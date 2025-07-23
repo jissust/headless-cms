@@ -31,6 +31,21 @@ export default {
       // 'zh-Hans',
       // 'zh',
     ],
+    theme: {
+      light: {
+        colors: {
+          primary100: "#FFEBEE",
+          primary200: "#FFCDD2",
+          primary500: "#F44336", // rojo principal
+          primary600: "#E53935", // hover
+          primary700: "#D32F2F", // activo
+
+          buttonPrimary500: "#F44336",
+          buttonPrimary600: "#E53935",
+          buttonPrimary700: "#D32F2F",
+        },
+      },
+    },
   },
   bootstrap(app: StrapiApp) {
     console.log(app);
