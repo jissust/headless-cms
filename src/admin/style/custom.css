@@ -1,3 +1,5 @@
-nav ul li:nth-child(n+3) {
+nav ol li ol li:nth-child(n+3),
+nav ul li:nth-child(n+3),
+nav ol li span {
     display: none;
 }
