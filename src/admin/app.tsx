@@ -56,6 +56,9 @@ export default {
       nav ol li span {
           display: none !important;
       }
+      .sc-bRKDuR.hfpZoY {
+        display: none;
+      }   
     `;
     document.head.appendChild(style);
   },
