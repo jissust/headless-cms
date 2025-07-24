@@ -71,7 +71,7 @@ export default {
           width:100%;
         }
         #main-content div div div:nth-child(2){
-          background-color:red;
+          display: block;
         }
         nav ~ div div nav {
           position: absolute !important;
