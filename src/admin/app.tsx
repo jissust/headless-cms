@@ -66,6 +66,7 @@ export default {
       @media (max-width: 992px) { 
         #main-content {
           margin: 0 20px !important;
+          padding:0;
         }
         #main-content div:first-child {
           width:100%;
