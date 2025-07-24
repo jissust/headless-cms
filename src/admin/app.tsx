@@ -60,6 +60,9 @@ export default {
         display: none !important;
       }
 
+      nav div div img {
+      background-color:red;}
+
       @media (max-width: 992px) { 
         #main-content {
           margin: 0 20px !important;
@@ -67,9 +70,42 @@ export default {
         #main-content div:first-child {
           width:100%;
         }
+        #main-content div div div:nth-child(2){
+          background-color:red;
+        }
+        nav ~ div div nav {
+          position: absolute !important;
+          left: -100%;
+        }
+        .show {
+          left:55px !important;
+        }
+        
       }
 
     `;
     document.head.appendChild(style);
+    /* evento para ocultar/mostrar nav */
+    const interval = setInterval(() => {
+      const logo = document.querySelector(
+        "nav > div > div > img"
+      ) as HTMLElement;
+      const menu = document.querySelector("nav ~ div div nav") as HTMLElement;
+
+      if (logo) {
+        logo.style.cursor = "pointer";
+
+        logo.addEventListener("click", () => {
+          const menu = document.querySelector(
+            "nav ~ div div nav"
+          ) as HTMLElement;
+          if (menu) {
+            menu.classList.toggle("show");
+          }
+        });
+
+        clearInterval(interval);
+      }
+    }, 500);
   },
 };
