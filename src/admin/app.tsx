@@ -59,6 +59,16 @@ export default {
       #main-content div:first-child div:first-child img ~ div{
         display: none !important;
       }
+
+      @media (max-width: 992px) { 
+        #main-content {
+          margin: 0 20px !important;
+        }
+        #main-content div:first-child {
+          width:100%;
+        }
+      }
+
     `;
     document.head.appendChild(style);
   },
