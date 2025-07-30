@@ -443,6 +443,69 @@ export interface ApiProductoProducto extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTipoDeVentaTipoDeVenta extends Struct.CollectionTypeSchema {
+  collectionName: 'tipo_de_ventas';
+  info: {
+    displayName: 'tipo de venta';
+    pluralName: 'tipo-de-ventas';
+    singularName: 'tipo-de-venta';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tipo-de-venta.tipo-de-venta'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVentaVenta extends Struct.CollectionTypeSchema {
+  collectionName: 'ventas';
+  info: {
+    displayName: 'venta';
+    pluralName: 'ventas';
+    singularName: 'venta';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    apellido: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dni: Schema.Attribute.Integer;
+    email: Schema.Attribute.Email;
+    local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::venta.venta'> &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    productos: Schema.Attribute.DynamicZone<['productos.productos']>;
+    publishedAt: Schema.Attribute.DateTime;
+    telefono: Schema.Attribute.String;
+    tipo_de_venta: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::tipo-de-venta.tipo-de-venta'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -954,6 +1017,8 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::local.local': ApiLocalLocal;
       'api::producto.producto': ApiProductoProducto;
+      'api::tipo-de-venta.tipo-de-venta': ApiTipoDeVentaTipoDeVenta;
+      'api::venta.venta': ApiVentaVenta;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

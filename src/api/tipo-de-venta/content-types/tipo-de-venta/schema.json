@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tipo_de_ventas",
+  "info": {
+    "singularName": "tipo-de-venta",
+    "pluralName": "tipo-de-ventas",
+    "displayName": "tipo de venta"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

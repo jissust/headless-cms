@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_productos_productos",
+  "info": {
+    "displayName": "productos",
+    "icon": "shoppingCart"
+  },
+  "options": {},
+  "attributes": {
+    "producto": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::producto.producto"
+    },
+    "cantidad": {
+      "type": "integer",
+      "required": true
+    }
+  },
+  "config": {}
+}
