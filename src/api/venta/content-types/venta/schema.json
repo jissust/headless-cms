@@ -33,6 +33,11 @@
     "email": {
       "type": "email"
     },
+    "local": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::local.local"
+    },
     "Productos": {
       "type": "dynamiczone",
       "components": [

@@ -488,6 +488,7 @@ export interface ApiVentaVenta extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     dni: Schema.Attribute.BigInteger;
     email: Schema.Attribute.Email;
+    local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::venta.venta'> &
       Schema.Attribute.Private;
