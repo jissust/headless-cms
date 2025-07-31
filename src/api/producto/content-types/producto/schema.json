@@ -14,7 +14,7 @@
     "nombre": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "descripcion": {
       "type": "text"

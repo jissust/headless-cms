@@ -13,6 +13,16 @@ export default {
       );
     }
 
+    
+    if(!ctxBody.local.connect[0]) {
+        throw new errors.ApplicationError(
+            `Debe seleccionar un local`
+        );        
+    }
+    
+    //const local = ctxBody.local.connect[0];
+    //const localId = local.id;
+
     const productos = ctxBody.productos;
     for (const producto of productos) {
       const productoConnect = producto.producto.connect[0];
@@ -40,12 +50,12 @@ export default {
     }
   },
   async afterCreate(event) {
-    console.log("afterCreate");
+    
     const ctx = strapi.requestContext.get();
     const ctxBody = ctx.request.body;
-    console.log(ctxBody);
+    
     const productos = ctxBody.productos;
-    console.log(productos);
+    
 
     for (const producto of productos) {
       const productoConnect = producto.producto.connect[0];
@@ -67,7 +77,7 @@ export default {
             stock: stockNuevo < 0 ? 0 : stockNuevo,
           },
         });
-        console.log(`producto actualizado`)
+        
       }
     }
   },

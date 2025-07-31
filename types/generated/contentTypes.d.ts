@@ -427,9 +427,7 @@ export interface ApiProductoProducto extends Struct.CollectionTypeSchema {
       'api::producto.producto'
     > &
       Schema.Attribute.Private;
-    nombre: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
     precio: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;

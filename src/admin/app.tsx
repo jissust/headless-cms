@@ -47,8 +47,66 @@ export default {
       },
     },
   },
-  bootstrap(app: StrapiApp) {
+  async bootstrap(app: StrapiApp) {
     console.log(app);
+    /** */
+    /*console.log(window.location.pathname)
+    if(window.location.pathname == '/admin/content-manager/collection-types/api::venta.venta/create'){
+      const params = new URLSearchParams(window.location.search)
+      console.log(params.get('localId'))
+      console.log(document.querySelector('input[name="local"]'))
+    }*/
+    /** */
+    /** agrego boton de locales */
+    const ventaInterval = setInterval(() => {
+      const pathname = window.location.pathname;
+      const isVentaList =
+        pathname === "/admin/content-manager/collection-types/api::venta.venta";
+
+      if (isVentaList) {
+ 
+        const containerAnchor = document.querySelector(
+          '[data-strapi-header="true"] div:nth-child(2) a'
+        ) as HTMLElement;
+ 
+        if (containerAnchor) {
+          containerAnchor.remove();
+        }
+ 
+        const container = document.querySelector(
+          '[data-strapi-header="true"] div:nth-child(2)'
+        ) as HTMLElement;
+
+        if (container && !document.getElementById("locales-buttons")) {
+          const btns = document.createElement("div");
+          btns.id = "locales-buttons";
+
+          fetch("/api/locals")
+            .then((res) => res.json())
+            .then((data) => {
+              if (!data?.data) return;
+
+              data.data.forEach((local: any) => {
+                const a = document.createElement("a");
+                a.href = `/admin/content-manager/collection-types/api::venta.venta/create?localId=${local.id}`;
+                a.innerText = local.nombre || `Local ${local.id}`;
+                a.classList.add('boton-local')
+
+                btns.appendChild(a);
+              });
+
+              container.appendChild(btns);
+            })
+            .catch((err) => {
+              console.error("Error al cargar locales", err);
+            });
+
+          clearInterval(ventaInterval);
+        }
+      }
+    }, 500);
+    /** */
+
     const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(4),
@@ -62,6 +120,20 @@ export default {
 
       nav div div img {
       background-color:red;}
+
+      #locales-buttons {
+        display: flex;
+        gap: 10px
+      }
+      .boton-local {
+        background-color:#E53935;
+        color:#FFFFFF;
+        padding: 7px 15px; 
+        border-radius:4px;
+        text-decoration:none;
+        font-size:1.2rem;
+        font-weight:600;
+      }
 
       @media (max-width: 992px) { 
         #main-content {
