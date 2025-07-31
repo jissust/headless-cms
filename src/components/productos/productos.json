@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_productos_productos",
+  "info": {
+    "displayName": "productos",
+    "icon": "plus"
+  },
+  "options": {},
+  "attributes": {
+    "producto": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::producto.producto"
+    },
+    "cantidad": {
+      "type": "integer"
+    },
+    "total": {
+      "type": "decimal"
+    }
+  },
+  "config": {}
+}

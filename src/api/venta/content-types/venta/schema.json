@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ventas",
+  "info": {
+    "singularName": "venta",
+    "pluralName": "ventas",
+    "displayName": "venta"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tipo_de_venta": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tipo-de-venta.tipo-de-venta"
+    },
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "apellido": {
+      "type": "string",
+      "required": true
+    },
+    "telefono": {
+      "type": "string"
+    },
+    "dni": {
+      "type": "biginteger"
+    },
+    "email": {
+      "type": "email"
+    },
+    "Productos": {
+      "type": "dynamiczone",
+      "components": [
+        "productos.productos"
+      ]
+    }
+  }
+}
