@@ -7,22 +7,22 @@ export default {
     const ctx = strapi.requestContext.get();
     const ctxBody = ctx.request.body;
     const productos = ctxBody.Productos;
-    
+
     if (productos.length == 0) {
       throw new errors.ApplicationError(
         "Para crear una venta como mínimo debe haber un producto."
       );
     }
-    
-    if(!ctxBody.local.connect[0]) {
-        throw new errors.ApplicationError(
-            `Debe seleccionar un local`
-        );        
+
+    const localId = ctx.request.query.localId;    
+    if(!localId) {
+      throw new errors.ApplicationError(`Debe seleccionar un local`);
     }
 
-    //const local = ctxBody.local.connect[0];
-    //const localId = local.id;
-    
+    event.params.data.local = {
+      connect: [{ id: localId }],
+    };
+
     for (const producto of productos) {
       const productoConnect = producto.producto.connect[0];
 
@@ -49,12 +49,10 @@ export default {
     }
   },
   async afterCreate(event) {
-    
     const ctx = strapi.requestContext.get();
     const ctxBody = ctx.request.body;
-    
+
     const productos = ctxBody.Productos;
-    
 
     for (const producto of productos) {
       const productoConnect = producto.producto.connect[0];
@@ -76,7 +74,6 @@ export default {
             stock: stockNuevo < 0 ? 0 : stockNuevo,
           },
         });
-        
       }
     }
   },

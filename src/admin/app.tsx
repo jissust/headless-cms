@@ -77,7 +77,7 @@ export default {
             .then((res) => res.json())
             .then((data) => {
               if (!data?.data) return;
-              
+
               data.data.forEach((local: any) => {
                 const a = document.createElement("a");
                 a.href = `/admin/content-manager/collection-types/api::venta.venta/create?localId=${local.id}`;
@@ -97,6 +97,15 @@ export default {
         }
       }
     }, 500);
+    /** */
+
+    /** */
+    setTimeout(() => {
+      const tabpanel = document.querySelector("div[role='tabpanel']");
+      const lastDiv = tabpanel?.querySelectorAll('div > div')[32];
+      lastDiv?.classList.add('d-none')
+    }, 500);
+    
     /** */
 
     const style = document.createElement("style");
@@ -127,7 +136,9 @@ export default {
         font-size:1.2rem;
         font-weight:600;
       }
-
+      .d-none {
+        display: none !important;
+      }
       @media (max-width: 992px) { 
         #main-content {
           margin: 0 20px !important;
