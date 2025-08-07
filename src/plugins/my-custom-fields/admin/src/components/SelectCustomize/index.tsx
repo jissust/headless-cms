@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const SelectCustomize = (props: any, ref: any) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   const [productos, setProductos] = useState<any[]>([]);
+  const [selectedProducto, setSelectedProducto] = useState<any>(null);
 
   const queryParams = new URLSearchParams(window.location.search);
   const localId = queryParams.get('localId');
@@ -14,7 +15,6 @@ const SelectCustomize = (props: any, ref: any) => {
     fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (!data?.data) return;
         setProductos(data.data);
       })
@@ -25,16 +25,17 @@ const SelectCustomize = (props: any, ref: any) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = e.target.value;
-    const selectedProducto = productos.find((p) => p.id === parseInt(selectedId));
+    const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
+
+    setSelectedProducto(selectedProductoChange);
 
     onChange({
       target: { name, type: attribute.type, value: selectedId },
     });
-    console.log(selectedProducto);
 
-    if (selectedProducto) {
-      const precio = selectedProducto.precio;
-      const stock = selectedProducto.stock;
+    if (selectedProductoChange) {
+      const precio = selectedProductoChange.precio;
+      const stock = selectedProductoChange.stock;
 
       onChange({
         target: {
@@ -71,6 +72,14 @@ const SelectCustomize = (props: any, ref: any) => {
           </option>
         ))}
       </select>
+
+      {selectedProducto && (
+        <>
+          <p>Precio base: {selectedProducto.precio}</p>
+          <input type="number" name={`total-base-${index}`} value={selectedProducto.precio} readOnly disabled/>
+        </>
+      )}
+      
     </>
   );
 };

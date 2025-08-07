@@ -29,6 +29,30 @@ export default {
       },
     });
 
+    app.customFields.register({
+      name: 'my-input-number-field',
+      pluginId: PLUGIN_ID,
+      type: 'integer',
+      intlLabel: {
+        id: 'my-input-number-field-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'my-input-number-field-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputNumberCustomize').then((module) => ({
+            default: module.InputNumberCustomize,
+          })),
+      },
+      options: {
+    
+      },
+    });
+
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
@@ -37,6 +61,7 @@ export default {
     });
   },
 
+  
   async registerTrads({ locales }: { locales: string[] }) {
     return Promise.all(
       locales.map(async (locale) => {
