@@ -1,1 +1,6 @@
-export default () => ({});
+export default () => ({
+  'my-custom-fields': {
+    enabled: true,
+    resolve: './src/plugins/my-custom-fields'
+  },
+});

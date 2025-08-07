@@ -1,0 +1,11 @@
+import type { Core } from '@strapi/strapi';
+
+const register = ({ strapi }: { strapi: Core.Strapi }) => {
+  strapi.customFields.register({
+    name: 'my-custom-field',
+    plugin: "my-custom-fields",
+    type: 'integer',
+  });
+};
+
+export default register;

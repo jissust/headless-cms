@@ -6,10 +6,9 @@
   },
   "options": {},
   "attributes": {
-    "producto": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::producto.producto"
+    "productoItem": {
+      "type": "integer",
+      "customField": "plugin::my-custom-fields.my-custom-field"
     },
     "cantidad": {
       "type": "integer"

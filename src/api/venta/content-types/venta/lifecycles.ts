@@ -6,16 +6,15 @@ export default {
   async beforeCreate(event) {
     const ctx = strapi.requestContext.get();
     const ctxBody = ctx.request.body;
-    const productos = ctxBody.Productos;
-
-    if (productos.length == 0) {
+    
+    if (ctxBody.Productos.length == 0) {
       throw new errors.ApplicationError(
         "Para crear una venta como mínimo debe haber un producto."
       );
     }
 
-    const localId = ctx.request.query.localId;    
-    if(!localId) {
+    const localId = ctx.request.query.localId;
+    if (!localId) {
       throw new errors.ApplicationError(`Debe seleccionar un local`);
     }
 
@@ -23,17 +22,10 @@ export default {
       connect: [{ id: localId }],
     };
 
-    for (const producto of productos) {
-      const productoConnect = producto.producto.connect[0];
-
-      const cantidad = producto.cantidad;
-      const id = productoConnect.id;
-      const documentId = productoConnect.documentId;
-
-      //console.log(`cantidad: ${cantidad}`)
-      //console.log(`id: ${id}`)
-      //console.log(`documentId: ${documentId}`)
-
+    for (const producto of ctxBody.Productos) {
+      const cantidad = producto.cantidad; 
+      const id = parseInt(producto.productoItem);
+     
       const productoDb = await strapi.entityService.findOne(
         "api::producto.producto",
         id
@@ -55,11 +47,9 @@ export default {
     const productos = ctxBody.Productos;
 
     for (const producto of productos) {
-      const productoConnect = producto.producto.connect[0];
 
       const cantidad = producto.cantidad;
-      const id = productoConnect.id;
-      const documentId = productoConnect.documentId;
+      const id = parseInt(producto.productoItem);
 
       const productoDb = await strapi.entityService.findOne(
         "api::producto.producto",

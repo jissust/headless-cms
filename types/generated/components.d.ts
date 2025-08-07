@@ -8,7 +8,8 @@ export interface ProductosProductos extends Struct.ComponentSchema {
   };
   attributes: {
     cantidad: Schema.Attribute.Integer;
-    producto: Schema.Attribute.Relation<'oneToOne', 'api::producto.producto'>;
+    productoItem: Schema.Attribute.Integer &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.my-custom-field'>;
     total: Schema.Attribute.Decimal;
   };
 }

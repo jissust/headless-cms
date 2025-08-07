@@ -77,7 +77,7 @@ export default {
             .then((res) => res.json())
             .then((data) => {
               if (!data?.data) return;
-
+              console.log(data)
               data.data.forEach((local: any) => {
                 const a = document.createElement("a");
                 a.href = `/admin/content-manager/collection-types/api::venta.venta/create?localId=${local.id}`;
@@ -107,8 +107,8 @@ export default {
     }, 500);
     
     /** */
-
-    const style = document.createElement("style");
+    
+    /*const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(4),
       nav ul li:nth-child(n+3),
@@ -161,7 +161,7 @@ export default {
       }
 
     `;
-    document.head.appendChild(style);
+    document.head.appendChild(style);*/
     /* evento para ocultar/mostrar nav */
     const interval = setInterval(() => {
       const logo = document.querySelector(
