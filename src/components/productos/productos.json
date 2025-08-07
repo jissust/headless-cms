@@ -11,7 +11,8 @@
       "customField": "plugin::my-custom-fields.my-custom-field"
     },
     "cantidad": {
-      "type": "integer"
+      "type": "integer",
+      "customField": "plugin::my-custom-fields.my-input-number-field"
     },
     "total": {
       "type": "decimal"

@@ -7,7 +7,8 @@ export interface ProductosProductos extends Struct.ComponentSchema {
     icon: 'plus';
   };
   attributes: {
-    cantidad: Schema.Attribute.Integer;
+    cantidad: Schema.Attribute.Integer &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.my-input-number-field'>;
     productoItem: Schema.Attribute.Integer &
       Schema.Attribute.CustomField<'plugin::my-custom-fields.my-custom-field'>;
     total: Schema.Attribute.Decimal;
