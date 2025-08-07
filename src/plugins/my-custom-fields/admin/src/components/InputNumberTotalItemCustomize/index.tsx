@@ -7,7 +7,7 @@ const InputNumberTotalItemCustomize = (props: any, ref: any) => {
 
   return (
     <>
-      <label>Total</label>
+      <label className='label-customize'>Total</label>
       <input
         name={name}
         disabled={true}
@@ -15,6 +15,7 @@ const InputNumberTotalItemCustomize = (props: any, ref: any) => {
         value={value}
         min="0"
         type="number"
+        className="input-customize"
       />
     </>
   );

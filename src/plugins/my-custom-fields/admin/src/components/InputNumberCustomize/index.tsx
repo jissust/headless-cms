@@ -30,7 +30,7 @@ const InputNumberCustomize = (props: any, ref: any) => {
 
   return (
     <>
-      <label>Cantidad</label>
+      <label className='label-customize'>Cantidad</label>
       <input
         name={name}
         disabled={disabled}
@@ -39,6 +39,7 @@ const InputNumberCustomize = (props: any, ref: any) => {
         min="0"
         onChange={handleChange}
         type="number"
+        className="input-customize"
       />
     </>
   );

@@ -57,13 +57,14 @@ const SelectCustomize = (props: any, ref: any) => {
 
   return (
     <>
-      <label htmlFor={name}>Producto</label>
+      <label className='label-customize' htmlFor={name}>Producto</label>
       <select
         name={name}
         disabled={disabled}
         required={required}
         value={value}
         onChange={handleChange}
+        className="input-customize"
       >
         <option value="">Seleccione un producto</option>
         {productos.map((producto: any) => (
@@ -75,11 +76,11 @@ const SelectCustomize = (props: any, ref: any) => {
 
       {selectedProducto && (
         <>
-          <p>Precio base: {selectedProducto.precio}</p>
-          <input type="number" name={`total-base-${index}`} value={selectedProducto.precio} readOnly disabled/>
+          <label className='label-customize p-1'>Precio base: $ {selectedProducto.precio}</label>
+          <input className='d-none' type="number" name={`total-base-${index}`} value={selectedProducto.precio} readOnly disabled/>
         </>
       )}
-      
+
     </>
   );
 };
