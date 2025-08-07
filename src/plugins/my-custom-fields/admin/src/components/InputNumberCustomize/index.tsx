@@ -3,8 +3,6 @@ const InputNumberCustomize = (props: any, ref: any) => {
   const nameSplit = name.split('.');
   const index = parseInt(nameSplit[1]);
 
-  console.log(props);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cantidad = parseInt(e.target.value, 10) || 0;
     onChange({

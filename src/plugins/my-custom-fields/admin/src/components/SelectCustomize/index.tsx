@@ -4,7 +4,7 @@ const SelectCustomize = (props: any, ref: any) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   const [productos, setProductos] = useState<any[]>([]);
   const [selectedProducto, setSelectedProducto] = useState<any>(null);
-
+  
   const queryParams = new URLSearchParams(window.location.search);
   const localId = queryParams.get('localId');
 

@@ -43,6 +43,9 @@
       "components": [
         "productos.productos"
       ]
+    },
+    "total": {
+      "type": "decimal"
     }
   }
 }
