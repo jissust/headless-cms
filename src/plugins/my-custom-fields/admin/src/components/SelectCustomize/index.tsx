@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
 const SelectCustomize = (props: any, ref: any) => {
-  console.log('field component loaded');
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   const [productos, setProductos] = useState<any[]>([]);
-
+  
+  const queryParams = new URLSearchParams(window.location.search);
+  const localId = queryParams.get('localId');
+    
   useEffect(() => {
-    fetch('/api/productos')
+    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         if (!data?.data) return;
         setProductos(data.data);
       })
@@ -23,9 +24,6 @@ const SelectCustomize = (props: any, ref: any) => {
       target: { name, type: attribute.type, value: e.target.value },
     });
   };
-
-  console.log(props);
-  console.log(ref);
 
   return (
     <>
