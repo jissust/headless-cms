@@ -139,6 +139,41 @@ export default {
       .d-none {
         display: none !important;
       }
+
+      .input-customize {
+        position: relative;
+        border: 1px solid #dcdce4;
+        border-radius: 4px;
+        background: #ffffff;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-inline-start: 16px;
+        padding-inline-end: 12px;
+        padding-block: 8px;
+        outline: none;
+        box-shadow: none;
+        transition-property: border-color, box-shadow, fill;
+        transition-duration: 0.2s;
+        font-size:1.4rem;
+      }
+      .label-customize {
+        font-size: 1.2rem;
+        line-height: 1.33;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #32324d;
+        font-weight: 600;
+        padding:0 0 5px 0;
+      }
+
+      .p-1 {
+        padding:10px 0;
+      }
+
       @media (max-width: 992px) { 
         #main-content {
           margin: 0 20px !important;
