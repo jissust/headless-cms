@@ -15,7 +15,8 @@
       "customField": "plugin::my-custom-fields.my-input-number-field"
     },
     "total": {
-      "type": "decimal"
+      "type": "decimal",
+      "customField": "plugin::my-custom-fields.my-input-number-total-field"
     }
   },
   "config": {}

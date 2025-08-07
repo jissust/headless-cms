@@ -11,7 +11,8 @@ export interface ProductosProductos extends Struct.ComponentSchema {
       Schema.Attribute.CustomField<'plugin::my-custom-fields.my-input-number-field'>;
     productoItem: Schema.Attribute.Integer &
       Schema.Attribute.CustomField<'plugin::my-custom-fields.my-custom-field'>;
-    total: Schema.Attribute.Decimal;
+    total: Schema.Attribute.Decimal &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.my-input-number-total-field'>;
   };
 }
 

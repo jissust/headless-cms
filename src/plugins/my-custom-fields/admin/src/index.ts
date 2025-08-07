@@ -24,9 +24,7 @@ export default {
             default: module.SelectCustomize,
           })),
       },
-      options: {
-    
-      },
+      options: {},
     });
 
     app.customFields.register({
@@ -48,9 +46,29 @@ export default {
             default: module.InputNumberCustomize,
           })),
       },
-      options: {
-    
+      options: {},
+    });
+
+    app.customFields.register({
+      name: 'my-input-number-total-field',
+      pluginId: PLUGIN_ID,
+      type: 'integer',
+      intlLabel: {
+        id: 'my-input-number-total-label',
+        defaultMessage: 'label',
       },
+      intlDescription: {
+        id: 'my-input-number-total-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputNumberTotalItemCustomize').then((module) => ({
+            default: module.InputNumberTotalItemCustomize,
+          })),
+      },
+      options: {},
     });
 
     app.registerPlugin({
@@ -61,7 +79,6 @@ export default {
     });
   },
 
-  
   async registerTrads({ locales }: { locales: string[] }) {
     return Promise.all(
       locales.map(async (locale) => {

@@ -12,6 +12,13 @@ const register = ({ strapi }: { strapi: Core.Strapi }) => {
     plugin: "my-custom-fields",
     type: 'integer',
   });
+
+  strapi.customFields.register({
+    name: 'my-input-number-total-field',
+    plugin: "my-custom-fields",
+    type: 'integer',
+  });
+
 };
 
 export default register;
