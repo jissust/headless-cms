@@ -10,9 +10,14 @@ const SelectCustomize = (props: any, ref: any) => {
 
   const nameSplit = name.split('.');
   const index = parseInt(nameSplit[1]);
-
+  
+  let url = `/api/productos?populate=*`;
+  if(value === undefined) {
+    url += `&filters[locales][id][$eq]=${localId}`;
+  }
+  
   useEffect(() => {
-    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId}`)
+    fetch(`${url}`)
       .then((res) => res.json())
       .then((data) => {
         if (!data?.data) return;
@@ -76,7 +81,7 @@ const SelectCustomize = (props: any, ref: any) => {
 
       {selectedProducto && (
         <>
-          <label className='label-customize p-1'>Precio base: $ {selectedProducto.precio}</label>
+          {/*<label className='label-customize p-1'>Precio base: $ {selectedProducto.precio}</label>*/}
           <input className='d-none' type="number" name={`total-base-${index}`} value={selectedProducto.precio} readOnly disabled/>
         </>
       )}

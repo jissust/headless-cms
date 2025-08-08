@@ -67,4 +67,9 @@ export default {
       }
     }
   },
+  beforeUpdate(event){
+    throw new errors.ApplicationError(
+      `No se puede editar una venta una vez creada.`
+    );
+  }
 };
