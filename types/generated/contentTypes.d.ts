@@ -501,7 +501,8 @@ export interface ApiVentaVenta extends Struct.CollectionTypeSchema {
       'oneToOne',
       'api::tipo-de-venta.tipo-de-venta'
     >;
-    total: Schema.Attribute.Decimal;
+    total: Schema.Attribute.Decimal &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.my-input-number-total-venta-field'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

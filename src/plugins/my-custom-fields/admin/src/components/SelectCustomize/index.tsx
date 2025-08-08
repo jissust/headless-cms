@@ -84,8 +84,8 @@ const SelectCustomize = (props: any, ref: any) => {
 
       {selectedProducto && (
         <>
-          <label className='label-customize p-1'>{(Number(tipoDeVentaId) == 1) ? "Venta minorista" : "Venta mayorista"}</label>
-          <input className='' type="number" name={`total-base-${index}`} value={precio} readOnly disabled/>
+          <label className='label-customize p-1'>{(Number(tipoDeVentaId) == 1) ? "Precio minorista" : "Precio mayorista"}</label>
+          <input className='d-none' type="number" name={`total-base-${index}`} value={precio} readOnly disabled/>
         </>
       )}
 

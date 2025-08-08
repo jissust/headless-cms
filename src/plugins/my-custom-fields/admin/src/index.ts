@@ -71,6 +71,28 @@ export default {
       options: {},
     });
 
+    app.customFields.register({
+      name: 'my-input-number-total-venta-field',
+      pluginId: PLUGIN_ID,
+      type: 'integer',
+      intlLabel: {
+        id: 'my-input-number-total-venta-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'my-input-number-total-venta-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputTotalVentaCustomize').then((module) => ({
+            default: module.InputTotalVentaCustomize,
+          })),
+      },
+      options: {},
+    });
+
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
