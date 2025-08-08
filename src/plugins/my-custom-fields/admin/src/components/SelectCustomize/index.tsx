@@ -4,6 +4,7 @@ const SelectCustomize = (props: any, ref: any) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   const [productos, setProductos] = useState<any[]>([]);
   const [selectedProducto, setSelectedProducto] = useState<any>(null);
+  const [precio, setPrecio] = useState<number>(0);
   
   const queryParams = new URLSearchParams(window.location.search);
   const localId = queryParams.get('localId');
@@ -40,8 +41,8 @@ const SelectCustomize = (props: any, ref: any) => {
     });
 
     if (selectedProductoChange) {
-      const precio = (Number(tipoDeVentaId) == 1) ? selectedProductoChange.precio : selectedProductoChange.precio_mayorista;
-      let tipoDeVentaLabel =  (Number(tipoDeVentaId) == 1) ? "Venta minorista" : "Venta mayorista";
+      let precioSelected = (Number(tipoDeVentaId) == 1) ? selectedProductoChange.precio : selectedProductoChange.precio_mayorista;
+      setPrecio(precioSelected);
       const stock = selectedProductoChange.stock;
 
       onChange({
@@ -56,7 +57,7 @@ const SelectCustomize = (props: any, ref: any) => {
         target: {
           name: `Productos.${index}.total`,
           type: 'number',
-          value: precio,
+          value: precioSelected,
         },
       });
     }
@@ -84,7 +85,7 @@ const SelectCustomize = (props: any, ref: any) => {
       {selectedProducto && (
         <>
           <label className='label-customize p-1'>{(Number(tipoDeVentaId) == 1) ? "Venta minorista" : "Venta mayorista"}</label>
-          <input className='d-none' type="number" name={`total-base-${index}`} value={selectedProducto.precio} readOnly disabled/>
+          <input className='' type="number" name={`total-base-${index}`} value={precio} readOnly disabled/>
         </>
       )}
 

@@ -22,6 +22,15 @@ export default {
       connect: [{ id: localId }],
     };
 
+    const tipoDeVentaId = ctx.request.query.tipoDeVentaId;
+    if (!tipoDeVentaId) {
+      throw new errors.ApplicationError(`Debe seleccionar un tipo de venta`);
+    }
+
+    event.params.data.tipo_de_venta = {
+      connect: [{ id: tipoDeVentaId }],
+    };
+
     for (const producto of ctxBody.Productos) {
       const cantidad = producto.cantidad; 
       const id = parseInt(producto.productoItem);

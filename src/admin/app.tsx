@@ -111,15 +111,6 @@ export default {
     }, 500);
     /** */
 
-    /** */
-    setTimeout(() => {
-      const tabpanel = document.querySelector("div[role='tabpanel']");
-      const lastDiv = tabpanel?.querySelectorAll("div > div")[32];
-      lastDiv?.classList.add("d-none");
-    }, 500);
-
-    /** */
-
     const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(4),
