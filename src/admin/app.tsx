@@ -77,14 +77,26 @@ export default {
             .then((res) => res.json())
             .then((data) => {
               if (!data?.data) return;
-              console.log(data)
-              data.data.forEach((local: any) => {
-                const a = document.createElement("a");
-                a.href = `/admin/content-manager/collection-types/api::venta.venta/create?localId=${local.id}`;
-                a.innerText = local.nombre || `Local ${local.id}`;
-                a.classList.add("boton-local");
 
-                btns.appendChild(a);
+              data.data.forEach((local: any) => {
+
+                fetch("/api/tipo-de-ventas")
+                  .then((res) => res.json())
+                  .then((data) => {
+                    if (!data?.data) return;
+                    data.data.forEach((tipoDeVenta: any) => {
+                      const a = document.createElement("a");
+                      a.href = `/admin/content-manager/collection-types/api::venta.venta/create?localId=${local.id}&tipoDeVentaId=${tipoDeVenta.id}`;
+                      a.innerText = `${local.nombre} - ${tipoDeVenta.nombre}` || `Local ${local.id} - ${tipoDeVenta.id}`;
+                      a.classList.add("boton-local");
+
+                      btns.appendChild(a);
+                    })
+                  })
+                  .catch((err) => {
+                    console.error("Error al cargar locales", err);
+                  });
+
               });
 
               container.appendChild(btns);
@@ -102,12 +114,12 @@ export default {
     /** */
     setTimeout(() => {
       const tabpanel = document.querySelector("div[role='tabpanel']");
-      const lastDiv = tabpanel?.querySelectorAll('div > div')[32];
-      lastDiv?.classList.add('d-none')
+      const lastDiv = tabpanel?.querySelectorAll("div > div")[32];
+      lastDiv?.classList.add("d-none");
     }, 500);
-    
+
     /** */
-    
+
     const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(4),

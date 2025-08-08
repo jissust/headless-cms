@@ -24,6 +24,10 @@
       "required": true,
       "default": 0
     },
+    "precio_mayorista": {
+      "type": "decimal",
+      "required": true
+    },
     "stock": {
       "type": "integer",
       "required": true,
