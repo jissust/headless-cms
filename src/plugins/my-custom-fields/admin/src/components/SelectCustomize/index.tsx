@@ -57,7 +57,7 @@ const SelectCustomize = (props: any, ref: any) => {
         target: {
           name: `Productos.${index}.total`,
           type: 'number',
-          value: precioSelected,
+          value: stock > 0 ? precioSelected : 0,
         },
       });
     }
