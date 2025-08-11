@@ -24,6 +24,18 @@ const register = ({ strapi }: { strapi: Core.Strapi }) => {
     plugin: 'my-custom-fields',
     type: 'integer',
   });
+
+  strapi.customFields.register({
+    name: 'input-nombre-venta',
+    plugin: 'my-custom-fields',
+    type: 'string',
+  });
+
+  strapi.customFields.register({
+    name: 'input-nombre-local',
+    plugin: 'my-custom-fields',
+    type: 'string',
+  });
 };
 
 export default register;

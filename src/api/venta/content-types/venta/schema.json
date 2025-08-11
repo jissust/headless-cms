@@ -11,6 +11,14 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "nombre-venta": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.input-nombre-venta"
+    },
+    "nombre-local": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.input-nombre-local"
+    },
     "tipo_de_venta": {
       "type": "relation",
       "relation": "oneToOne",

@@ -93,6 +93,50 @@ export default {
       options: {},
     });
 
+    app.customFields.register({
+      name: 'input-nombre-venta',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-nombre-venta-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-nombre-venta-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputNombreVenta').then((module) => ({
+            default: module.InputNombreVenta,
+          })),
+      },
+      options: {},
+    });
+
+    app.customFields.register({
+      name: 'input-nombre-local',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-nombre-local-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-nombre-local-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputNombreLocal').then((module) => ({
+            default: module.InputNombreLocal,
+          })),
+      },
+      options: {},
+    });
+
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
