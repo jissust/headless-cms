@@ -23,9 +23,7 @@
     "dist"
   ],
   "scripts": {
-    "build:admin": "tsc --project admin/tsconfig.json",
-    "build:server": "tsc --project server/tsconfig.json",
-    "build": "yarn build:admin && yarn build:server",
+    "build": "strapi-plugin build",
     "watch": "strapi-plugin watch",
     "watch:link": "strapi-plugin watch:link",
     "verify": "strapi-plugin verify",
