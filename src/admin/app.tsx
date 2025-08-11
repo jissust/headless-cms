@@ -111,7 +111,7 @@ export default {
     }, 500);
     /** */
 
-    /*const style = document.createElement("style");
+    const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(4),
       nav ul li:nth-child(n+3),
@@ -199,7 +199,7 @@ export default {
       }
 
     `;
-    document.head.appendChild(style);*/
+    document.head.appendChild(style);
     /* evento para ocultar/mostrar nav */
     const interval = setInterval(() => {
       const logo = document.querySelector(
