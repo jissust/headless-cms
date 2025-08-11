@@ -23,10 +23,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "strapi-plugin build",
-    "watch": "strapi-plugin watch",
-    "watch:link": "strapi-plugin watch:link",
-    "verify": "strapi-plugin verify",
+    "build": "strapi build",
+    "watch": "strapi watch",
+    "watch:link": "strapi watch:link",
+    "verify": "strapi verify",
     "test:ts:front": "run -T tsc -p admin/tsconfig.json",
     "test:ts:back": "run -T tsc -p server/tsconfig.json"
   },

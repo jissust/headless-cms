@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
-  "workspaces": [
-    "src/plugins/*"
-  ],
   "scripts": {
-    "build": "yarn workspace my-custom-fields run build && strapi build",
+    "build": "cd src/plugins/my-custom-fields && yarn install --frozen-lockfile && yarn run build && cd ../../../ && strapi build",
     "console": "strapi console",
     "deploy": "strapi deploy",
     "dev": "strapi develop",
