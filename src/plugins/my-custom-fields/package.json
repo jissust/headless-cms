@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@strapi/design-system": "^2.0.0-rc.29",
-    "@strapi/helper-plugin": "^4.25.23",
     "@strapi/icons": "^2.0.0-rc.29",
     "react-intl": "^7.1.11"
   },
