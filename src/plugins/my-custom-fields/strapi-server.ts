@@ -4,7 +4,7 @@ import controllers from './server/src/controllers';
 import register from './server/src/register';
 import routes from './server/src/routes';
 
-const plugin = () => {
+module.exports = () => {
   return {
     register,
     config,
@@ -13,5 +13,3 @@ const plugin = () => {
     routes,
   };
 };
-
-export default plugin;

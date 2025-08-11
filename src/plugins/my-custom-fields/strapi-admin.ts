@@ -1,3 +1,5 @@
-import admin from './admin/src';
-
-export default admin;
+export default {
+  register(app) {},
+  bootstrap() {},
+  registerTrads({ locales }) {},
+};
