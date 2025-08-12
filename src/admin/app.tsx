@@ -1,5 +1,78 @@
 import type { StrapiApp } from "@strapi/strapi/admin";
-//import './style/custom.css';
+
+function limpiarDuplicadosLocalesButtons() {
+  const botones = document.querySelectorAll("#locales-buttons");
+  if (botones.length > 1) {
+    botones.forEach((btn, index) => {
+      if (index > 0) btn.remove();
+    });
+  }
+}
+
+function insertarBotonesLocales() {
+  limpiarDuplicadosLocalesButtons();
+  if (document.getElementById("locales-buttons")) return;
+  console.log("URL actual:", window.location.pathname);
+  const containerAnchor = document.querySelector(
+    '[data-strapi-header="true"] div:nth-child(2) a'
+  ) as HTMLElement;
+  if (containerAnchor) {
+    //containerAnchor.remove();
+    containerAnchor.classList.add("d-none");
+  }
+
+  const container = document.querySelector(
+    '[data-strapi-header="true"] div:nth-child(2)'
+  ) as HTMLElement;
+
+  if (!container) return;
+
+  const btns = document.createElement("div");
+  btns.id = "locales-buttons";
+
+  fetch("/api/locals")
+    .then((res) => res.json())
+    .then((data) => {
+      if (!data?.data) return;
+
+      data.data.forEach((local: any) => {
+        fetch("/api/tipo-de-ventas")
+          .then((res) => res.json())
+          .then((tipos) => {
+            if (!tipos?.data) return;
+            tipos.data.forEach((tipoDeVenta: any) => {
+              const a = document.createElement("a");
+              a.href = `/admin/content-manager/collection-types/api::venta.venta/create?localId=${local.id}&tipoDeVentaId=${tipoDeVenta.id}`;
+              a.innerText =
+                `${local.nombre} - ${tipoDeVenta.nombre}` ||
+                `Local ${local.id} - ${tipoDeVenta.id}`;
+              a.classList.add("boton-local");
+              btns.appendChild(a);
+            });
+          });
+      });
+
+      container.appendChild(btns);
+      
+    });
+  limpiarDuplicadosLocalesButtons();
+}
+
+function observarPaginaVentas() {
+  const observer = new MutationObserver(() => {
+    const pathname = window.location.pathname;
+    const isVentaList =
+      pathname === "/admin/content-manager/collection-types/api::venta.venta";
+    if (isVentaList) {
+      insertarBotonesLocales();
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true, // detecta nodos agregados o eliminados
+    subtree: true, // detecta cambios dentro de hijos
+  });
+}
 
 export default {
   config: {
@@ -49,9 +122,9 @@ export default {
   },
   bootstrap(app: StrapiApp) {
     console.log(app);
-
+    observarPaginaVentas();
     /** agrego boton de locales */
-    const ventaInterval = setInterval(() => {
+    /*const ventaInterval = setInterval(() => {
       const pathname = window.location.pathname;
       const isVentaList =
         pathname === "/admin/content-manager/collection-types/api::venta.venta";
@@ -79,7 +152,6 @@ export default {
               if (!data?.data) return;
 
               data.data.forEach((local: any) => {
-
                 fetch("/api/tipo-de-ventas")
                   .then((res) => res.json())
                   .then((data) => {
@@ -87,16 +159,17 @@ export default {
                     data.data.forEach((tipoDeVenta: any) => {
                       const a = document.createElement("a");
                       a.href = `/admin/content-manager/collection-types/api::venta.venta/create?localId=${local.id}&tipoDeVentaId=${tipoDeVenta.id}`;
-                      a.innerText = `${local.nombre} - ${tipoDeVenta.nombre}` || `Local ${local.id} - ${tipoDeVenta.id}`;
+                      a.innerText =
+                        `${local.nombre} - ${tipoDeVenta.nombre}` ||
+                        `Local ${local.id} - ${tipoDeVenta.id}`;
                       a.classList.add("boton-local");
 
                       btns.appendChild(a);
-                    })
+                    });
                   })
                   .catch((err) => {
                     console.error("Error al cargar locales", err);
                   });
-
               });
 
               container.appendChild(btns);
@@ -108,7 +181,7 @@ export default {
           clearInterval(ventaInterval);
         }
       }
-    }, 500);
+    }, 500);*/
     /** */
 
     const style = document.createElement("style");
