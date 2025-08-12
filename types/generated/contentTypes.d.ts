@@ -494,8 +494,19 @@ export interface ApiVentaVenta extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::venta.venta'> &
       Schema.Attribute.Private;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    nombre_local: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.input-nombre-local'>;
+    nombre_venta: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.input-nombre-venta'>;
+    Productos: Schema.Attribute.DynamicZone<['productos.productos']>;
     publishedAt: Schema.Attribute.DateTime;
     telefono: Schema.Attribute.String;
+    tipo_de_venta: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::tipo-de-venta.tipo-de-venta'
+    >;
+    total: Schema.Attribute.Decimal &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.my-input-number-total-venta-field'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

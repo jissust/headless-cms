@@ -120,7 +120,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-jsCS9BCo.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-DzWZEf3l.js")).then((module2) => ({
           default: module2.InputNombreVenta
         }))
       },
@@ -140,7 +140,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-B8OhOAmO.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-BP7hUBrc.js")).then((module2) => ({
           default: module2.InputNombreLocal
         }))
       },
@@ -167,3 +167,4 @@ const index = {
   }
 };
 module.exports = index;
+//# sourceMappingURL=index.js.map

@@ -20,3 +20,4 @@ const InputTotalVentaCustomize = (props, ref) => {
   ] });
 };
 exports.InputTotalVentaCustomize = InputTotalVentaCustomize;
+//# sourceMappingURL=index-Dx-K5B5M.js.map

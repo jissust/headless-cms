@@ -20,3 +20,4 @@ const InputTotalVentaCustomize = (props, ref) => {
 export {
   InputTotalVentaCustomize
 };
+//# sourceMappingURL=index-BsbbBqvj.mjs.map

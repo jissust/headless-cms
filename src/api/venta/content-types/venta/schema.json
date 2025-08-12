@@ -11,11 +11,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "nombre-venta": {
+    "nombre_venta": {
       "type": "string",
       "customField": "plugin::my-custom-fields.input-nombre-venta"
     },
-    "nombre-local": {
+    "nombre_local": {
       "type": "string",
       "customField": "plugin::my-custom-fields.input-nombre-local"
     },

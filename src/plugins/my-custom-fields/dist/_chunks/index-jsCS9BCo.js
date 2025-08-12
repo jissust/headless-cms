@@ -29,3 +29,4 @@ const InputNombreVenta = (props, ref) => {
   ) });
 };
 exports.InputNombreVenta = InputNombreVenta;
+//# sourceMappingURL=index-jsCS9BCo.js.map

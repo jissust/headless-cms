@@ -29,3 +29,4 @@ const InputNombreVenta = (props, ref) => {
 export {
   InputNombreVenta
 };
+//# sourceMappingURL=index-Cb0RWlP-.mjs.map
