@@ -193,7 +193,7 @@ export default {
 
     const style = document.createElement("style");
     style.innerHTML = `
-      nav ol li ol li:nth-child(4),
+      nav ol li ol li:nth-child(6),
       nav ul li:nth-child(n+3),
       nav ol li span {
           display: none !important;
