@@ -53,7 +53,6 @@ function insertarBotonesLocales() {
       });
 
       container.appendChild(btns);
-      
     });
   limpiarDuplicadosLocalesButtons();
 }
@@ -65,6 +64,14 @@ function observarPaginaVentas() {
       pathname === "/admin/content-manager/collection-types/api::venta.venta";
     if (isVentaList) {
       insertarBotonesLocales();
+    } else {
+      document.getElementById("locales-buttons")?.remove();
+      const containerAnchor = document.querySelector(
+        '[data-strapi-header="true"] div:nth-child(2) a'
+      ) as HTMLElement;
+      if (containerAnchor.classList.contains("d-none")) {
+        containerAnchor.classList.remove("d-none");
+      }
     }
   });
 
