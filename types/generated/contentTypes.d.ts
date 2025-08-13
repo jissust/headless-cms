@@ -373,6 +373,38 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEstadoDeServiceEstadoDeService
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'estado_de_services';
+  info: {
+    displayName: 'estado de service';
+    pluralName: 'estado-de-services';
+    singularName: 'estado-de-service';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descripcion: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::estado-de-service.estado-de-service'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiLocalLocal extends Struct.CollectionTypeSchema {
   collectionName: 'locals';
   info: {
@@ -438,6 +470,45 @@ export interface ApiProductoProducto extends Struct.CollectionTypeSchema {
     stock: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiServiceService extends Struct.CollectionTypeSchema {
+  collectionName: 'services';
+  info: {
+    displayName: 'service';
+    pluralName: 'services';
+    singularName: 'service';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    apellido: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descripcion: Schema.Attribute.Text & Schema.Attribute.Required;
+    email: Schema.Attribute.Email;
+    estado_de_service: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::estado-de-service.estado-de-service'
+    >;
+    local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service.service'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    producto: Schema.Attribute.Text & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    telefono: Schema.Attribute.BigInteger;
+    total: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1022,8 +1093,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::estado-de-service.estado-de-service': ApiEstadoDeServiceEstadoDeService;
       'api::local.local': ApiLocalLocal;
       'api::producto.producto': ApiProductoProducto;
+      'api::service.service': ApiServiceService;
       'api::tipo-de-venta.tipo-de-venta': ApiTipoDeVentaTipoDeVenta;
       'api::venta.venta': ApiVentaVenta;
       'plugin::content-releases.release': PluginContentReleasesRelease;

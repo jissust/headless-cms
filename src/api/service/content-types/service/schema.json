@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "service"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "apellido": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "telefono": {
+      "type": "biginteger"
+    },
+    "producto": {
+      "type": "text",
+      "required": true
+    },
+    "descripcion": {
+      "type": "text",
+      "required": true
+    },
+    "local": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::local.local"
+    },
+    "estado_de_service": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::estado-de-service.estado-de-service"
+    },
+    "total": {
+      "type": "decimal"
+    }
+  }
+}

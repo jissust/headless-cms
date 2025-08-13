@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "estado_de_services",
+  "info": {
+    "singularName": "estado-de-service",
+    "pluralName": "estado-de-services",
+    "displayName": "estado de service"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "descripcion": {
+      "type": "text"
+    }
+  }
+}
