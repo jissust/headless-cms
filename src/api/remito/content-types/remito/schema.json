@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "remitos",
+  "info": {
+    "singularName": "remito",
+    "pluralName": "remitos",
+    "displayName": "remito"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombreYApellido": {
+      "type": "string",
+      "required": true
+    },
+    "telefono": {
+      "type": "biginteger",
+      "required": true
+    },
+    "fecha": {
+      "type": "date",
+      "required": true,
+      "default": "2025-08-14"
+    },
+    "descripcion": {
+      "type": "text",
+      "required": true
+    },
+    "precio": {
+      "type": "text",
+      "required": true
+    },
+    "telefonoLocal": {
+      "type": "string"
+    },
+    "direccionLocal": {
+      "type": "text"
+    },
+    "cantidad": {
+      "type": "text"
+    }
+  }
+}
