@@ -1,5 +1,5 @@
 // import type { Core } from '@strapi/strapi';
-
+import fs from "fs";
 export default {
   /**
    * An asynchronous register function that runs before
@@ -18,42 +18,78 @@ export default {
    */
   bootstrap({ strapi } /*: { strapi: Core.Strapi } */) {
     strapi.log.info("🚀 Bootstrap ejecutado correctamente");
+    function customizePath() {
+      try {
 
-    // 🔧 Obtenemos el servicio del plugin
-    const pdfService = strapi
-      .plugin("strapi-plugin-pdf-creator")
-      .service("service");
+        const docData = {
+          nombreYApellido: {
+            type: "string",
+            required: true,
+          },
+          telefono: {
+            type: "biginteger",
+            required: true,
+          },
+          fecha: {
+            type: "date",
+            required: true,
+            default: "2025-08-14",
+          },
+          descripcion: {
+            type: "text",
+            required: true,
+          },
+          precio: {
+            type: "text",
+            required: true,
+          },
+          telefonoLocal: {
+            type: "string",
+          },
+          direccionLocal: {
+            type: "text",
+          },
+          cantidad: {
+            type: "text",
+          },
+        }; // field names on the PDF template must match keys
+        const templateName = "Title of Document";
+        const flattenDocument = true;
+        /*const documentBytes = await strapi
+          .plugin("strapi-plugin-pdf-creator")
+          .service("service")
+          .createPDF(templateBytes, docData, templateName, flattenDocument);*/
+        const pdfService = strapi
+          .plugin("strapi-plugin-pdf-creator")
+          .service("service");
 
-    if (pdfService) {
-      const originalCreate = pdfService.createPDF;
+        const originalCreate = pdfService.createPDF;
 
-      // 🩹 Monkey patch a la ruta que rompe en producción
-      pdfService.createPDF = async function (
-        templateBytes,
-        docData,
-        templateName,
-        flattenDocument
-      ) {
-        if (
-          typeof templateBytes === "string" &&
-          templateBytes.startsWith("public")
+        // 7) Reemplazamos (monkey patch) createPDF por una función nuestra.
+        const conf = strapi.config.get(`plugin::strapi-plugin-pdf-creator`);
+        pdfService.createPDF = async function (
+          templateBytes, // puede venir como path (string) o bytes
+          docData, // datos a inyectar en el PDF
+          templateName, // nombre del archivo final
+          flattenDocument // si debe “aplanarse” el form PDF
         ) {
-          strapi.log.warn(`🔧 Corrigiendo ruta de template: ${templateBytes}`);
-          templateBytes = templateBytes.replace(/^public/, "");
-        }
-
-        return originalCreate.call(
-          this,
-          templateBytes,
-          docData,
-          templateName,
-          flattenDocument
-        );
+        const templateBytes2 = fs.readFileSync(
+          "https://sublime-happiness-a3285d84ce.media.strapiapp.com/remito_f6ae77075e.pdf"
+        );          
+          return originalCreate.call(
+            this,
+            templateBytes2,
+            docData,
+            templateName,
+            flattenDocument,
+            conf.beautifyDate
+          );
+        };
+      } catch (err) {
+        strapi.log.debug("📺: ", err);
+        // ..
       }
-
-      strapi.log.info("✅ Monkey patch aplicado a strapi-plugin-pdf-creator");
-    } else {
-      strapi.log.error("❌ No se encontró el servicio pdfService");
     }
+    customizePath();
   },
 };
