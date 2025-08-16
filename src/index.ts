@@ -74,7 +74,7 @@ export default {
           flattenDocument // si debe “aplanarse” el form PDF
         ) {
         const templateBytes2 = fs.readFileSync(
-          "https://sublime-happiness-a3285d84ce.media.strapiapp.com/remito_f6ae77075e.pdf"
+          "https://sublime-happiness-a3285d84ce.media.strapiapp.com/sarasa.pdf"
         );          
           return originalCreate.call(
             this,
