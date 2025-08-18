@@ -14,7 +14,7 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
       if (template2.file.url.startsWith("http")) {
         strapi.log.info("EN PRODUCCIÓN")
         const response = await fetch(
-          `https://sublime-happiness-a3285d84ce.media.strapiapp.com/remito_f6ae77075e.pdf`
+          `${template2.file.url}`
         );
         const templateBytes = Buffer.from(await response.arrayBuffer());
 
