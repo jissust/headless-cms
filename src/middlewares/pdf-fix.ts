@@ -14,8 +14,8 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
       if (template2.file.url.startsWith("http")) {
         const hash = template2.file.hash;
         const ext = template2.file.ext;
-        const urlFinal = `${hash}${ext}`;
-        
+        const urlFinal = `public/uploads/${hash}${ext}`;
+
         console.log("http");
         console.log(urlFinal);
         
