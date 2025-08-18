@@ -18,7 +18,7 @@ export default {
    */
   bootstrap({ strapi } /*: { strapi: Core.Strapi } */) {
     strapi.log.info("🚀 Bootstrap ejecutado correctamente");
-    function customizePath() {
+    //function customizePath() {
       try {
 
         const docData = {
@@ -86,7 +86,7 @@ export default {
         strapi.log.debug("📺: ", err);
         // ..
       }
-    }
-    customizePath();
+    //}
+    //customizePath();
   },
 };
