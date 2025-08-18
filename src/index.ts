@@ -64,7 +64,7 @@ export default {
           .service("service");
 
         const originalCreate = pdfService.createPDF;
-
+        strapi.log.info("🚀 PREVIO");
         // 7) Reemplazamos (monkey patch) createPDF por una función nuestra.
         const conf = strapi.config.get(`plugin::strapi-plugin-pdf-creator`);
         pdfService.createPDF = async function (
@@ -73,6 +73,7 @@ export default {
           templateName, // nombre del archivo final
           flattenDocument // si debe “aplanarse” el form PDF
         ) {
+        strapi.log.info("🚀 INGRESO");
         const templateBytes2 = fs.readFileSync(
           "/sarasa.pdf"
         );          
