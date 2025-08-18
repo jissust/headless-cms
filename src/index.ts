@@ -59,11 +59,11 @@ export default {
           .plugin("strapi-plugin-pdf-creator")
           .service("service");
 
-        const originalCreate = pdfService.createPDF;
+        const originalCreate = pdfService.fillPDF;
         strapi.log.info("🚀 PREVIO");
-
+        
         const conf = strapi.config.get(`plugin::strapi-plugin-pdf-creator`);
-        pdfService.createPDF = async function (
+        pdfService.fillPDF = async function (
           templateBytes,
           docData,
           templateName,
