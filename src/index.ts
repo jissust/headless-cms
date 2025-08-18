@@ -18,75 +18,24 @@ export default {
    */
   bootstrap({ strapi } /*: { strapi: Core.Strapi } */) {
     strapi.log.info("🚀 Bootstrap ejecutado correctamente");
-    //function customizePath() {
-      try {
+    const pdfService = strapi
+      .plugin("strapi-plugin-pdf-creator")
+      .service("service");
 
-        const docData = {
-          nombreYApellido: {
-            type: "string",
-            required: true,
-          },
-          telefono: {
-            type: "biginteger",
-            required: true,
-          },
-          fecha: {
-            type: "date",
-            required: true,
-            default: "2025-08-14",
-          },
-          descripcion: {
-            type: "text",
-            required: true,
-          },
-          precio: {
-            type: "text",
-            required: true,
-          },
-          telefonoLocal: {
-            type: "string",
-          },
-          direccionLocal: {
-            type: "text",
-          },
-          cantidad: {
-            type: "text",
-          },
-        }; // field names on the PDF template must match keys
-        const templateName = "Title of Document";
-        const flattenDocument = true;
-        const pdfService = strapi
-          .plugin("strapi-plugin-pdf-creator")
-          .service("service");
+    const originalCreate = pdfService.create;
 
-        const originalCreate = pdfService.fillPDF;
-        strapi.log.info("🚀 PREVIO");
-        
-        const conf = strapi.config.get(`plugin::strapi-plugin-pdf-creator`);
-        pdfService.fillPDF = async function (
-          templateBytes,
-          docData,
-          templateName,
-          flattenDocument
-        ) {
-        strapi.log.info("🚀 INGRESO");
-        const templateBytes2 = fs.readFileSync(
-          "/sarasa.pdf"
-        );          
-          return originalCreate.call(
-            this,
-            templateBytes2,
-            docData,
-            templateName,
-            flattenDocument,
-            conf?.beautifyDate
-          );
-        };
-      } catch (err) {
-        strapi.log.info("📺 ERROR: ", err);
-        // ..
-      }
-    //}
-    //customizePath();
+    pdfService.create = async function (ctx) {
+      strapi.log.info("🚀 Entré al create del PDF (monkey patch)");
+
+      // 🔹 Fuerzo a que siempre use mi PDF fijo
+      ctx.request.body.template.file.url = "/remito_f6ae77075e.pdf";
+
+      // 🔹 Log extra para confirmar
+      strapi.log.info(
+        `📂 URL reemplazada: ${ctx.request.body.template.file.url}`
+      );
+
+      return originalCreate.call(this, ctx);
+    };
   },
 };
