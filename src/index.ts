@@ -83,7 +83,7 @@ export default {
           );
         };
       } catch (err) {
-        strapi.log.debug("📺: ", err);
+        strapi.log.info("📺 ERROR: ", err);
         // ..
       }
     //}
