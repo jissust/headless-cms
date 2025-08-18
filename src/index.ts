@@ -55,10 +55,6 @@ export default {
         }; // field names on the PDF template must match keys
         const templateName = "Title of Document";
         const flattenDocument = true;
-        /*const documentBytes = await strapi
-          .plugin("strapi-plugin-pdf-creator")
-          .service("service")
-          .createPDF(templateBytes, docData, templateName, flattenDocument);*/
         const pdfService = strapi
           .plugin("strapi-plugin-pdf-creator")
           .service("service");
@@ -67,24 +63,25 @@ export default {
         strapi.log.info("🚀 PREVIO");
 
         const conf = strapi.config.get(`plugin::strapi-plugin-pdf-creator`);
-        /*pdfService.createPDF = async function (
+        pdfService.createPDF = async function (
           templateBytes,
           docData,
           templateName,
           flattenDocument
-        ) {*/
+        ) {
         strapi.log.info("🚀 INGRESO");
         const templateBytes2 = fs.readFileSync(
           "/sarasa.pdf"
         );          
           return originalCreate.call(
+            this,
             templateBytes2,
             docData,
             templateName,
             flattenDocument,
-            conf.beautifyDate
+            conf?.beautifyDate
           );
-        //};
+        };
       } catch (err) {
         strapi.log.debug("📺: ", err);
         // ..
