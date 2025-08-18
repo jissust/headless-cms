@@ -74,10 +74,9 @@ export default {
           flattenDocument // si debe “aplanarse” el form PDF
         ) {
         const templateBytes2 = fs.readFileSync(
-          "/remito_f6ae77075e.pdf"
+          "/sarasa.pdf"
         );          
           return originalCreate.call(
-            this,
             templateBytes2,
             docData,
             templateName,
