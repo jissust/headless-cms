@@ -30,7 +30,7 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
           );
         }
         const templateBytes = Buffer.from(await response.arrayBuffer());
-
+        console.log("TEMPLATEBYTES");
         const originalCreate = pdfService.create;
         pdfService.create = async function (ctx: any) {
           return await strapi
@@ -44,7 +44,7 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
               true
             );
         };
-        ctx.isTest = true;
+        //ctx.isTest = true;
       }
     }
 
