@@ -4,6 +4,9 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
     if (
       ctx.url.startsWith(
         '/content-manager/relations/productos.productos/producto'
+      ) || 
+      ctx.url.startsWith(
+        '/content-manager/relations/gastos.gastos-items/producto'
       )
     ) {
       const localId = ctx.query.localId;

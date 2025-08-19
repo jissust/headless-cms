@@ -405,6 +405,36 @@ export interface ApiEstadoDeServiceEstadoDeService
   };
 }
 
+export interface ApiGastoGasto extends Struct.CollectionTypeSchema {
+  collectionName: 'gastos';
+  info: {
+    displayName: 'gasto';
+    pluralName: 'gastos';
+    singularName: 'gasto';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    Gastos: Schema.Attribute.DynamicZone<['gastos.gastos-items']>;
+    local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::gasto.gasto'> &
+      Schema.Attribute.Private;
+    proveedor: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    telefono: Schema.Attribute.BigInteger;
+    total: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiLocalLocal extends Struct.CollectionTypeSchema {
   collectionName: 'locals';
   info: {
@@ -1192,6 +1222,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::estado-de-service.estado-de-service': ApiEstadoDeServiceEstadoDeService;
+      'api::gasto.gasto': ApiGastoGasto;
       'api::local.local': ApiLocalLocal;
       'api::producto.producto': ApiProductoProducto;
       'api::remito.remito': ApiRemitoRemito;

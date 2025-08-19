@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gastos",
+  "info": {
+    "singularName": "gasto",
+    "pluralName": "gastos",
+    "displayName": "gasto"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "proveedor": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "telefono": {
+      "type": "biginteger"
+    },
+    "Gastos": {
+      "type": "dynamiczone",
+      "components": [
+        "gastos.gastos-items"
+      ]
+    },
+    "total": {
+      "type": "decimal"
+    },
+    "local": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::local.local"
+    }
+  }
+}

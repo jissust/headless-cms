@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_gastos_gastos_items",
+  "info": {
+    "displayName": "gastos-items",
+    "icon": "plus"
+  },
+  "options": {},
+  "attributes": {
+    "producto": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::producto.producto"
+    },
+    "nombre_producto_nuevo": {
+      "type": "string"
+    },
+    "cantidad": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "precio_por_unidad": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "total_por_item": {
+      "type": "decimal"
+    }
+  },
+  "config": {}
+}
