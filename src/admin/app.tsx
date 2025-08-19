@@ -194,7 +194,6 @@ export default {
     const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(3),
-      nav ol li ol li:nth-child(5),
       nav ol li ol li:nth-child(8),
       nav ul li:nth-child(n+3),
       nav ol li span {

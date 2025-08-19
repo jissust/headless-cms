@@ -21,16 +21,17 @@
     },
     "fecha": {
       "type": "date",
-      "required": true,
-      "default": "2025-08-14"
+      "required": true
     },
     "descripcion": {
       "type": "text",
-      "required": true
+      "required": true,
+      "maxLength": 252
     },
     "precio": {
       "type": "text",
-      "required": true
+      "required": true,
+      "maxLength": 96
     },
     "telefonoLocal": {
       "type": "string"
@@ -39,7 +40,8 @@
       "type": "text"
     },
     "cantidad": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 96
     }
   }
 }

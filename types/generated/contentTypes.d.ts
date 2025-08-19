@@ -487,15 +487,20 @@ export interface ApiRemitoRemito extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    cantidad: Schema.Attribute.Text;
+    cantidad: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 96;
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    descripcion: Schema.Attribute.Text & Schema.Attribute.Required;
-    direccionLocal: Schema.Attribute.Text;
-    fecha: Schema.Attribute.Date &
+    descripcion: Schema.Attribute.Text &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'2025-08-14'>;
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 252;
+      }>;
+    direccionLocal: Schema.Attribute.Text;
+    fecha: Schema.Attribute.Date & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -503,7 +508,11 @@ export interface ApiRemitoRemito extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     nombreYApellido: Schema.Attribute.String & Schema.Attribute.Required;
-    precio: Schema.Attribute.Text & Schema.Attribute.Required;
+    precio: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 96;
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     telefono: Schema.Attribute.BigInteger & Schema.Attribute.Required;
     telefonoLocal: Schema.Attribute.String;
