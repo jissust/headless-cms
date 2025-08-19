@@ -20,17 +20,13 @@
       "type": "text"
     },
     "precio": {
-      "type": "decimal",
-      "required": true,
-      "default": 0
+      "type": "decimal"
     },
     "precio_mayorista": {
-      "type": "decimal",
-      "required": true
+      "type": "decimal"
     },
     "stock": {
       "type": "integer",
-      "required": true,
       "default": 0
     },
     "locales": {
