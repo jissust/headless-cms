@@ -17,15 +17,17 @@
     "cantidad": {
       "type": "integer",
       "required": true,
-      "default": 0
+      "customField":"plugin::my-custom-fields.input-cantidad-gastos-item"
     },
     "precio_por_unidad": {
       "type": "decimal",
       "required": true,
-      "default": 0
+      "customField":"plugin::my-custom-fields.input-precio-por-unidad-gastos-item"
     },
     "total_por_item": {
-      "type": "decimal"
+      "type": "decimal",
+      "customField": "plugin::my-custom-fields.input-total-gastos-item"
+
     }
   },
   "config": {}

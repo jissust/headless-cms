@@ -44,4 +44,3 @@ const InputNombreLocal = (props, ref) => {
   ) });
 };
 exports.InputNombreLocal = InputNombreLocal;
-//# sourceMappingURL=index-BP7hUBrc.js.map

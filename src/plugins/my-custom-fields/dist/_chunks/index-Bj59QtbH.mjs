@@ -44,4 +44,3 @@ const InputNombreVenta = (props, ref) => {
 export {
   InputNombreVenta
 };
-//# sourceMappingURL=index-Bj59QtbH.mjs.map

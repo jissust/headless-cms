@@ -41,4 +41,3 @@ const InputNumberCustomize = (props, ref) => {
 export {
   InputNumberCustomize
 };
-//# sourceMappingURL=index-BZ2FoXdE.mjs.map

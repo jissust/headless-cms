@@ -146,6 +146,66 @@ const index = {
       },
       options: {}
     });
+    app.customFields.register({
+      name: "input-total-gastos-item",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-total-gastos-item-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-total-gastos-item-id-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-Dx0kEfoQ.js")).then((module2) => ({
+          default: module2.InputTotalGastosItem
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "input-cantidad-gastos-item",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-cantidad-gastos-item-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-cantidad-gastos-item-id-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-CWNsiCmX.js")).then((module2) => ({
+          default: module2.InputCantidadGastosItem
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "input-precio-por-unidad-gastos-item",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-precio-por-unidad-gastos-item-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-precio-por-unidad-gastos-item-id-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-Vqr-H8Fx.js")).then((module2) => ({
+          default: module2.InputPrecioPorUnidadGastosItem
+        }))
+      },
+      options: {}
+    });
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
@@ -167,4 +227,3 @@ const index = {
   }
 };
 module.exports = index;
-//# sourceMappingURL=index.js.map

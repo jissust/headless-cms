@@ -38,4 +38,3 @@ const InputNumberTotalItemCustomize = (props, ref) => {
 export {
   InputNumberTotalItemCustomize
 };
-//# sourceMappingURL=index-DcDpN9Dx.mjs.map

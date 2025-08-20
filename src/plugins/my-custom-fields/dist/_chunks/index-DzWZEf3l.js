@@ -44,4 +44,3 @@ const InputNombreVenta = (props, ref) => {
   ) });
 };
 exports.InputNombreVenta = InputNombreVenta;
-//# sourceMappingURL=index-DzWZEf3l.js.map

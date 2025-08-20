@@ -6,13 +6,13 @@ export default {
     const ctxBody = ctx.request.body;
     const { data } = event.params;
     const gastos = ctxBody.Gastos;
-
+    
     if (gastos.length == 0) {
       throw new errors.ApplicationError(
         "Para crear un gasto como mínimo debe haber un producto."
       );
     }
-
+    
     const localId = ctx.request.query.localId;
     if (!localId) {
       throw new errors.ApplicationError(`Debe seleccionar un local`);

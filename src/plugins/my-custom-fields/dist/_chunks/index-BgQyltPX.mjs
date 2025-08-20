@@ -44,4 +44,3 @@ const InputNombreLocal = (props, ref) => {
 export {
   InputNombreLocal
 };
-//# sourceMappingURL=index-BgQyltPX.mjs.map

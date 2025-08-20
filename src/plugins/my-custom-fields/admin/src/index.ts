@@ -137,6 +137,72 @@ export default {
       options: {},
     });
 
+    app.customFields.register({
+      name: 'input-total-gastos-item',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-total-gastos-item-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-total-gastos-item-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputTotalGastosItem').then((module) => ({
+            default: module.InputTotalGastosItem,
+          })),
+      },
+      options: {},
+    });
+
+    app.customFields.register({
+      name: 'input-cantidad-gastos-item',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-cantidad-gastos-item-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-cantidad-gastos-item-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputCantidadGastosItem').then((module) => ({
+            default: module.InputCantidadGastosItem,
+          })),
+      },
+      options: {},
+    });
+
+    app.customFields.register({
+      name: 'input-precio-por-unidad-gastos-item',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-precio-por-unidad-gastos-item-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-precio-por-unidad-gastos-item-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputPrecioPorUnidadGastosItem').then((module) => ({
+            default: module.InputPrecioPorUnidadGastosItem,
+          })),
+      },
+      options: {},
+    });
+
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
