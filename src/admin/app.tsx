@@ -1,7 +1,7 @@
 import type { StrapiApp } from "@strapi/strapi/admin";
 
-function limpiarDuplicadosLocalesButtons() {
-  const botones = document.querySelectorAll("#locales-buttons");
+function limpiarDuplicadosLocalesButtons(id: any) {
+  const botones = document.querySelectorAll(id);
   if (botones.length > 1) {
     botones.forEach((btn, index) => {
       if (index > 0) btn.remove();
@@ -10,14 +10,15 @@ function limpiarDuplicadosLocalesButtons() {
 }
 
 function insertarBotonesLocales() {
-  limpiarDuplicadosLocalesButtons();
+  limpiarDuplicadosLocalesButtons("#locales-buttons");
   if (document.getElementById("locales-buttons")) return;
-  console.log("URL actual:", window.location.pathname);
+
   const containerAnchor = document.querySelector(
     '[data-strapi-header="true"] div:nth-child(2) a'
   ) as HTMLElement;
+  
   if (containerAnchor) {
-    //containerAnchor.remove();
+    containerAnchor.remove();
     containerAnchor.classList.add("d-none");
   }
 
@@ -54,7 +55,7 @@ function insertarBotonesLocales() {
 
       container.appendChild(btns);
     });
-  limpiarDuplicadosLocalesButtons();
+  limpiarDuplicadosLocalesButtons("#locales-buttons");
 }
 
 function observarPaginaVentas() {
@@ -66,6 +67,70 @@ function observarPaginaVentas() {
       insertarBotonesLocales();
     } else {
       document.getElementById("locales-buttons")?.remove();
+      const containerAnchor = document.querySelector(
+        '[data-strapi-header="true"] div:nth-child(2) a'
+      ) as HTMLElement;
+      if (containerAnchor.classList.contains("d-none")) {
+        containerAnchor.classList.remove("d-none");
+      }
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true, // detecta nodos agregados o eliminados
+    subtree: true, // detecta cambios dentro de hijos
+  });
+}
+
+function insertarBotonesLocalesGastos() {
+  limpiarDuplicadosLocalesButtons("#locales-buttons-gastos");
+  if (document.getElementById("locales-buttons-gastos")) return;
+
+  const containerAnchor = document.querySelector(
+    '[data-strapi-header="true"] div:nth-child(2) a'
+  ) as HTMLElement;
+
+  if (containerAnchor) {
+    containerAnchor.remove();
+    containerAnchor.classList.add("d-none");
+  }
+
+  const container = document.querySelector(
+    '[data-strapi-header="true"] div:nth-child(2)'
+  ) as HTMLElement;
+
+  if (!container) return;
+
+  const btns = document.createElement("div");
+  btns.id = "locales-buttons-gastos";
+
+  fetch("/api/locals")
+    .then((res) => res.json())
+    .then((data) => {
+      if (!data?.data) return;
+      data.data.forEach((local: any) => {
+        console.log(local);
+        const a = document.createElement("a");
+        a.href = `/admin/content-manager/collection-types/api::gasto.gasto/create?localId=${local.id}`;
+        a.innerText = `${local.nombre}` || `Local ${local.id}`;
+        a.classList.add("boton-local");
+        btns.appendChild(a);
+      });
+      container.appendChild(btns);
+    });
+
+  limpiarDuplicadosLocalesButtons("#locales-buttons-gastos");
+}
+
+function observarPaginaGastos() {
+  const observer = new MutationObserver(() => {
+    const pathname = window.location.pathname;
+    const isVentaList =
+      pathname === "/admin/content-manager/collection-types/api::gasto.gasto";
+    if (isVentaList) {
+      insertarBotonesLocalesGastos();
+    } else {
+      document.getElementById("locales-buttons-gastos")?.remove();
       const containerAnchor = document.querySelector(
         '[data-strapi-header="true"] div:nth-child(2) a'
       ) as HTMLElement;
@@ -130,11 +195,12 @@ export default {
   bootstrap(app: StrapiApp) {
     console.log(app);
     observarPaginaVentas();
-  
+    observarPaginaGastos();
+
     const style = document.createElement("style");
     style.innerHTML = `
-      nav ol li ol li:nth-child(3),
-      nav ol li ol li:nth-child(8),
+      nav ol li ol li:nth-child(4),
+      nav ol li ol li:nth-child(9),
       nav ul li:nth-child(n+3),
       nav ol li span {
           display: none !important;
