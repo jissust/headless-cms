@@ -160,7 +160,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-Dx0kEfoQ.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-DK7Z5eE3.js")).then((module2) => ({
           default: module2.InputTotalGastosItem
         }))
       },
@@ -202,6 +202,26 @@ const index = {
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-ByiF4_9a.js")).then((module2) => ({
           default: module2.InputPrecioPorUnidadGastosItem
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "input-total-gastos",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-total-gastos-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-total-gastos-id-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-HoEMup73.js")).then((module2) => ({
+          default: module2.InputTotalGastos
         }))
       },
       options: {}

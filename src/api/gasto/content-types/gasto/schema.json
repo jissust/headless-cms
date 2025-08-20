@@ -28,7 +28,8 @@
       ]
     },
     "total": {
-      "type": "decimal"
+      "type": "decimal",
+      "customField": "plugin::my-custom-fields.input-total-gastos"
     },
     "local": {
       "type": "relation",

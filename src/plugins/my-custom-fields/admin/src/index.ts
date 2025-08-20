@@ -203,6 +203,28 @@ export default {
       options: {},
     });
 
+    app.customFields.register({
+      name: 'input-total-gastos',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-total-gastos-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-total-gastos-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputTotalGastos').then((module) => ({
+            default: module.InputTotalGastos,
+          })),
+      },
+      options: {},
+    });
+
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
