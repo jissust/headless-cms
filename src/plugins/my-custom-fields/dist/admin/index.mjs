@@ -179,7 +179,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-C9LaHC_S.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-BPg5BWA0.mjs").then((module) => ({
           default: module.InputCantidadGastosItem
         }))
       },
@@ -199,7 +199,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-C2a1WXGA.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-Ylr-BL2I.mjs").then((module) => ({
           default: module.InputPrecioPorUnidadGastosItem
         }))
       },

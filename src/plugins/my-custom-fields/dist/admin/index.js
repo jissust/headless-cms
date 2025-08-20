@@ -180,7 +180,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-CWNsiCmX.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-D2QOg1rA.js")).then((module2) => ({
           default: module2.InputCantidadGastosItem
         }))
       },
@@ -200,7 +200,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-Vqr-H8Fx.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-ByiF4_9a.js")).then((module2) => ({
           default: module2.InputPrecioPorUnidadGastosItem
         }))
       },

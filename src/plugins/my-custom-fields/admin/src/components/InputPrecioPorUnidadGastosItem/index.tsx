@@ -9,6 +9,21 @@ const InputPrecioPorUnidadGastosItem = (props: any, ref: any) => {
     onChange({
       target: { name, type: attribute.type, value: precioPorUnidad },
     });
+
+    const cantidadGastos: HTMLInputElement | null = document.querySelector(
+      `input[name="Gastos.${index}.cantidad"]`
+    );
+
+    const cantidadGastosValue = cantidadGastos ? parseInt(cantidadGastos?.value) : 0;
+    const total = precioPorUnidad * cantidadGastosValue;
+
+    onChange({
+      target: {
+        name: `Gastos.${index}.total_por_item`,
+        type: 'number',
+        value: total,
+      },
+    });
   };
 
   return (
