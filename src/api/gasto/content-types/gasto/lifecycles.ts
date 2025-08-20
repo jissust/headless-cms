@@ -29,6 +29,14 @@ export default {
       const precio_por_unidad = gasto.precio_por_unidad;
       const total_por_item = gasto.total_por_item;
       
+      if( ( productoExistente && productoExistente["connect"].length > 0) && productoNuevo ){
+        throw new errors.ApplicationError(`Si selecciona un "Producto" existente no puede completar el campo "Nombre producto nuevo"`);
+      }
+
+      if( !( productoExistente && productoExistente["connect"].length > 0) && !productoNuevo ){
+        throw new errors.ApplicationError(`Debe seleccionar un "Producto" existente o completar un "Nombre producto nuevo"`);
+      }
+
       if (productoExistente && productoExistente["connect"].length > 0) {
         
         const id = productoExistente["connect"][0]["id"];
