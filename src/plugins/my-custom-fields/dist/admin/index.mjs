@@ -39,7 +39,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-D-fWbRRH.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-n4q-hw5R.mjs").then((module) => ({
           default: module.SelectCustomize
         }))
       },
@@ -221,6 +221,26 @@ const index = {
       components: {
         Input: async () => import("../_chunks/index-Bi8G9_t8.mjs").then((module) => ({
           default: module.InputTotalGastos
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "select-customize-gasto",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "select-customize-gasto-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "select-customize-gasto-id-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => import("../_chunks/index-CGK04Tyb.mjs").then((module) => ({
+          default: module.SelectCustomizeGasto
         }))
       },
       options: {}

@@ -7,9 +7,8 @@
   "options": {},
   "attributes": {
     "producto": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::producto.producto"
+      "type": "integer",
+      "customField":"plugin::my-custom-fields.select-customize-gasto"
     },
     "nombre_producto_nuevo": {
       "type": "string"

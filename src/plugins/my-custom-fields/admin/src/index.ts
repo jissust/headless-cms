@@ -225,6 +225,28 @@ export default {
       options: {},
     });
 
+    app.customFields.register({
+      name: 'select-customize-gasto',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'select-customize-gasto-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'select-customize-gasto-id-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/SelectCustomizeGasto').then((module) => ({
+            default: module.SelectCustomizeGasto,
+          })),
+      },
+      options: {},
+    });
+
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,

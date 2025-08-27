@@ -1,0 +1,61 @@
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
+import { useState, useEffect } from "react";
+const SelectCustomizeGasto = (props, ref) => {
+  const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
+  const queryParams = new URLSearchParams(window.location.search);
+  const [productos, setProductos] = useState([]);
+  const localId = queryParams.get("localId");
+  const nameSplit = name.split(".");
+  parseInt(nameSplit[1]);
+  useEffect(() => {
+    if (!localId) {
+      let urlSplit = window.location.href.split("/");
+      let documentId = urlSplit[urlSplit.length - 1];
+      console.log(documentId);
+      fetch(`/api/gastos?populate=*&filters[documentId][$eq]=${documentId}`).then((res) => res.json()).then((data) => {
+        if (!data?.data) return;
+        filtrarLocalesPorLocal(data.data[0].local.id);
+      }).catch((err) => {
+        console.error("Error al cargar productos", err);
+      });
+    } else {
+      filtrarLocalesPorLocal(localId);
+    }
+  }, []);
+  const filtrarLocalesPorLocal = (localId2) => {
+    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId2}`).then((res) => res.json()).then((data) => {
+      if (!data?.data) return;
+      setProductos(data.data);
+    }).catch((err) => {
+      console.error("Error al cargar productos", err);
+    });
+  };
+  const handleChange = (e) => {
+    const selectedId = e.target.value;
+    console.log(selectedId);
+    onChange({
+      target: { name, type: attribute.type, value: selectedId }
+    });
+  };
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx("label", { className: "label-customize", htmlFor: name, children: "Producto" }),
+    /* @__PURE__ */ jsxs(
+      "select",
+      {
+        name,
+        disabled,
+        required,
+        value,
+        onChange: handleChange,
+        className: "input-customize",
+        children: [
+          /* @__PURE__ */ jsx("option", { value: "", children: "Seleccione un producto" }),
+          productos.map((producto) => /* @__PURE__ */ jsx("option", { value: producto.id, children: producto?.nombre || `Producto ${producto.id}` }, producto.id))
+        ]
+      }
+    )
+  ] });
+};
+export {
+  SelectCustomizeGasto
+};

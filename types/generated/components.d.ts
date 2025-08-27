@@ -14,7 +14,8 @@ export interface GastosGastosItems extends Struct.ComponentSchema {
     precio_por_unidad: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<'plugin::my-custom-fields.input-precio-por-unidad-gastos-item'>;
-    producto: Schema.Attribute.Relation<'oneToOne', 'api::producto.producto'>;
+    producto: Schema.Attribute.Integer &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.select-customize-gasto'>;
     total_por_item: Schema.Attribute.Decimal &
       Schema.Attribute.CustomField<'plugin::my-custom-fields.input-total-gastos-item'>;
   };

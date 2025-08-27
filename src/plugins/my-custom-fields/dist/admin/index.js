@@ -40,7 +40,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-DPcz7amO.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-DGbYmaFw.js")).then((module2) => ({
           default: module2.SelectCustomize
         }))
       },
@@ -222,6 +222,26 @@ const index = {
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-HoEMup73.js")).then((module2) => ({
           default: module2.InputTotalGastos
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "select-customize-gasto",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "select-customize-gasto-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "select-customize-gasto-id-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-CmeMTzFP.js")).then((module2) => ({
+          default: module2.SelectCustomizeGasto
         }))
       },
       options: {}
