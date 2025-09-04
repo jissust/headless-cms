@@ -44,7 +44,22 @@
       "target": "api::estado-de-service.estado-de-service"
     },
     "total": {
-      "type": "decimal"
+      "type": "decimal",
+      "default": 0
+    },
+    "descripcion_gasto": {
+      "type": "text",
+      "required": true
+    },
+    "total_gasto": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "ganancia": {
+      "type": "decimal",
+      "default": 0,
+      "customField": "plugin::my-custom-fields.input-service-total-ganancia"
     }
   }
 }

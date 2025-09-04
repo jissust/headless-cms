@@ -565,11 +565,15 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     descripcion: Schema.Attribute.Text & Schema.Attribute.Required;
+    descripcion_gasto: Schema.Attribute.Text & Schema.Attribute.Required;
     email: Schema.Attribute.Email;
     estado_de_service: Schema.Attribute.Relation<
       'oneToOne',
       'api::estado-de-service.estado-de-service'
     >;
+    ganancia: Schema.Attribute.Decimal &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.input-service-total-ganancia'> &
+      Schema.Attribute.DefaultTo<0>;
     local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -581,7 +585,10 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     producto: Schema.Attribute.Text & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     telefono: Schema.Attribute.BigInteger;
-    total: Schema.Attribute.Decimal;
+    total: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    total_gasto: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

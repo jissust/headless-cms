@@ -246,6 +246,26 @@ const index = {
       },
       options: {}
     });
+    app.customFields.register({
+      name: "input-service-total-ganancia",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-service-total-ganancia-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-service-total-ganancia-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-Bvwc8qDu.js")).then((module2) => ({
+          default: module2.InputServiceTotalGanancia
+        }))
+      },
+      options: {}
+    });
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
