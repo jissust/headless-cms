@@ -11,27 +11,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "nombre": {
-      "type": "string",
-      "required": true
-    },
-    "apellido": {
-      "type": "string",
-      "required": true
-    },
     "email": {
       "type": "email"
     },
     "telefono": {
       "type": "biginteger"
-    },
-    "producto": {
-      "type": "text",
-      "required": true
-    },
-    "descripcion": {
-      "type": "text",
-      "required": true
     },
     "local": {
       "type": "relation",
@@ -56,10 +40,126 @@
       "required": true,
       "default": 0
     },
+    "comercio": {
+      "type": "string",
+      "default": "Bien copiado"
+    },
+    "cliente": {
+      "type": "string",
+      "required": true
+    },
+    "fecha_de_ingreso": {
+      "type": "date"
+    },
+    "numero_de_orden": {
+      "type": "string"
+    },
+    "descripcion_estado_del_equipo": {
+      "type": "text"
+    },
+    "marca": {
+      "type": "string"
+    },
+    "modelo": {
+      "type": "string"
+    },
+    "imei": {
+      "type": "string"
+    },
+    "trabajo_solicitado_por_el_cliente": {
+      "type": "text"
+    },
+    "observaciones_del_tecnico": {
+      "type": "text"
+    },
+    "condiciones_del_servicio": {
+      "type": "text",
+      "default": "1. El comercio *no se responsabiliza por fallas adicionales* que puedan aparecer durante o después de la reparación debido al estado previo del equipo. 2. El cliente declara haber entregado el equipo con el *estado detallado arriba*. 3. Las reparaciones tienen una *garantía limitada de X días* (solo sobre la pieza o trabajo realizado, no sobre otros componentes). 4. Equipos mojados o con golpes previos *no tienen garantía*. 5. El cliente debe retirar el equipo en un plazo máximo de *30 días*, pasado ese tiempo el comercio no se responsabiliza por pérdida o daño."
+    },
+    "enciende": {
+      "type": "boolean",
+      "default": false
+    },
+    "no_enciende": {
+      "type": "boolean",
+      "default": false
+    },
+    "pantalla_daniada": {
+      "type": "boolean",
+      "default": false
+    },
+    "golpes": {
+      "type": "boolean",
+      "default": false
+    },
+    "icloud_activo": {
+      "type": "boolean",
+      "default": false
+    },
+    "icloud_desactivado": {
+      "type": "boolean",
+      "default": false
+    },
+    "otros": {
+      "type": "boolean",
+      "default": false
+    },
+    "rayaduras": {
+      "type": "boolean",
+      "default": false
+    },
     "ganancia": {
       "type": "decimal",
-      "default": 0,
-      "customField": "plugin::my-custom-fields.input-service-total-ganancia"
+      "customField": "plugin::my-custom-fields.input-service-total-ganancia",
+      "default": 0
+    },
+    "title_section": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Datos del equipo",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "title_section_trabajo_solicitado_por_cliente": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Trabajo solicitado por el cliente",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "title_section_observaciones_del_tecnico": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Observaciones del técnico",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "title_section_condiciones_de_servicio": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Condiciones de Servicio",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "title_section_gastos": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Gastos",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "title_section_estados_del_equipo": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Estados del equipo al ingreso",
+        "placeholder": "Ingrese el título de la sección"
+      }
     }
   }
 }

@@ -263,7 +263,11 @@ export default {
       .p-1 {
         padding:10px 0;
       }
-
+      .h1 {
+        font-weight: 600;
+        font-size: 2.5rem;
+        line-height: 1.25;
+      }
       @media (max-width: 992px) { 
         #main-content {
           margin: 0 20px !important;

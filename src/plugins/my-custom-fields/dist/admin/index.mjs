@@ -265,6 +265,26 @@ const index = {
       },
       options: {}
     });
+    app.customFields.register({
+      name: "title-section",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "title-section-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "title-section-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => import("../_chunks/index-D6xlgTMB.mjs").then((module) => ({
+          default: module.TitleSection
+        }))
+      },
+      options: {}
+    });
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,

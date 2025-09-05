@@ -560,20 +560,31 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    apellido: Schema.Attribute.String & Schema.Attribute.Required;
+    cliente: Schema.Attribute.String & Schema.Attribute.Required;
+    comercio: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Bien copiado'>;
+    condiciones_del_servicio: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'1. El comercio *no se responsabiliza por fallas adicionales* que puedan aparecer durante o despu\u00E9s de la reparaci\u00F3n debido al estado previo del equipo. 2. El cliente declara haber entregado el equipo con el *estado detallado arriba*. 3. Las reparaciones tienen una *garant\u00EDa limitada de X d\u00EDas* (solo sobre la pieza o trabajo realizado, no sobre otros componentes). 4. Equipos mojados o con golpes previos *no tienen garant\u00EDa*. 5. El cliente debe retirar el equipo en un plazo m\u00E1ximo de *30 d\u00EDas*, pasado ese tiempo el comercio no se responsabiliza por p\u00E9rdida o da\u00F1o.'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    descripcion: Schema.Attribute.Text & Schema.Attribute.Required;
+    descripcion_estado_del_equipo: Schema.Attribute.Text;
     descripcion_gasto: Schema.Attribute.Text & Schema.Attribute.Required;
     email: Schema.Attribute.Email;
+    enciende: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     estado_de_service: Schema.Attribute.Relation<
       'oneToOne',
       'api::estado-de-service.estado-de-service'
     >;
+    fecha_de_ingreso: Schema.Attribute.Date;
     ganancia: Schema.Attribute.Decimal &
       Schema.Attribute.CustomField<'plugin::my-custom-fields.input-service-total-ganancia'> &
       Schema.Attribute.DefaultTo<0>;
+    golpes: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    icloud_activo: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    icloud_desactivado: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    imei: Schema.Attribute.String;
     local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -581,14 +592,70 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
       'api::service.service'
     > &
       Schema.Attribute.Private;
-    nombre: Schema.Attribute.String & Schema.Attribute.Required;
-    producto: Schema.Attribute.Text & Schema.Attribute.Required;
+    marca: Schema.Attribute.String;
+    modelo: Schema.Attribute.String;
+    no_enciende: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    numero_de_orden: Schema.Attribute.String;
+    observaciones_del_tecnico: Schema.Attribute.Text;
+    otros: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    pantalla_daniada: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
+    rayaduras: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     telefono: Schema.Attribute.BigInteger;
+    title_section: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::my-custom-fields.title-section',
+        {
+          label: 'Datos del equipo';
+          placeholder: 'Ingrese el t\u00EDtulo de la secci\u00F3n';
+        }
+      >;
+    title_section_condiciones_de_servicio: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::my-custom-fields.title-section',
+        {
+          label: 'Condiciones de Servicio';
+          placeholder: 'Ingrese el t\u00EDtulo de la secci\u00F3n';
+        }
+      >;
+    title_section_estados_del_equipo: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::my-custom-fields.title-section',
+        {
+          label: 'Estados del equipo al ingreso';
+          placeholder: 'Ingrese el t\u00EDtulo de la secci\u00F3n';
+        }
+      >;
+    title_section_gastos: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::my-custom-fields.title-section',
+        {
+          label: 'Gastos';
+          placeholder: 'Ingrese el t\u00EDtulo de la secci\u00F3n';
+        }
+      >;
+    title_section_observaciones_del_tecnico: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::my-custom-fields.title-section',
+        {
+          label: 'Observaciones del t\u00E9cnico';
+          placeholder: 'Ingrese el t\u00EDtulo de la secci\u00F3n';
+        }
+      >;
+    title_section_trabajo_solicitado_por_cliente: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::my-custom-fields.title-section',
+        {
+          label: 'Trabajo solicitado por el cliente';
+          placeholder: 'Ingrese el t\u00EDtulo de la secci\u00F3n';
+        }
+      >;
     total: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     total_gasto: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
+    trabajo_solicitado_por_el_cliente: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
