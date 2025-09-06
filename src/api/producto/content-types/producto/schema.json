@@ -33,6 +33,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::local.local"
+    },
+    "precio_compra": {
+      "type": "decimal"
     }
   }
 }

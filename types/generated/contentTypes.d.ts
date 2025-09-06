@@ -494,6 +494,7 @@ export interface ApiProductoProducto extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     precio: Schema.Attribute.Decimal;
+    precio_compra: Schema.Attribute.Decimal;
     precio_mayorista: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     stock: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;

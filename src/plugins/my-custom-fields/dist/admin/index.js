@@ -40,7 +40,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-DGbYmaFw.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-BjYmgBPT.js")).then((module2) => ({
           default: module2.SelectCustomize
         }))
       },

@@ -48,7 +48,7 @@ const SelectCustomize = (props: any, ref: any) => {
     const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
 
     setSelectedProducto(selectedProductoChange);
-
+    console.log(selectedProductoChange);
     onChange({
       target: { name, type: attribute.type, value: selectedId },
     });

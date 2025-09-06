@@ -39,7 +39,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-n4q-hw5R.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-C9j_YOYf.mjs").then((module) => ({
           default: module.SelectCustomize
         }))
       },
