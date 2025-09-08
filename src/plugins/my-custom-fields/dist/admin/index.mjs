@@ -39,7 +39,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-BvbUKvcv.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-DNzfHvSO.mjs").then((module) => ({
           default: module.SelectCustomize
         }))
       },
@@ -79,7 +79,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-DcDpN9Dx.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-2BMoRILb.mjs").then((module) => ({
           default: module.InputNumberTotalItemCustomize
         }))
       },
@@ -99,7 +99,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-BsbbBqvj.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-7DNjnmAF.mjs").then((module) => ({
           default: module.InputTotalVentaCustomize
         }))
       },
@@ -159,7 +159,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-xwof3UkE.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-DeYxMX8r.mjs").then((module) => ({
           default: module.InputTotalGastosItem
         }))
       },
@@ -219,7 +219,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-Bi8G9_t8.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-DiBboY0S.mjs").then((module) => ({
           default: module.InputTotalGastos
         }))
       },
@@ -259,7 +259,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-BH3SE1C5.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-BekRk7qZ.mjs").then((module) => ({
           default: module.InputServiceTotalGanancia
         }))
       },
@@ -299,7 +299,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-DiEi7B1c.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-e_ifErM5.mjs").then((module) => ({
           default: module.InputNumberVentaGananciaItem
         }))
       },
@@ -319,7 +319,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-DPzz_kR7.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-YlGs4tPR.mjs").then((module) => ({
           default: module.InputTotalVentaGanancia
         }))
       },

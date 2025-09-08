@@ -4,7 +4,9 @@ const InputTotalVentaCustomize = (props: any, ref: any) => {
   return (
     <>
       <label className="label-customize">Total</label>
-      <input
+      <div className="container-number-currency">
+       <span>$</span>
+       <input
         name={name}
         disabled={true}
         required={required}
@@ -13,6 +15,7 @@ const InputTotalVentaCustomize = (props: any, ref: any) => {
         type="number"
         className="input-customize"
       />
+      </div>
     </>
   );
 };

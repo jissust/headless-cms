@@ -268,6 +268,13 @@ export default {
         font-size: 2.5rem;
         line-height: 1.25;
       }
+      .container-number-currency {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 15px;
+        font-weight: bold;
+      }
       @media (max-width: 992px) { 
         #main-content {
           margin: 0 20px !important;

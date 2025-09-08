@@ -40,6 +40,8 @@ const InputServiceTotalGanancia = (props: any, ref: any) => {
   return (
     <>
       <label className="label-customize">Ganancia</label>
+      <div className='container-number-currency'>
+      <span>$</span>
       <input
         name={name}
         disabled={true}
@@ -49,6 +51,7 @@ const InputServiceTotalGanancia = (props: any, ref: any) => {
         type="number"
         className="input-customize"
       />
+      </div>
     </>
   );
 };

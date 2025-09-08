@@ -130,8 +130,8 @@ const SelectCustomize = (props: any, ref: any) => {
         <>
           <label className="label-customize p-1">
             {Number(tipoDeVentaId) == 1
-              ? `Precio minorista: $ ${precio}`
-              : `Precio mayorista: $ ${precio}`}
+              ? `Precio minorista: $ ${precio} (por unidad)`
+              : `Precio mayorista: $ ${precio} (por unidad)`}
           </label>
           <input
             className="d-none"
@@ -142,7 +142,7 @@ const SelectCustomize = (props: any, ref: any) => {
             disabled
           />
 
-          <label className="label-customize p-1">{`Precio de compra: $ ${precioCompra}`}</label>
+          <label className="label-customize p-1">{`Precio de compra: $ ${precioCompra} (por unidad)`}</label>
 
           <input
             className="d-none"

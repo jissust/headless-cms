@@ -27,6 +27,8 @@ const InputNumberVentaGananciaItem = (props: any, ref: any) => {
   return (
     <>
       <label className="label-customize">Ganancia</label>
+      <div className='container-number-currency'>
+      <span>$</span>
       <input
         name={name}
         disabled={true}
@@ -36,6 +38,7 @@ const InputNumberVentaGananciaItem = (props: any, ref: any) => {
         type="number"
         className="input-customize input_ganancia_item_product"
       />
+      </div>
     </>
   );
 };

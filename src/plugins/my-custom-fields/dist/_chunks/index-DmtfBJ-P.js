@@ -24,18 +24,21 @@ const InputNumberVentaGananciaItem = (props, ref) => {
   }, [value]);
   return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
     /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize", children: "Ganancia" }),
-    /* @__PURE__ */ jsxRuntime.jsx(
-      "input",
-      {
-        name,
-        disabled: true,
-        required,
-        value,
-        min: "0",
-        type: "number",
-        className: "input-customize input_ganancia_item_product"
-      }
-    )
+    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "container-number-currency", children: [
+      /* @__PURE__ */ jsxRuntime.jsx("span", { children: "$" }),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        "input",
+        {
+          name,
+          disabled: true,
+          required,
+          value,
+          min: "0",
+          type: "number",
+          className: "input-customize input_ganancia_item_product"
+        }
+      )
+    ] })
   ] });
 };
 exports.InputNumberVentaGananciaItem = InputNumberVentaGananciaItem;

@@ -4,15 +4,18 @@ const InputTotalVentaGanancia = (props: any, ref: any) => {
   return (
     <>
       <label className="label-customize">Total ganancia</label>
-      <input
-        name={name}
-        disabled={true}
-        required={required}
-        value={value}
-        min="0"
-        type="number"
-        className="input-customize"
-      />
+      <div className="container-number-currency">
+        <span>$</span>
+        <input
+          name={name}
+          disabled={true}
+          required={required}
+          value={value}
+          min="0"
+          type="number"
+          className="input-customize"
+        />
+      </div>
     </>
   );
 };
