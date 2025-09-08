@@ -48,7 +48,7 @@ export default {
         if (productoDb) {
           await strapi.db.query("api::producto.producto").update({
             where: { id: id },
-            data: { stock: productoDb.stock + cantidad },
+            data: { stock: productoDb.stock + cantidad, precio_compra: precio_por_unidad },
           });
         }
       }
@@ -61,9 +61,86 @@ export default {
               nombre: productoNuevo,
               stock: cantidad,
               locales: localId,
+              precio_compra: precio_por_unidad
             },
           });
       }
     }
   },
+  async beforeUpdate(event) {
+    const ctx = strapi.requestContext.get();
+    const ctxBody = ctx.request.body;
+    const { data } = event.params;
+    const gastos = ctxBody.Gastos;
+    const documentId = data.documentId;
+    if(!documentId){
+      throw new errors.ApplicationError(
+        "No se encontró el ID del gasto"
+      );
+    }
+    const gastoDb = await strapi.db.query("api::gasto.gasto").findOne({
+      where: { documentId },
+      populate: true,
+    });
+
+    if (gastos.length == 0) {
+      throw new errors.ApplicationError(
+        "Para crear un gasto como mínimo debe haber un producto."
+      );
+    }
+    
+    const localId = gastoDb.local.id;
+    if (!localId) {
+      throw new errors.ApplicationError(`Debe seleccionar un local`);
+    }
+
+    event.params.data.local = {
+      connect: [{ id: localId }],
+    };
+
+    for (const gasto of gastos) {
+
+      const id = gasto.producto;
+      const productoNuevo = gasto.nombre_producto_nuevo;
+      const cantidad = gasto.cantidad;
+      const precio_por_unidad = gasto.precio_por_unidad;
+      const total_por_item = gasto.total_por_item;
+      
+      if( id && productoNuevo ){
+        throw new errors.ApplicationError(`Si selecciona un "Producto" existente no puede completar el campo "Nombre producto nuevo"`);
+      }
+
+      if( !id && !productoNuevo ){
+        throw new errors.ApplicationError(`Debe seleccionar un "Producto" existente o completar un "Nombre producto nuevo"`);
+      }
+
+      if (id) {
+        //const id = id;
+        const productoDb = await strapi.entityService.findOne(
+          "api::producto.producto",
+          id
+        );
+
+        if (productoDb) {
+          await strapi.db.query("api::producto.producto").update({
+            where: { id: id },
+            data: { stock: productoDb.stock + cantidad, precio_compra: precio_por_unidad },
+          });
+        }
+      }
+
+      if (productoNuevo) {
+        const nuevoProducto = await strapi.db
+          .query("api::producto.producto")
+          .create({
+            data: {
+              nombre: productoNuevo,
+              stock: cantidad,
+              locales: localId,
+              precio_compra: precio_por_unidad
+            },
+          });
+      }
+    }
+  },  
 };
