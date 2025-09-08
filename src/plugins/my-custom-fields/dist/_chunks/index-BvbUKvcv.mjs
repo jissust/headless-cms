@@ -33,10 +33,14 @@ const SelectCustomize = (props, ref) => {
       console.error("Error al cargar productos", err);
     });
   };
-  const handleChange = (e) => {
-    const selectedId = e.target.value;
+  const handleChange = (selectedId) => {
     const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
     setSelectedProducto(selectedProductoChange);
+    const cantidadHTML = document.querySelector(
+      `input[name="Productos.${index}.cantidad"]`
+    );
+    const cantidad = cantidadHTML?.value;
+    console.log(`Cantidad: ${cantidad}`);
     onChange({
       target: { name, type: attribute.type, value: selectedId }
     });
@@ -45,19 +49,12 @@ const SelectCustomize = (props, ref) => {
       setPrecio(precioSelected);
       const stock = selectedProductoChange.stock;
       setPrecioCompra(selectedProductoChange.precio_compra);
-      const totalGanancia = precioSelected - selectedProductoChange.precio_compra;
-      onChange({
-        target: {
-          name: `Productos.${index}.cantidad`,
-          type: "number",
-          value: stock > 0 ? 1 : 0
-        }
-      });
+      const totalGanancia = precioSelected * parseInt(cantidad || "0") - selectedProductoChange.precio_compra * parseInt(cantidad || "0");
       onChange({
         target: {
           name: `Productos.${index}.total`,
           type: "number",
-          value: stock > 0 ? precioSelected : 0
+          value: stock > 0 ? precioSelected * parseInt(cantidad || "0") : 0
         }
       });
       onChange({
@@ -69,6 +66,12 @@ const SelectCustomize = (props, ref) => {
       });
     }
   };
+  console.log(`value: ${value}`);
+  useEffect(() => {
+    if (value && productos.length > 0) {
+      handleChange(value);
+    }
+  }, [value, productos]);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx("label", { className: "label-customize", htmlFor: name, children: "Producto" }),
     /* @__PURE__ */ jsxs(
@@ -78,7 +81,7 @@ const SelectCustomize = (props, ref) => {
         disabled,
         required,
         value,
-        onChange: handleChange,
+        onChange: (e) => handleChange(e.target.value),
         className: "input-customize",
         children: [
           /* @__PURE__ */ jsx("option", { value: "", children: "Seleccione un producto" }),
