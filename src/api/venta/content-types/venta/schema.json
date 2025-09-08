@@ -55,6 +55,11 @@
     "total": {
       "type": "decimal",
       "customField": "plugin::my-custom-fields.my-input-number-total-venta-field"
+    },
+    "total_ganancia": {
+      "type": "decimal",
+      "default": 0,
+      "customField": "plugin::my-custom-fields.input-total-venta-ganancia"
     }
   }
 }

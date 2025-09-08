@@ -726,6 +726,9 @@ export interface ApiVentaVenta extends Struct.CollectionTypeSchema {
     >;
     total: Schema.Attribute.Decimal &
       Schema.Attribute.CustomField<'plugin::my-custom-fields.my-input-number-total-venta-field'>;
+    total_ganancia: Schema.Attribute.Decimal &
+      Schema.Attribute.CustomField<'plugin::my-custom-fields.input-total-venta-ganancia'> &
+      Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

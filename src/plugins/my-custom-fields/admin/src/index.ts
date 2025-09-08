@@ -312,6 +312,28 @@ export default {
       },
       options: {},
     });
+    
+    app.customFields.register({
+      name: 'input-total-venta-ganancia',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-total-venta-ganancia-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-total-venta-ganancia-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputTotalVentaGanancia').then((module) => ({
+            default: module.InputTotalVentaGanancia,
+          })),
+      },
+      options: {},
+    });
 
     app.registerPlugin({
       id: PLUGIN_ID,

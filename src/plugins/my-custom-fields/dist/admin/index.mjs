@@ -299,8 +299,28 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-FU6Pee1z.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-DiEi7B1c.mjs").then((module) => ({
           default: module.InputNumberVentaGananciaItem
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "input-total-venta-ganancia",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-total-venta-ganancia-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-total-venta-ganancia-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => import("../_chunks/index-DPzz_kR7.mjs").then((module) => ({
+          default: module.InputTotalVentaGanancia
         }))
       },
       options: {}

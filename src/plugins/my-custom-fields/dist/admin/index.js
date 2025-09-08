@@ -300,8 +300,28 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-BhUULEnz.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-CWM_CJds.js")).then((module2) => ({
           default: module2.InputNumberVentaGananciaItem
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "input-total-venta-ganancia",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-total-venta-ganancia-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-total-venta-ganancia-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-B7uTav5i.js")).then((module2) => ({
+          default: module2.InputTotalVentaGanancia
         }))
       },
       options: {}
