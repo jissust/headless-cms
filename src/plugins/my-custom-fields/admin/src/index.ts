@@ -290,6 +290,28 @@ export default {
       },
       options: {},
     });
+    
+    app.customFields.register({
+      name: 'input-number-venta-ganancia-item',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-number-venta-ganancia-item-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-number-venta-ganancia-item-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputNumberVentaGananciaItem').then((module) => ({
+            default: module.InputNumberVentaGananciaItem,
+          })),
+      },
+      options: {},
+    });
 
     app.registerPlugin({
       id: PLUGIN_ID,

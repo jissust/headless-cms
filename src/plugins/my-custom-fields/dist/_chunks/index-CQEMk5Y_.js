@@ -1,16 +1,19 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useState, useEffect } from "react";
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const jsxRuntime = require("react/jsx-runtime");
+const react = require("react");
 const SelectCustomize = (props, ref) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   const queryParams = new URLSearchParams(window.location.search);
-  const [productos, setProductos] = useState([]);
-  const [selectedProducto, setSelectedProducto] = useState(null);
-  const [precio, setPrecio] = useState(0);
+  const [productos, setProductos] = react.useState([]);
+  const [selectedProducto, setSelectedProducto] = react.useState(null);
+  const [precio, setPrecio] = react.useState(0);
+  const [precioCompra, setPrecioCompra] = react.useState(0);
   const localId = queryParams.get("localId");
   const tipoDeVentaId = queryParams.get("tipoDeVentaId");
   const nameSplit = name.split(".");
   const index = parseInt(nameSplit[1]);
-  useEffect(() => {
+  react.useEffect(() => {
     if (!localId) {
       let urlSplit = window.location.href.split("/");
       let documentId = urlSplit[urlSplit.length - 1];
@@ -36,7 +39,6 @@ const SelectCustomize = (props, ref) => {
     const selectedId = e.target.value;
     const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
     setSelectedProducto(selectedProductoChange);
-    console.log(selectedProductoChange);
     onChange({
       target: { name, type: attribute.type, value: selectedId }
     });
@@ -44,6 +46,8 @@ const SelectCustomize = (props, ref) => {
       let precioSelected = Number(tipoDeVentaId) == 1 ? selectedProductoChange.precio : selectedProductoChange.precio_mayorista;
       setPrecio(precioSelected);
       const stock = selectedProductoChange.stock;
+      setPrecioCompra(selectedProductoChange.precio_compra);
+      const totalGanancia = precioSelected - selectedProductoChange.precio_compra;
       onChange({
         target: {
           name: `Productos.${index}.cantidad`,
@@ -58,11 +62,18 @@ const SelectCustomize = (props, ref) => {
           value: stock > 0 ? precioSelected : 0
         }
       });
+      onChange({
+        target: {
+          name: `Productos.${index}.ganancia_por_item`,
+          type: "number",
+          value: totalGanancia
+        }
+      });
     }
   };
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx("label", { className: "label-customize", htmlFor: name, children: "Producto" }),
-    /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize", htmlFor: name, children: "Producto" }),
+    /* @__PURE__ */ jsxRuntime.jsxs(
       "select",
       {
         name,
@@ -72,14 +83,14 @@ const SelectCustomize = (props, ref) => {
         onChange: handleChange,
         className: "input-customize",
         children: [
-          /* @__PURE__ */ jsx("option", { value: "", children: "Seleccione un producto" }),
-          productos.map((producto) => /* @__PURE__ */ jsx("option", { value: producto.id, children: producto?.nombre || `Producto ${producto.id}` }, producto.id))
+          /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", children: "Seleccione un producto" }),
+          productos.map((producto) => /* @__PURE__ */ jsxRuntime.jsx("option", { value: producto.id, children: producto?.nombre || `Producto ${producto.id}` }, producto.id))
         ]
       }
     ),
-    selectedProducto && /* @__PURE__ */ jsxs(Fragment, { children: [
-      /* @__PURE__ */ jsx("label", { className: "label-customize p-1", children: Number(tipoDeVentaId) == 1 ? "Precio minorista" : "Precio mayorista" }),
-      /* @__PURE__ */ jsx(
+    selectedProducto && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize p-1", children: Number(tipoDeVentaId) == 1 ? `Precio minorista: $ ${precio}` : `Precio mayorista: $ ${precio}` }),
+      /* @__PURE__ */ jsxRuntime.jsx(
         "input",
         {
           className: "d-none",
@@ -89,10 +100,20 @@ const SelectCustomize = (props, ref) => {
           readOnly: true,
           disabled: true
         }
+      ),
+      /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize p-1", children: `Precio de compra: $ ${precioCompra}` }),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        "input",
+        {
+          className: "d-none",
+          type: "number",
+          name: `total-compra-${index}`,
+          value: precioCompra,
+          readOnly: true,
+          disabled: true
+        }
       )
     ] })
   ] });
 };
-export {
-  SelectCustomize
-};
+exports.SelectCustomize = SelectCustomize;

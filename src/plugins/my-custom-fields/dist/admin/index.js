@@ -40,7 +40,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-BjYmgBPT.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-CQEMk5Y_.js")).then((module2) => ({
           default: module2.SelectCustomize
         }))
       },
@@ -60,7 +60,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-B2VI_aDF.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-pogELDak.js")).then((module2) => ({
           default: module2.InputNumberCustomize
         }))
       },
@@ -282,6 +282,26 @@ const index = {
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-B_HXBpob.js")).then((module2) => ({
           default: module2.TitleSection
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "input-number-venta-ganancia-item",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-number-venta-ganancia-item-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-number-venta-ganancia-item-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-BhUULEnz.js")).then((module2) => ({
+          default: module2.InputNumberVentaGananciaItem
         }))
       },
       options: {}

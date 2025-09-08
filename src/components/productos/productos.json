@@ -12,11 +12,18 @@
     },
     "cantidad": {
       "type": "integer",
+      "default": 0,
       "customField": "plugin::my-custom-fields.my-input-number-field"
     },
     "total": {
       "type": "decimal",
+      "default": 0,
       "customField": "plugin::my-custom-fields.my-input-number-total-field"
+    },
+    "ganancia_por_item": {
+      "type": "decimal",
+      "default": 0,
+      "customField": "plugin::my-custom-fields.input-number-venta-ganancia-item"
     }
   },
   "config": {}

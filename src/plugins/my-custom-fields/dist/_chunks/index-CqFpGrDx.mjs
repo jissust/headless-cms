@@ -20,6 +20,18 @@ const InputNumberCustomize = (props, ref) => {
         value: total
       }
     });
+    const precioCompraInput = document.querySelector(
+      `input[name="total-compra-${index}"]`
+    );
+    const precioCompra = precioCompraInput ? parseFloat(precioCompraInput.value) : 0;
+    const totalGanancia = total - cantidad * precioCompra;
+    onChange({
+      target: {
+        name: `Productos.${index}.ganancia_por_item`,
+        type: "decimal",
+        value: totalGanancia
+      }
+    });
   };
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx("label", { className: "label-customize", children: "Cantidad" }),

@@ -7,6 +7,7 @@ const SelectCustomize = (props: any, ref: any) => {
   const [productos, setProductos] = useState<any[]>([]);
   const [selectedProducto, setSelectedProducto] = useState<any>(null);
   const [precio, setPrecio] = useState<number>(0);
+  const [precioCompra, setPrecioCompra] = useState<number>(0);
   const localId = queryParams.get('localId');
   const tipoDeVentaId = queryParams.get('tipoDeVentaId');
   const nameSplit = name.split('.');
@@ -21,13 +22,13 @@ const SelectCustomize = (props: any, ref: any) => {
         .then((res) => res.json())
         .then((data) => {
           if (!data?.data) return;
-          filtrarLocalesPorLocal(data.data[0].local.id)
+          filtrarLocalesPorLocal(data.data[0].local.id);
         })
         .catch((err) => {
           console.error('Error al cargar productos', err);
         });
     } else {
-      filtrarLocalesPorLocal(localId)
+      filtrarLocalesPorLocal(localId);
     }
   }, []);
 
@@ -48,7 +49,7 @@ const SelectCustomize = (props: any, ref: any) => {
     const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
 
     setSelectedProducto(selectedProductoChange);
-    console.log(selectedProductoChange);
+
     onChange({
       target: { name, type: attribute.type, value: selectedId },
     });
@@ -60,6 +61,10 @@ const SelectCustomize = (props: any, ref: any) => {
           : selectedProductoChange.precio_mayorista;
       setPrecio(precioSelected);
       const stock = selectedProductoChange.stock;
+
+      setPrecioCompra(selectedProductoChange.precio_compra); 
+
+      const totalGanancia = precioSelected - selectedProductoChange.precio_compra;
 
       onChange({
         target: {
@@ -74,6 +79,14 @@ const SelectCustomize = (props: any, ref: any) => {
           name: `Productos.${index}.total`,
           type: 'number',
           value: stock > 0 ? precioSelected : 0,
+        },
+      });
+
+      onChange({
+        target: {
+          name: `Productos.${index}.ganancia_por_item`,
+          type: 'number',
+          value: totalGanancia,
         },
       });
     }
@@ -103,13 +116,26 @@ const SelectCustomize = (props: any, ref: any) => {
       {selectedProducto && (
         <>
           <label className="label-customize p-1">
-            {Number(tipoDeVentaId) == 1 ? 'Precio minorista' : 'Precio mayorista'}
+            {Number(tipoDeVentaId) == 1
+              ? `Precio minorista: $ ${precio}`
+              : `Precio mayorista: $ ${precio}`}
           </label>
           <input
             className="d-none"
             type="number"
             name={`total-base-${index}`}
             value={precio}
+            readOnly
+            disabled
+          />
+
+          <label className="label-customize p-1">{`Precio de compra: $ ${precioCompra}`}</label>
+
+          <input
+            className="d-none"
+            type="number"
+            name={`total-compra-${index}`}
+            value={precioCompra}
             readOnly
             disabled
           />

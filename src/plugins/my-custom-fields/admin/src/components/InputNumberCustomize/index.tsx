@@ -15,7 +15,7 @@ const InputNumberCustomize = (props: any, ref: any) => {
 
     const precioBase = precioBaseInput ? parseFloat(precioBaseInput.value) : 0;
     const total = cantidad * precioBase;
-
+    
     onChange({
       target: {
         name: `Productos.${index}.total`,
@@ -24,6 +24,20 @@ const InputNumberCustomize = (props: any, ref: any) => {
       },
     });
 
+    const precioCompraInput: HTMLInputElement | null = document.querySelector(
+      `input[name="total-compra-${index}"]`
+    );
+
+    const precioCompra = precioCompraInput ? parseFloat(precioCompraInput.value) : 0;
+    const totalGanancia = total - (cantidad * precioCompra);
+
+    onChange({
+      target: {
+        name: `Productos.${index}.ganancia_por_item`,
+        type: 'decimal',
+        value: totalGanancia,
+      },
+    });
   };
 
   return (
