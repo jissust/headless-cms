@@ -15,6 +15,7 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
+    "@fresh.codes/strapi-plugin-export-csv": "^1.0.1",
     "@redon2inc/strapi-plugin-pdf-creator": "^0.1.4",
     "@strapi/admin": "^5.18.1",
     "@strapi/design-system": "^1.19.0",

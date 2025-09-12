@@ -10,5 +10,6 @@ export default [
   'strapi::favicon',
   'strapi::public',
   'global::filter-products-by-local',
-  'global::pdf-fix'
+  'global::pdf-fix',
+  'global::csv-file-add',
 ];
