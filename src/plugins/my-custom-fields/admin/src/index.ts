@@ -335,6 +335,28 @@ export default {
       options: {},
     });
 
+    app.customFields.register({
+      name: 'input-total-generico',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'input-total-generico-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'input-total-generico-description',
+        defaultMessage: 'Select any color',
+      },
+      icon: {},
+      components: {
+        Input: async () =>
+          import('./components/InputTotalGenerico').then((module) => ({
+            default: module.InputTotalGenerico,
+          })),
+      },
+      options: {},
+    });
+
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,

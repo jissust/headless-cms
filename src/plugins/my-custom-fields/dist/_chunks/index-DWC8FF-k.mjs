@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const jsxRuntime = require("react/jsx-runtime");
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 const InputPrecioPorUnidadGastosItem = (props, ref) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   const nameSplit = name.split(".");
@@ -23,21 +21,26 @@ const InputPrecioPorUnidadGastosItem = (props, ref) => {
       }
     });
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize", children: "Precio por unidad" }),
-    /* @__PURE__ */ jsxRuntime.jsx(
-      "input",
-      {
-        name,
-        disabled,
-        required,
-        value,
-        min: "0",
-        type: "number",
-        className: "input-customize",
-        onChange: handleChange
-      }
-    )
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx("label", { className: "label-customize", children: "Precio por unidad" }),
+    /* @__PURE__ */ jsxs("div", { className: "container-number-currency", children: [
+      /* @__PURE__ */ jsx("span", { children: "$" }),
+      /* @__PURE__ */ jsx(
+        "input",
+        {
+          name,
+          disabled,
+          required,
+          value,
+          min: "0",
+          type: "number",
+          className: "input-customize",
+          onChange: handleChange
+        }
+      )
+    ] })
   ] });
 };
-exports.InputPrecioPorUnidadGastosItem = InputPrecioPorUnidadGastosItem;
+export {
+  InputPrecioPorUnidadGastosItem
+};

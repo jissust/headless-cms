@@ -29,16 +29,19 @@ const InputPrecioPorUnidadGastosItem = (props: any, ref: any) => {
   return (
     <>
       <label className="label-customize">Precio por unidad</label>
-      <input
-        name={name}
-        disabled={disabled}
-        required={required}
-        value={value}
-        min="0"
-        type="number"
-        className="input-customize"
-        onChange={handleChange}
-      />
+      <div className="container-number-currency">
+        <span>$</span>
+        <input
+          name={name}
+          disabled={disabled}
+          required={required}
+          value={value}
+          min="0"
+          type="number"
+          className="input-customize"
+          onChange={handleChange}
+        />
+      </div>
     </>
   );
 };

@@ -652,9 +652,24 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
           placeholder: 'Ingrese el t\u00EDtulo de la secci\u00F3n';
         }
       >;
-    total: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    total: Schema.Attribute.Decimal &
+      Schema.Attribute.CustomField<
+        'plugin::my-custom-fields.input-total-generico',
+        {
+          disabled: false;
+          label: 'Total';
+        }
+      > &
+      Schema.Attribute.DefaultTo<0>;
     total_gasto: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::my-custom-fields.input-total-generico',
+        {
+          disabled: false;
+          label: 'Total Gasto';
+        }
+      > &
       Schema.Attribute.DefaultTo<0>;
     trabajo_solicitado_por_el_cliente: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;

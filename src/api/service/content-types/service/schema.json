@@ -29,7 +29,12 @@
     },
     "total": {
       "type": "decimal",
-      "default": 0
+      "default": 0,
+      "customField": "plugin::my-custom-fields.input-total-generico",
+      "options": {
+        "label": "Total",
+        "disabled": false
+      }
     },
     "descripcion_gasto": {
       "type": "text",
@@ -38,7 +43,12 @@
     "total_gasto": {
       "type": "decimal",
       "required": true,
-      "default": 0
+      "default": 0,
+      "customField": "plugin::my-custom-fields.input-total-generico",
+      "options": {
+        "label": "Total Gasto",
+        "disabled": false
+      }
     },
     "comercio": {
       "type": "string",

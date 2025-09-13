@@ -199,7 +199,7 @@ const index = {
       },
       icon: {},
       components: {
-        Input: async () => import("../_chunks/index-Ylr-BL2I.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-DWC8FF-k.mjs").then((module) => ({
           default: module.InputPrecioPorUnidadGastosItem
         }))
       },
@@ -321,6 +321,26 @@ const index = {
       components: {
         Input: async () => import("../_chunks/index-YlGs4tPR.mjs").then((module) => ({
           default: module.InputTotalVentaGanancia
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "input-total-generico",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "input-total-generico-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "input-total-generico-description",
+        defaultMessage: "Select any color"
+      },
+      icon: {},
+      components: {
+        Input: async () => import("../_chunks/index-CO4gXNoK.mjs").then((module) => ({
+          default: module.InputTotalGenerico
         }))
       },
       options: {}

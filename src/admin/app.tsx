@@ -109,7 +109,7 @@ function insertarBotonesLocalesGastos() {
     .then((data) => {
       if (!data?.data) return;
       data.data.forEach((local: any) => {
-        console.log(local);
+        
         const a = document.createElement("a");
         a.href = `/admin/content-manager/collection-types/api::gasto.gasto/create?localId=${local.id}`;
         a.innerText = `${local.nombre}` || `Local ${local.id}`;
@@ -193,7 +193,7 @@ export default {
     },
   },
   bootstrap(app: StrapiApp) {
-    console.log(app);
+    
     observarPaginaVentas();
     observarPaginaGastos();
 
@@ -213,9 +213,10 @@ export default {
         background-color:red;
       }
 
-      #locales-buttons {
+      #locales-buttons,
+      #locales-buttons-gastos {
         display: flex;
-        gap: 10px
+        gap: 5px
       }
       .boton-local {
         background-color:#E53935;
@@ -259,9 +260,11 @@ export default {
         font-weight: 600;
         padding:0 0 5px 0;
       }
-
       .p-1 {
         padding:10px 0;
+      }
+      h1{
+        text-transform: capitalize;
       }
       .h1 {
         font-weight: 600;
