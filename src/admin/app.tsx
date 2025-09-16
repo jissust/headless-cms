@@ -176,6 +176,14 @@ export default {
       // 'zh-Hans',
       // 'zh',
     ],
+    translations: {
+      es: {
+      "HomePage.header.title": "Hola {name}",
+      "HomePage.header.subtitle": "Bienvenido a su panel de administración",
+      "global.home": "Página principal",
+      "global.plugins.content-manager": "Gestor de contenidos",
+      } 
+    },
     theme: {
       light: {
         colors: {
