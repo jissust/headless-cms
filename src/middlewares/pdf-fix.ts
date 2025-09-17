@@ -10,13 +10,13 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
           documentId: reqData.templateId,
           populate: ["file"],
         });
-
-      let templateBytes = fs.readFileSync(`public${template2.file.url}`);
-
+      let templateBytes = null  
       if (template2.file.url.startsWith("http")) {
         strapi.log.info("EN PRODUCCIÓN");
         const response = await fetch(`${template2.file.url}`);
         templateBytes = Buffer.from(await response.arrayBuffer());
+      }else{
+       templateBytes = fs.readFileSync(`public${template2.file.url}`);
       }
 
       let docData = await strapi.documents(reqData.collectionType).findFirst({
