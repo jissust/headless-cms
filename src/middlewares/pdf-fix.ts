@@ -10,13 +10,13 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
           documentId: reqData.templateId,
           populate: ["file"],
         });
-      let templateBytes = null  
+      let templateBytes = null;
       if (template2.file.url.startsWith("http")) {
         strapi.log.info("EN PRODUCCIÓN");
         const response = await fetch(`${template2.file.url}`);
         templateBytes = Buffer.from(await response.arrayBuffer());
-      }else{
-       templateBytes = fs.readFileSync(`public${template2.file.url}`);
+      } else {
+        templateBytes = fs.readFileSync(`public${template2.file.url}`);
       }
 
       let docData = await strapi.documents(reqData.collectionType).findFirst({
@@ -24,9 +24,10 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
         populate: "*",
       });
 
-      docData.tmpLocalDireccion = docData.local.direccion;
-      docData.tmpLocalTel = docData.local.telefono;
-
+      if (docData.local) {
+        docData.tmpLocalDireccion = docData.local.direccion;
+        docData.tmpLocalTel = docData.local.telefono;
+      }
       docData = await strapi
         .plugin("strapi-plugin-pdf-creator")
         .service("images")
@@ -34,7 +35,7 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
       console.log(docData);
 
       const conf = strapi.config.get(`plugin::strapi-plugin-pdf-creator`);
-      
+
       const genDoc = await strapi
         .plugin("strapi-plugin-pdf-creator")
         .service("service")

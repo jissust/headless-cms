@@ -25,23 +25,22 @@
     },
     "descripcion": {
       "type": "text",
-      "required": true,
-      "maxLength": 252
+      "maxLength": 252,
+      "required": true
     },
     "precio": {
       "type": "text",
-      "required": true,
-      "maxLength": 96
-    },
-    "telefonoLocal": {
-      "type": "string"
-    },
-    "direccionLocal": {
-      "type": "text"
+      "maxLength": 96,
+      "required": true
     },
     "cantidad": {
       "type": "text",
       "maxLength": 96
+    },
+    "local": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::local.local"
     }
   }
 }

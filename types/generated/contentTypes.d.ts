@@ -527,8 +527,8 @@ export interface ApiRemitoRemito extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 252;
       }>;
-    direccionLocal: Schema.Attribute.Text;
     fecha: Schema.Attribute.Date & Schema.Attribute.Required;
+    local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -543,7 +543,6 @@ export interface ApiRemitoRemito extends Struct.CollectionTypeSchema {
       }>;
     publishedAt: Schema.Attribute.DateTime;
     telefono: Schema.Attribute.BigInteger & Schema.Attribute.Required;
-    telefonoLocal: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
