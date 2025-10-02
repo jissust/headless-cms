@@ -32,7 +32,7 @@ async function loadServices() {
       <td>${service.numero_de_orden}</td>
       <td>${service.cliente}</td>
       <td>${( service.local ) ? service.local?.nombre : `-`}</td>
-      <td>${( service.estado_de_service ) ? service.estado_de_service?.nombre : `-` }</td>
+      <td><span class="badge" style="color:#000;background-color: ${service.estado_de_service?.color}"> ${( service.estado_de_service ) ? service.estado_de_service?.nombre : `-` }</span></td>
       <td>${formatFecha(service.updatedAt)}</td>
       <td>${formatFecha(service.createdAt)}</td>
     </tr>`;
