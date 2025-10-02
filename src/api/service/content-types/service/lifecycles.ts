@@ -11,6 +11,7 @@ export default {
       });
       console.log(`✅ numero_de_orden asignado al crear: ${result.id}`);
     }
+    (strapi as any).io.emit("respuesta", "actualizado")
   },
   async beforeUpdate(event) {
     const { data, where } = event.params;
@@ -18,4 +19,7 @@ export default {
       event.params.data.numero_de_orden = where.id;
     }
   },
+  async afterUpdate(event) {
+    (strapi as any).io.emit("respuesta", "actualizado")
+  }
 };
