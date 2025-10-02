@@ -1,4 +1,4 @@
-const socket = io("http://localhost:1337");
+const socket = io();
 
 //const log = (msg) => {
   //document.getElementById("tabla").innerHTML += `<p>${msg}</p>`;
