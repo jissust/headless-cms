@@ -20,6 +20,7 @@
     "@strapi/admin": "^5.18.1",
     "@strapi/design-system": "^1.19.0",
     "@strapi/plugin-cloud": "5.18.1",
+    "@strapi/plugin-color-picker": "^5.25.0",
     "@strapi/plugin-users-permissions": "5.18.1",
     "@strapi/strapi": "5.18.1",
     "better-sqlite3": "11.3.0",

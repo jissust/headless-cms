@@ -17,7 +17,6 @@ export default {
         id: 'my-custom-fields-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/SelectCustomize').then((module) => ({
@@ -39,7 +38,6 @@ export default {
         id: 'my-input-number-field-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputNumberCustomize').then((module) => ({
@@ -61,7 +59,6 @@ export default {
         id: 'my-input-number-total-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputNumberTotalItemCustomize').then((module) => ({
@@ -83,7 +80,6 @@ export default {
         id: 'my-input-number-total-venta-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputTotalVentaCustomize').then((module) => ({
@@ -105,7 +101,6 @@ export default {
         id: 'input-nombre-venta-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputNombreVenta').then((module) => ({
@@ -127,7 +122,6 @@ export default {
         id: 'input-nombre-local-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputNombreLocal').then((module) => ({
@@ -149,7 +143,6 @@ export default {
         id: 'input-total-gastos-item-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputTotalGastosItem').then((module) => ({
@@ -171,7 +164,6 @@ export default {
         id: 'input-cantidad-gastos-item-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputCantidadGastosItem').then((module) => ({
@@ -193,7 +185,6 @@ export default {
         id: 'input-precio-por-unidad-gastos-item-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputPrecioPorUnidadGastosItem').then((module) => ({
@@ -215,7 +206,6 @@ export default {
         id: 'input-total-gastos-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputTotalGastos').then((module) => ({
@@ -237,7 +227,6 @@ export default {
         id: 'select-customize-gasto-id-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/SelectCustomizeGasto').then((module) => ({
@@ -259,7 +248,6 @@ export default {
         id: 'input-service-total-ganancia-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputServiceTotalGanancia').then((module) => ({
@@ -281,7 +269,6 @@ export default {
         id: 'title-section-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/TitleSection').then((module) => ({
@@ -303,7 +290,6 @@ export default {
         id: 'input-number-venta-ganancia-item-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputNumberVentaGananciaItem').then((module) => ({
@@ -325,7 +311,6 @@ export default {
         id: 'input-total-venta-ganancia-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputTotalVentaGanancia').then((module) => ({
@@ -347,7 +332,6 @@ export default {
         id: 'input-total-generico-description',
         defaultMessage: 'Select any color',
       },
-      icon: {},
       components: {
         Input: async () =>
           import('./components/InputTotalGenerico').then((module) => ({

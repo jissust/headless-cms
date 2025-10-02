@@ -25,7 +25,10 @@
     "estado_de_service": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::estado-de-service.estado-de-service"
+      "target": "api::estado-de-service.estado-de-service",
+      "config": {
+        "mainField":"nombre"
+      }
     },
     "total": {
       "type": "decimal",

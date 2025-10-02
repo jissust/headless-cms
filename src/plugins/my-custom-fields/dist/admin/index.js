@@ -38,7 +38,6 @@ const index = {
         id: "my-custom-fields-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-CAv9FL9n.js")).then((module2) => ({
           default: module2.SelectCustomize
@@ -58,7 +57,6 @@ const index = {
         id: "my-input-number-field-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-pogELDak.js")).then((module2) => ({
           default: module2.InputNumberCustomize
@@ -78,7 +76,6 @@ const index = {
         id: "my-input-number-total-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-BmbC3AWp.js")).then((module2) => ({
           default: module2.InputNumberTotalItemCustomize
@@ -98,7 +95,6 @@ const index = {
         id: "my-input-number-total-venta-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-EJ6c7NXq.js")).then((module2) => ({
           default: module2.InputTotalVentaCustomize
@@ -118,7 +114,6 @@ const index = {
         id: "input-nombre-venta-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-DzWZEf3l.js")).then((module2) => ({
           default: module2.InputNombreVenta
@@ -138,7 +133,6 @@ const index = {
         id: "input-nombre-local-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-BP7hUBrc.js")).then((module2) => ({
           default: module2.InputNombreLocal
@@ -158,7 +152,6 @@ const index = {
         id: "input-total-gastos-item-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-D7jHeDo1.js")).then((module2) => ({
           default: module2.InputTotalGastosItem
@@ -178,7 +171,6 @@ const index = {
         id: "input-cantidad-gastos-item-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-D2QOg1rA.js")).then((module2) => ({
           default: module2.InputCantidadGastosItem
@@ -198,7 +190,6 @@ const index = {
         id: "input-precio-por-unidad-gastos-item-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-BDrxO0JG.js")).then((module2) => ({
           default: module2.InputPrecioPorUnidadGastosItem
@@ -218,7 +209,6 @@ const index = {
         id: "input-total-gastos-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-DaBJAo9T.js")).then((module2) => ({
           default: module2.InputTotalGastos
@@ -238,7 +228,6 @@ const index = {
         id: "select-customize-gasto-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-CmeMTzFP.js")).then((module2) => ({
           default: module2.SelectCustomizeGasto
@@ -258,7 +247,6 @@ const index = {
         id: "input-service-total-ganancia-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-ClUyAwDT.js")).then((module2) => ({
           default: module2.InputServiceTotalGanancia
@@ -278,7 +266,6 @@ const index = {
         id: "title-section-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-B_HXBpob.js")).then((module2) => ({
           default: module2.TitleSection
@@ -298,7 +285,6 @@ const index = {
         id: "input-number-venta-ganancia-item-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-DmtfBJ-P.js")).then((module2) => ({
           default: module2.InputNumberVentaGananciaItem
@@ -318,7 +304,6 @@ const index = {
         id: "input-total-venta-ganancia-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-B_dfG6Qj.js")).then((module2) => ({
           default: module2.InputTotalVentaGanancia
@@ -338,7 +323,6 @@ const index = {
         id: "input-total-generico-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => Promise.resolve().then(() => require("../_chunks/index-BlK59dHC.js")).then((module2) => ({
           default: module2.InputTotalGenerico

@@ -37,7 +37,6 @@ const index = {
         id: "my-custom-fields-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-DNzfHvSO.mjs").then((module) => ({
           default: module.SelectCustomize
@@ -57,7 +56,6 @@ const index = {
         id: "my-input-number-field-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-CqFpGrDx.mjs").then((module) => ({
           default: module.InputNumberCustomize
@@ -77,7 +75,6 @@ const index = {
         id: "my-input-number-total-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-2BMoRILb.mjs").then((module) => ({
           default: module.InputNumberTotalItemCustomize
@@ -97,7 +94,6 @@ const index = {
         id: "my-input-number-total-venta-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-7DNjnmAF.mjs").then((module) => ({
           default: module.InputTotalVentaCustomize
@@ -117,7 +113,6 @@ const index = {
         id: "input-nombre-venta-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-Bj59QtbH.mjs").then((module) => ({
           default: module.InputNombreVenta
@@ -137,7 +132,6 @@ const index = {
         id: "input-nombre-local-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-BgQyltPX.mjs").then((module) => ({
           default: module.InputNombreLocal
@@ -157,7 +151,6 @@ const index = {
         id: "input-total-gastos-item-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-DeYxMX8r.mjs").then((module) => ({
           default: module.InputTotalGastosItem
@@ -177,7 +170,6 @@ const index = {
         id: "input-cantidad-gastos-item-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-BPg5BWA0.mjs").then((module) => ({
           default: module.InputCantidadGastosItem
@@ -197,7 +189,6 @@ const index = {
         id: "input-precio-por-unidad-gastos-item-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-DWC8FF-k.mjs").then((module) => ({
           default: module.InputPrecioPorUnidadGastosItem
@@ -217,7 +208,6 @@ const index = {
         id: "input-total-gastos-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-DiBboY0S.mjs").then((module) => ({
           default: module.InputTotalGastos
@@ -237,7 +227,6 @@ const index = {
         id: "select-customize-gasto-id-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-CGK04Tyb.mjs").then((module) => ({
           default: module.SelectCustomizeGasto
@@ -257,7 +246,6 @@ const index = {
         id: "input-service-total-ganancia-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-BekRk7qZ.mjs").then((module) => ({
           default: module.InputServiceTotalGanancia
@@ -277,7 +265,6 @@ const index = {
         id: "title-section-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-D6xlgTMB.mjs").then((module) => ({
           default: module.TitleSection
@@ -297,7 +284,6 @@ const index = {
         id: "input-number-venta-ganancia-item-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-e_ifErM5.mjs").then((module) => ({
           default: module.InputNumberVentaGananciaItem
@@ -317,7 +303,6 @@ const index = {
         id: "input-total-venta-ganancia-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-YlGs4tPR.mjs").then((module) => ({
           default: module.InputTotalVentaGanancia
@@ -337,7 +322,6 @@ const index = {
         id: "input-total-generico-description",
         defaultMessage: "Select any color"
       },
-      icon: {},
       components: {
         Input: async () => import("../_chunks/index-CO4gXNoK.mjs").then((module) => ({
           default: module.InputTotalGenerico
