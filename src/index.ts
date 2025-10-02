@@ -1,5 +1,7 @@
 // import type { Core } from '@strapi/strapi';
 //import fs from "fs";
+import { Server } from "socket.io";
+
 export default {
   /**
    * An asynchronous register function that runs before
@@ -18,9 +20,7 @@ export default {
    */
   async bootstrap({ strapi }) {
     // buscamos el controller del plugin
-    const exportCtrl = strapi
-      .plugin('export-csv')
-      .controller('export');
+    const exportCtrl = strapi.plugin("export-csv").controller("export");
 
     const originalStreamCsv = exportCtrl.streamCsv;
 
@@ -46,5 +46,19 @@ export default {
         return oldWrite.call(this, str, ...args);
       };
     };
+
+    const io = new Server(strapi.server.httpServer, {
+      cors: { origin: "*" },
+    });
+
+    strapi.io = io;
+
+    io.on("connection", (socket) => {
+      strapi.log.info(`🔌 Cliente conectado: ${socket.id}`);
+      socket.on("disconnect", () => {
+        strapi.log.info(`❌ Cliente desconectado: ${socket.id}`);
+      });
+    });
+    
   },
 };
