@@ -46,6 +46,7 @@ async function loadServices(reset = false) {
               <th>ID</th>
               <th>N° orden</th>
               <th>Cliente</th>
+              <th>Modelo</th>
               <th>Local</th>
               <th>Estado</th>
               <th>Fecha editado</th>
@@ -78,6 +79,7 @@ async function loadServices(reset = false) {
       <td>${service.id}</td>
       <td>${service.numero_de_orden}</td>
       <td>${service.cliente}</td>
+      <td>${ (service.modelo) ? service.modelo : "-"}</td>
       <td>${service.local ? service.local.nombre : "-"}</td>
       <td>
         <span class="badge" style="color:#000;background-color:${service.estado_de_service?.color}">
