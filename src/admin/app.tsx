@@ -281,6 +281,28 @@ export default {
       "gasto": "Gastos",
       "estado de service": "Estado de service",
       "venta": "Ventas",
+
+      "app.utils.drag": "Drag",
+      "productos.productos": "Productos",
+      "productos": "Productos",
+      "gastos.gastos-items":"Gastos items",
+      "Gastos":"Gastos",
+      "gastos": "Gastos",
+      "api::venta.venta": "Venta",
+      "plugin::users-permissions.user": "Usuario",
+      "api::tipo-de-venta.tipo-de-venta": "Tipo de venta",
+      "api::service.service": "Service",
+      "api::remito.remito": "Remito",
+      "api::producto.producto": "Productos",
+      "plugin::strapi-plugin-pdf-creator.template": "PDF Template",
+      "api::local.local": "Local",
+      "api::gasto.gasto": "Gastos",
+      "api::estado-de-service.estado-de-service": "Estado de service",
+      "content-type-builder.search.placeholder": "buscar",
+      "global.more.actions": "Más",
+      "app.utils.toggle": "Toggle",
+      "Settings.application.header": "Encabezado",
+      "review-workflows.plugin.name": "Nombre"
       } 
     },
     theme: {
