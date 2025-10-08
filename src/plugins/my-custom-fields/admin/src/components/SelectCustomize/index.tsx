@@ -9,6 +9,7 @@ const SelectCustomize = (props: any, ref: any) => {
   const [selectedProducto, setSelectedProducto] = useState<any>(null);
   const [precio, setPrecio] = useState<number>(0);
   const [precioCompra, setPrecioCompra] = useState<number>(0);
+  const [tipoDeVenta, setTipoDeVenta] = useState<any>(null);
   const localId = queryParams.get('localId');
   const tipoDeVentaId = queryParams.get('tipoDeVentaId');
   const nameSplit = name.split('.');
@@ -31,6 +32,7 @@ const SelectCustomize = (props: any, ref: any) => {
     } else {
       filtrarLocalesPorLocal(localId);
     }
+    getTipoDeVenta(tipoDeVentaId);
   }, []);
 
   const filtrarLocalesPorLocal = (localId: any) => {
@@ -45,8 +47,19 @@ const SelectCustomize = (props: any, ref: any) => {
       });
   };
 
+  const getTipoDeVenta = (tipoDeVentaId: any) => {
+    fetch(`/api/tipo-de-ventas?populate=*&filters[id][$eq]=${tipoDeVentaId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data?.data) return;
+        setTipoDeVenta(data.data[0]);
+      })
+      .catch((err) => {
+        console.error('Error al cargar tipo de venta', err);
+      });
+  }
+
   const handleChange = (selectedId: string) => {
-    //const selectedId = e.target.value;
     const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
 
     setSelectedProducto(selectedProductoChange);
@@ -55,16 +68,20 @@ const SelectCustomize = (props: any, ref: any) => {
       `input[name="Productos.${index}.cantidad"]`
     );
     const cantidad = cantidadHTML?.value;
-    console.log(`Cantidad: ${cantidad}`);
+    
     onChange({
       target: { name, type: attribute.type, value: selectedId },
     });
 
     if (selectedProductoChange) {
-      let precioSelected =
+      /*let precioSelected =
         Number(tipoDeVentaId) == 1
           ? selectedProductoChange.precio
-          : selectedProductoChange.precio_mayorista;
+          : selectedProductoChange.precio_mayorista;*/
+      let precioSelected = tipoDeVenta?.nombre?.toLowerCase().includes("mayorista")
+        ? selectedProductoChange.precio_mayorista
+        : selectedProductoChange.precio;
+
       setPrecio(precioSelected);
       const stock = selectedProductoChange.stock;
 
@@ -98,7 +115,6 @@ const SelectCustomize = (props: any, ref: any) => {
     }
   };
 
-  console.log(`value: ${value}`);
   useEffect(() => {
     if (value && productos.length > 0) {
       handleChange(value);
@@ -129,9 +145,9 @@ const SelectCustomize = (props: any, ref: any) => {
       {selectedProducto && (
         <>
           <label className="label-customize p-1">
-            {Number(tipoDeVentaId) == 1
-              ? `Precio minorista: $ ${precio} (por unidad)`
-              : `Precio mayorista: $ ${precio} (por unidad)`}
+            {tipoDeVenta?.nombre?.toLowerCase().includes("mayorista")
+              ? `Precio mayorista: $ ${precio} (por unidad)`
+              : `Precio minorista: $ ${precio} (por unidad)`}
           </label>
           <input
             className="d-none"
