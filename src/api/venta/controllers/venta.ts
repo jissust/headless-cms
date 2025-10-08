@@ -42,15 +42,18 @@ export default factories.createCoreController(
 
       // Crear documento PDF
       const doc = new PDFDocument({ margin: 40, size: "A4" });
+      const chunks: Buffer[] = [];
 
-      // Guardar PDF temporalmente
-      const filePath = path.join(
-        strapi.dirs.static.public,
-        `venta-${documentId}.pdf`
-      );
-
-      const writeStream = fs.createWriteStream(filePath);
-      doc.pipe(writeStream);
+      doc.on("data", (chunk) => chunks.push(chunk));
+      doc.on("end", () => {
+        const result = Buffer.concat(chunks);
+        ctx.set("Content-type", "application/pdf");
+        ctx.set(
+          "Content-disposition",
+          `attachment; filename=venta-${documentId}.pdf`
+        );
+        ctx.body = result;
+      });
 
       // Agregar imagen antes del título
       const logoPath = path.join(process.cwd(), "public", "img/logo.png"); // ajustá la ruta según dónde tengas la imagen
@@ -128,21 +131,8 @@ export default factories.createCoreController(
       doc.fontSize(14).text(`Total de la venta: $${venta.total.toFixed(2)}`, {
         align: "right",
       });
-
-      // Finalizar PDF
+      
       doc.end();
-
-      // Esperar a que se genere el archivo antes de enviarlo
-      await new Promise<void>((resolve) =>
-        writeStream.on("finish", () => resolve())
-      );
-
-      ctx.set(
-        "Content-disposition",
-        `attachment; filename=venta-${documentId}.pdf`
-      );
-      ctx.set("Content-type", "application/pdf");
-      ctx.body = fs.createReadStream(filePath);
     },
   })
 );
