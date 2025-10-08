@@ -52,6 +52,21 @@ export default factories.createCoreController(
       const writeStream = fs.createWriteStream(filePath);
       doc.pipe(writeStream);
 
+      // Agregar imagen antes del título
+      const logoPath = path.join(process.cwd(), "public", "img/logo.png"); // ajustá la ruta según dónde tengas la imagen
+      if (fs.existsSync(logoPath)) {
+        doc.image(logoPath, {
+          fit: [150, 150], // ancho máximo 300 px, mantiene proporción
+          align: "center",
+          valign: "top",
+          x: (doc.page.width - 150) / 2, // centra la imagen horizontalmente
+          y: 40, // posición vertical inicial
+        });
+      }
+
+      //Mover un poco hacia abajo para que no se superponga con el título
+      doc.moveDown(1);
+
       // --------- ENCABEZADO ---------
       doc.fontSize(20).text("Comprobante de Venta", { align: "center" });
       doc.moveDown();
