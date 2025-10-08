@@ -395,6 +395,10 @@ export default {
         text-decoration:none;
         font-size:1.2rem;
         font-weight:600;
+        text-align:center;
+      }
+      .w-100 {
+        width: 100% !important;
       }
       .d-none {
         display: none !important;
@@ -508,8 +512,8 @@ export default {
           if (documentId === "create") return null;
 
           return (
-            <a href={`/api/venta/${documentId}/export-pdf`} target="_blank">
-              Descargar PDF
+            <a className="boton-local w-100" href={`/api/venta/${documentId}/export-pdf`} target="_blank">
+              Remito
             </a>
           );
         },
