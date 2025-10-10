@@ -145,6 +145,37 @@ function observarPaginaGastos() {
   });
 }
 
+function bloquearBotones() {
+  const observer = new MutationObserver(() => {
+    // bloquear botones con aria-haspopup="menu", dentro de formularios
+    const buttonsHasPopup = document.querySelectorAll(
+      'form button[aria-haspopup="menu"]'
+    );
+
+    buttonsHasPopup.forEach((btn) => {
+      btn.disabled = true;
+      btn.style.pointerEvents = "none";
+      btn.style.display = "none";
+    });
+
+    const buttonsHasDialog = document.querySelectorAll(
+      'button[aria-haspopup="dialog"]'
+    );
+    buttonsHasDialog.forEach((btn, index) => {
+      if(index == 1){
+        btn.disabled = true;
+        btn.style.pointerEvents = "none";
+        btn.style.display = "none";
+      }
+    })
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+}
+
 export default {
   config: {
     locales: [
@@ -365,23 +396,21 @@ export default {
   bootstrap(app: StrapiApp) {
     observarPaginaVentas();
     observarPaginaGastos();
-
+    bloquearBotones();
     const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(4),
       nav ol li ol li:nth-child(9),
       nav ul li:nth-child(n+3),
-      nav ol li span {
+      nav:not([aria-label="Pagination"]) ol li span {
           display: none !important;
-      }
+      }   
       #main-content div:first-child div:first-child img ~ div{
         display: none !important;
       }
-
       nav div div img {
         background-color:red;
       }
-
       #locales-buttons,
       #locales-buttons-gastos {
         display: flex;
@@ -403,7 +432,6 @@ export default {
       .d-none {
         display: none !important;
       }
-
       .input-customize {
         position: relative;
         border: 1px solid #dcdce4;
@@ -468,10 +496,8 @@ export default {
         }
         .show {
           left:55px !important;
-        }
-        
+        } 
       }
-
     `;
     document.head.appendChild(style);
     /* evento para ocultar/mostrar nav */
@@ -496,7 +522,7 @@ export default {
         clearInterval(interval);
       }
     }, 500);
-
+    /** agrego boton para realizar descarga de remito en ventas */
     app
       .getPlugin("content-manager")
       .injectComponent("editView", "right-links", {
@@ -512,7 +538,11 @@ export default {
           if (documentId === "create") return null;
 
           return (
-            <a className="boton-local w-100" href={`/api/venta/${documentId}/export-pdf`} target="_blank">
+            <a
+              className="boton-local w-100"
+              href={`/api/venta/${documentId}/export-pdf`}
+              target="_blank"
+            >
               Remito
             </a>
           );
