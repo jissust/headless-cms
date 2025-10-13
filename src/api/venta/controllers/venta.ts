@@ -81,7 +81,7 @@ export default factories.createCoreController(
         year: "numeric",
       });
 
-      doc.fontSize(12).text(`Fecha: ${fechaFormateada}`, { align: "right" });
+      doc.fontSize(12).text(`Fecha: ${fechaFormateada}`);
       doc.moveDown();
       
       // --------- DATOS DEL VENDEDOR ---------
