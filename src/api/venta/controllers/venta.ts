@@ -73,7 +73,17 @@ export default factories.createCoreController(
       // --------- ENCABEZADO ---------
       doc.fontSize(20).text("Comprobante de Venta", { align: "center" });
       doc.moveDown();
+      // --------- FECHA ---------
+      const fechaVenta = new Date(venta.createdAt);
+      const fechaFormateada = fechaVenta.toLocaleDateString("es-AR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
 
+      doc.fontSize(12).text(`Fecha: ${fechaFormateada}`, { align: "right" });
+      doc.moveDown();
+      
       // --------- DATOS DEL VENDEDOR ---------
       doc.fontSize(14).text("Datos del vendedor", { underline: true });
       doc.moveDown(0.5);
