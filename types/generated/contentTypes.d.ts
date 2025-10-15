@@ -500,6 +500,10 @@ export interface ApiProductoProducto extends Struct.CollectionTypeSchema {
     precio_mayorista: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     stock: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    tipo_de_moneda: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::tipo-de-moneda.tipo-de-moneda'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -673,6 +677,37 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
       > &
       Schema.Attribute.DefaultTo<0>;
     trabajo_solicitado_por_el_cliente: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTipoDeMonedaTipoDeMoneda
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'tipo_de_monedas';
+  info: {
+    displayName: 'Tipo de moneda';
+    pluralName: 'tipo-de-monedas';
+    singularName: 'tipo-de-moneda';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    codigo: Schema.Attribute.String & Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tipo-de-moneda.tipo-de-moneda'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    simbolo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1323,6 +1358,7 @@ declare module '@strapi/strapi' {
       'api::producto.producto': ApiProductoProducto;
       'api::remito.remito': ApiRemitoRemito;
       'api::service.service': ApiServiceService;
+      'api::tipo-de-moneda.tipo-de-moneda': ApiTipoDeMonedaTipoDeMoneda;
       'api::tipo-de-venta.tipo-de-venta': ApiTipoDeVentaTipoDeVenta;
       'api::venta.venta': ApiVentaVenta;
       'plugin::content-releases.release': PluginContentReleasesRelease;

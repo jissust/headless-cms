@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tipo_de_monedas",
+  "info": {
+    "singularName": "tipo-de-moneda",
+    "pluralName": "tipo-de-monedas",
+    "displayName": "Tipo de moneda"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "codigo": {
+      "type": "string",
+      "unique": true
+    },
+    "simbolo": {
+      "type": "string"
+    }
+  }
+}
