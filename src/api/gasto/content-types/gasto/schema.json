@@ -11,6 +11,10 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "total": {
+      "type": "decimal",
+      "customField": "plugin::my-custom-fields.input-total-gastos"
+    },
     "proveedor": {
       "type": "string",
       "required": true
@@ -27,14 +31,15 @@
         "gastos.gastos-items"
       ]
     },
-    "total": {
-      "type": "decimal",
-      "customField": "plugin::my-custom-fields.input-total-gastos"
-    },
     "local": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::local.local"
+    },
+    "tipo_de_moneda": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tipo-de-moneda.tipo-de-moneda"
     }
   }
 }

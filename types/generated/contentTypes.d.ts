@@ -430,6 +430,10 @@ export interface ApiGastoGasto extends Struct.CollectionTypeSchema {
     proveedor: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     telefono: Schema.Attribute.BigInteger;
+    tipo_de_moneda: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::tipo-de-moneda.tipo-de-moneda'
+    >;
     total: Schema.Attribute.Decimal &
       Schema.Attribute.CustomField<'plugin::my-custom-fields.input-total-gastos'>;
     updatedAt: Schema.Attribute.DateTime;

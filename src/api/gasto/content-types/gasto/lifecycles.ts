@@ -6,13 +6,13 @@ export default {
     const ctxBody = ctx.request.body;
     const { data } = event.params;
     const gastos = ctxBody.Gastos;
-    
-    if (gastos.length == 0) {
+
+    if (!gastos || gastos.length == 0) {
       throw new errors.ApplicationError(
         "Para crear un gasto como mínimo debe haber un producto."
       );
     }
-    
+
     const localId = ctx.request.query.localId;
     if (!localId) {
       throw new errors.ApplicationError(`Debe seleccionar un local`);
@@ -22,20 +22,30 @@ export default {
       connect: [{ id: localId }],
     };
 
-    for (const gasto of gastos) {
+    if(!data.tipo_de_moneda || !data.tipo_de_moneda.connect || data.tipo_de_moneda.connect.length === 0){
+      throw new errors.ApplicationError(`Debe seleccionar una moneda`);
+    }
 
+    const tipoDeMonedaId = data.tipo_de_moneda.connect[0].id;
+
+    for (const gasto of gastos) {
       const id = gasto.producto;
       const productoNuevo = gasto.nombre_producto_nuevo;
       const cantidad = gasto.cantidad;
       const precio_por_unidad = gasto.precio_por_unidad;
       const total_por_item = gasto.total_por_item;
-      
-      if( id && productoNuevo ){
-        throw new errors.ApplicationError(`Si selecciona un "Producto" existente no puede completar el campo "Nombre producto nuevo"`);
+      const tipoDeMoneda = { connect: [{ id: tipoDeMonedaId }] };
+
+      if (id && productoNuevo) {
+        throw new errors.ApplicationError(
+          `Si selecciona un "Producto" existente no puede completar el campo "Nombre producto nuevo"`
+        );
       }
 
-      if( !id && !productoNuevo ){
-        throw new errors.ApplicationError(`Debe seleccionar un "Producto" existente o completar un "Nombre producto nuevo"`);
+      if (!id && !productoNuevo) {
+        throw new errors.ApplicationError(
+          `Debe seleccionar un "Producto" existente o completar un "Nombre producto nuevo"`
+        );
       }
 
       if (id) {
@@ -44,11 +54,16 @@ export default {
           "api::producto.producto",
           id
         );
-
+        
         if (productoDb) {
           await strapi.db.query("api::producto.producto").update({
             where: { id: id },
-            data: { stock: productoDb.stock + cantidad, precio_compra: precio_por_unidad },
+            data: {
+              documentId:productoDb.documentId,
+              stock: productoDb.stock + cantidad,
+              precio_compra: precio_por_unidad,
+              tipo_de_moneda: tipoDeMoneda,
+            },
           });
         }
       }
@@ -61,7 +76,8 @@ export default {
               nombre: productoNuevo,
               stock: cantidad,
               locales: localId,
-              precio_compra: precio_por_unidad
+              precio_compra: precio_por_unidad,
+              tipo_de_moneda: tipoDeMoneda,
             },
           });
       }
@@ -73,10 +89,9 @@ export default {
     const { data } = event.params;
     const gastos = ctxBody.Gastos;
     const documentId = data.documentId;
-    if(!documentId){
-      throw new errors.ApplicationError(
-        "No se encontró el ID del gasto"
-      );
+    //console.log(`ctxBody GASTO`, ctxBody.tipo_de_moneda.connect.length)
+    if (!documentId) {
+      throw new errors.ApplicationError("No se encontró el ID del gasto");
     }
     const gastoDb = await strapi.db.query("api::gasto.gasto").findOne({
       where: { documentId },
@@ -88,30 +103,46 @@ export default {
         "Para crear un gasto como mínimo debe haber un producto."
       );
     }
-    
+
     const localId = gastoDb.local.id;
     if (!localId) {
       throw new errors.ApplicationError(`Debe seleccionar un local`);
     }
 
+    const tipoDeMonedaId = gastoDb.tipo_de_moneda.id;
+    /** si connect esta cargado quiere decir que se modifico la relacion */
+    if(ctxBody.tipo_de_moneda.connect.length > 0){
+      if(ctxBody.tipo_de_moneda.connect[0].id !== tipoDeMonedaId){
+        throw new errors.ApplicationError(`No se puede cambiar la moneda de un gasto ya creado`);
+      }
+    }
+    /** si connect esta vacio y disconnect esta cargado, quiere decir que se esta enviando vacio */
+    if(ctxBody.tipo_de_moneda.connect.length === 0 && ctxBody.tipo_de_moneda.disconnect.length > 0){
+      throw new errors.ApplicationError(`Debe seleccionar una moneda`);
+    }
+    
     event.params.data.local = {
       connect: [{ id: localId }],
     };
 
     for (const gasto of gastos) {
-
       const id = gasto.producto;
       const productoNuevo = gasto.nombre_producto_nuevo;
       const cantidad = gasto.cantidad;
       const precio_por_unidad = gasto.precio_por_unidad;
       const total_por_item = gasto.total_por_item;
-      
-      if( id && productoNuevo ){
-        throw new errors.ApplicationError(`Si selecciona un "Producto" existente no puede completar el campo "Nombre producto nuevo"`);
+      const tipoDeMoneda = { connect: [{ id: tipoDeMonedaId }] };
+
+      if (id && productoNuevo) {
+        throw new errors.ApplicationError(
+          `Si selecciona un "Producto" existente no puede completar el campo "Nombre producto nuevo"`
+        );
       }
 
-      if( !id && !productoNuevo ){
-        throw new errors.ApplicationError(`Debe seleccionar un "Producto" existente o completar un "Nombre producto nuevo"`);
+      if (!id && !productoNuevo) {
+        throw new errors.ApplicationError(
+          `Debe seleccionar un "Producto" existente o completar un "Nombre producto nuevo"`
+        );
       }
 
       if (id) {
@@ -124,7 +155,12 @@ export default {
         if (productoDb) {
           await strapi.db.query("api::producto.producto").update({
             where: { id: id },
-            data: { stock: productoDb.stock + cantidad, precio_compra: precio_por_unidad },
+            data: {
+              documentId: productoDb.documentId,
+              stock: productoDb.stock + cantidad,
+              precio_compra: precio_por_unidad,
+              tipo_de_moneda: tipoDeMoneda,
+            },
           });
         }
       }
@@ -137,10 +173,11 @@ export default {
               nombre: productoNuevo,
               stock: cantidad,
               locales: localId,
-              precio_compra: precio_por_unidad
+              precio_compra: precio_por_unidad,
+              tipo_de_moneda: tipoDeMoneda,
             },
           });
       }
     }
-  },  
+  },
 };

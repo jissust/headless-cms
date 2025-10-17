@@ -2,18 +2,17 @@ import { errors } from "@strapi/utils";
 
 export default {
   async beforeUpdate(event) {
-    const ctx = strapi.requestContext.get();
-    const ctxBody = ctx.request.body;
     const { data } = event.params;
-
+    
     const productoDb = await strapi.db.query("api::producto.producto").findOne({
-      where: { documentId: ctxBody.documentId },
+      where: { documentId: data.documentId },
       populate: true,
     });
-    
+    console.log(`data`, data)
+    console.log(`productoDb`, productoDb)
     if(data.tipo_de_moneda.connect.length > 0 ){
       if(productoDb.tipo_de_moneda && productoDb.tipo_de_moneda.id !== data.tipo_de_moneda.connect[0].id){
-        throw new errors.ApplicationError("No se puede cambiar la moneda de un producto ya creado");
+        throw new errors.ApplicationError(`No se puede cambiar la moneda de un producto ya creado: ${productoDb.nombre}`);
       }
     }
   },
