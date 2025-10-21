@@ -775,6 +775,10 @@ export interface ApiVentaVenta extends Struct.CollectionTypeSchema {
     Productos: Schema.Attribute.DynamicZone<['productos.productos']>;
     publishedAt: Schema.Attribute.DateTime;
     telefono: Schema.Attribute.String;
+    tipo_de_moneda: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::tipo-de-moneda.tipo-de-moneda'
+    >;
     tipo_de_venta: Schema.Attribute.Relation<
       'oneToOne',
       'api::tipo-de-venta.tipo-de-venta'

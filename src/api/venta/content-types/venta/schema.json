@@ -12,11 +12,11 @@
   "pluginOptions": {},
   "attributes": {
     "nombre_venta": {
-      "type": "string",
+      "type": "customField",
       "customField": "plugin::my-custom-fields.input-nombre-venta"
     },
     "nombre_local": {
-      "type": "string",
+      "type": "customField",
       "customField": "plugin::my-custom-fields.input-nombre-local"
     },
     "tipo_de_venta": {
@@ -54,13 +54,18 @@
     },
     "total": {
       "type": "decimal",
-      "default": 0,
-      "customField": "plugin::my-custom-fields.my-input-number-total-venta-field"
+      "customField": "plugin::my-custom-fields.my-input-number-total-venta-field",
+      "default": 0
     },
     "total_ganancia": {
       "type": "decimal",
-      "default": 0,
-      "customField": "plugin::my-custom-fields.input-total-venta-ganancia"
+      "customField": "plugin::my-custom-fields.input-total-venta-ganancia",
+      "default": 0
+    },
+    "tipo_de_moneda": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tipo-de-moneda.tipo-de-moneda"
     }
   }
 }

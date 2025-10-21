@@ -7,6 +7,14 @@ export default {
     const ctx = strapi.requestContext.get();
     const ctxBody = ctx.request.body;
     
+    if(!ctxBody.tipo_de_moneda || ctxBody.tipo_de_moneda.length === 0 || ctxBody.tipo_de_moneda.connect.length === 0){
+      throw new errors.ApplicationError(
+        `Debe seleccionar un "Tipo de moneda"`
+      );
+    }
+
+    const tipoDeMonedaId = ctxBody.tipo_de_moneda.connect[0].id;
+
     if (ctxBody.Productos.length == 0) {
       throw new errors.ApplicationError(
         "Para crear una venta como mínimo debe haber un producto."
@@ -32,13 +40,22 @@ export default {
     };
 
     for (const producto of ctxBody.Productos) {
-      const cantidad = producto.cantidad; 
+      const cantidad = producto.cantidad;
       const id = parseInt(producto.productoItem);
-     
-      const productoDb = await strapi.entityService.findOne(
-        "api::producto.producto",
-        id
-      );
+
+      const productoDb = await strapi.db
+        .query("api::producto.producto")
+        .findOne({
+          where: { id: id },
+          populate: true,
+        });
+      //console.log(`productoDb`, productoDb);
+
+      if(productoDb.tipo_de_moneda.id !== tipoDeMonedaId){
+        throw new ApplicationError(
+          `La moneda del producto ${productoDb.nombre} no coincide con la moneda seleccionada para la venta.`
+        );
+      }
 
       const stock = productoDb.stock;
       const nombreProducto = productoDb.nombre;
@@ -56,7 +73,6 @@ export default {
     const productos = ctxBody.Productos;
 
     for (const producto of productos) {
-
       const cantidad = producto.cantidad;
       const id = parseInt(producto.productoItem);
 
@@ -76,9 +92,9 @@ export default {
       }
     }
   },
-  beforeUpdate(event){
+  beforeUpdate(event) {
     throw new errors.ApplicationError(
       `No se puede editar una venta una vez creada.`
     );
-  }
+  },
 };
