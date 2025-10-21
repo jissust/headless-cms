@@ -112,6 +112,9 @@ export default {
     }
   },
   async beforeUpdate(event) {
+    throw new errors.ApplicationError(
+      `No se puede editar una gasto una vez creado.`
+    );
     const ctx = strapi.requestContext.get();
     const ctxBody = ctx.request.body;
     const { data } = event.params;
