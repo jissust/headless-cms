@@ -91,6 +91,7 @@ export default {
               stock: productoDb.stock + cantidad,
               precio_compra: precio_por_unidad,
               tipo_de_moneda: tipoDeMoneda,
+              locales:{ connect: [], disconnect: [] },
             },
           });
         }
@@ -103,7 +104,7 @@ export default {
             data: {
               nombre: productoNuevo,
               stock: cantidad,
-              locales: localId,
+              locales: event.params.data.local,
               precio_compra: precio_por_unidad,
               tipo_de_moneda: tipoDeMoneda,
             },
