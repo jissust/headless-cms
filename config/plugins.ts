@@ -54,6 +54,7 @@ export default () => ({
       },
       fieldTransforms: {
         local: (value: any) => value?.nombre ?? "",
+        tipo_de_moneda: (value: any) => value?.codigo ?? "",
         estado_de_service: (value: any) => value?.nombre ?? "",
         tipo_de_venta: (value: any) => value?.nombre ?? "",
         createdAt: (value: any) => {

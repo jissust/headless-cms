@@ -1,7 +1,9 @@
 export default () => {
   return async (ctx, next) => {
-    let total = 0;
-    let totalGanancia = 0;
+    let total = 0; // pesos
+    let totalDolares = 0;
+    let totalGanancia = 0; // pesos
+    let totalGananciaDolares = 0;
     let totalGasto = 0;
     let leftover = ""; // resto parcial entre chunks
     // helper: separa por comas respetando comillas
@@ -9,6 +11,7 @@ export default () => {
       line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
 
     const processText = (text: string, apiCollectionType?: string) => {
+      //console.log(text)
       const data = leftover + text;
       const lines = data.split("\n");
       leftover = lines.pop() || ""; // el último puede estar incompleto
@@ -17,6 +20,7 @@ export default () => {
         if (!line) continue;
         try {
           const cols = splitCsvLine(line);
+          const codigoTipoMoneda = cols[9];
 
           if (apiCollectionType === "venta") {
 
@@ -27,7 +31,11 @@ export default () => {
               const normalized = cleaned.replace(/\./g, "").replace(",", ".");
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
-                total += num;
+                if(codigoTipoMoneda?.toUpperCase() === '"USD"'){
+                  totalDolares += num; 
+                }else{
+                  total += num;
+                }
               }
             }
 
@@ -38,7 +46,11 @@ export default () => {
               const normalized = cleaned.replace(/\./g, "").replace(",", ".");
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
-                totalGanancia += num;
+                if(codigoTipoMoneda?.toUpperCase() === '"USD"'){
+                  totalGananciaDolares += num; 
+                }else{
+                  totalGanancia += num;
+                }
               }
             }
           }
@@ -121,9 +133,13 @@ export default () => {
           }
 
           // línea TOTAL antes de terminar la response
-          const totalLine = `TOTAL: ,${total}\n`;
-          const totalLineGanancia = `TOTAL GANANCIA: , ${totalGanancia}\n`;
-          const endTotalLine = totalLine + totalLineGanancia;
+          const totalLine = `TOTAL (ARS): ,${total}\n`;
+          const totalLineGanancia = `TOTAL GANANCIA (ARS): , ${totalGanancia}\n`;
+          const totalLineDolares = `TOTAL (USD): ,${totalDolares}\n`;
+          const totalLineGananciaDolares = `TOTAL GANANCIA (USD): , ${totalGananciaDolares}\n`;
+
+          const endTotalLine = totalLine + totalLineGanancia + totalLineDolares + totalLineGananciaDolares;
+
           oldWrite.call(this, endTotalLine);
         } catch (e) {
           console.error("csv-total end error:", e);
