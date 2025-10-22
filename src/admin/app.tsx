@@ -400,11 +400,12 @@ export default {
     const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(4),
-      nav ol li ol li:nth-child(9),
+      nav ol li ol li:nth-child(8),
+      nav ol li ol li:nth-child(10),
       nav ul li:nth-child(n+3),
       nav:not([aria-label="Pagination"]) ol li span {
           display: none !important;
-      }   
+      }
       #main-content div:first-child div:first-child img ~ div{
         display: none !important;
       }
