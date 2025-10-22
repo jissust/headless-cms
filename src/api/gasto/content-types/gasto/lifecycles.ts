@@ -68,7 +68,6 @@ export default {
           },
           populate: true,
         });
-      //console.log(`productoDbName`, productoDbName);
 
       if (productoDbName) {
         throw new errors.ApplicationError(
@@ -77,7 +76,6 @@ export default {
       }
 
       if (id) {
-        //const id = id;
         const productoDb = await strapi.entityService.findOne(
           "api::producto.producto",
           id
@@ -121,7 +119,7 @@ export default {
     const { data } = event.params;
     const gastos = ctxBody.Gastos;
     const documentId = data.documentId;
-    //console.log(`ctxBody GASTO`, ctxBody.tipo_de_moneda.connect.length)
+
     if (!documentId) {
       throw new errors.ApplicationError("No se encontró el ID del gasto");
     }

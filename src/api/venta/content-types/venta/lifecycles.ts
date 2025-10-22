@@ -49,7 +49,6 @@ export default {
           where: { id: id },
           populate: true,
         });
-      //console.log(`productoDb`, productoDb);
 
       if(productoDb.tipo_de_moneda.id !== tipoDeMonedaId){
         throw new ApplicationError(
