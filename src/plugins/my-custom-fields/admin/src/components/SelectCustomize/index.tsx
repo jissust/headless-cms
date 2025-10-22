@@ -61,7 +61,7 @@ const SelectCustomize = (props: any, ref: any) => {
 
   const handleChange = (selectedId: string) => {
     const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
-
+    console.log(selectedProductoChange);
     setSelectedProducto(selectedProductoChange);
 
     const cantidadHTML: HTMLInputElement | null = document.querySelector(
@@ -137,7 +137,7 @@ const SelectCustomize = (props: any, ref: any) => {
         <option value="">Seleccione un producto</option>
         {productos.map((producto: any) => (
           <option key={producto.id} value={producto.id}>
-            {producto?.nombre || `Producto ${producto.id}`}
+            {`${producto?.nombre} (${producto?.tipo_de_moneda?.codigo})` || `Producto ${producto.id}`}
           </option>
         ))}
       </select>
@@ -146,8 +146,8 @@ const SelectCustomize = (props: any, ref: any) => {
         <>
           <label className="label-customize p-1">
             {tipoDeVenta?.nombre?.toLowerCase().includes("mayorista")
-              ? `Precio mayorista: $ ${precio} (por unidad)`
-              : `Precio minorista: $ ${precio} (por unidad)`}
+              ? `Precio mayorista: ${selectedProducto.tipo_de_moneda.simbolo} ${precio} (por unidad)`
+              : `Precio minorista: ${selectedProducto.tipo_de_moneda.simbolo} ${precio} (por unidad)`}
           </label>
           <input
             className="d-none"
@@ -158,7 +158,7 @@ const SelectCustomize = (props: any, ref: any) => {
             disabled
           />
 
-          <label className="label-customize p-1">{`Precio de compra: $ ${precioCompra} (por unidad)`}</label>
+          <label className="label-customize p-1">{`Precio de compra: ${selectedProducto.tipo_de_moneda.simbolo} ${precioCompra} (por unidad)`}</label>
 
           <input
             className="d-none"

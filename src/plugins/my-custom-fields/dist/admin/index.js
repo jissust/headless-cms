@@ -39,7 +39,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-Dem4ANj2.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-DUgpUBAU.js")).then((module2) => ({
           default: module2.SelectCustomize
         }))
       },
