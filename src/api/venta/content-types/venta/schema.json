@@ -66,6 +66,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::tipo-de-moneda.tipo-de-moneda"
+    },
+    "forma_de_pago": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::forma-de-pago.forma-de-pago"
     }
   }
 }

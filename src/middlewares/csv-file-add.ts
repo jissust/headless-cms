@@ -5,6 +5,18 @@ export default () => {
     let totalGanancia = 0; // pesos
     let totalGananciaDolares = 0;
     let totalGasto = 0;
+
+    //Formas de pago
+    let totalEfectivo = 0;
+    let totalTransferencia = 0;
+    let totalTarjetaCredito = 0;
+    let totalTarjetaDebito = 0;
+    //formas de pago usd 
+    let totalEfectivoUsd = 0;
+    let totalTransferenciaUsd = 0;
+    let totalTarjetaCreditoUsd = 0;
+    let totalTarjetaDebitoUsd = 0;
+
     let leftover = ""; // resto parcial entre chunks
     // helper: separa por comas respetando comillas
     const splitCsvLine = (line: string) =>
@@ -21,9 +33,11 @@ export default () => {
         try {
           const cols = splitCsvLine(line);
           const codigoTipoMoneda = cols[9];
+          const formaDePago = cols[10];
+
+          console.log(cols);
 
           if (apiCollectionType === "venta") {
-
             // --- Columna 7 => total ---
             const rawTotal = cols[7];
             if (rawTotal !== undefined) {
@@ -31,10 +45,38 @@ export default () => {
               const normalized = cleaned.replace(/\./g, "").replace(",", ".");
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
-                if(codigoTipoMoneda?.toUpperCase() === '"USD"'){
-                  totalDolares += num; 
-                }else{
+                if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
+                  totalDolares += num;
+                } else {
                   total += num;
+                }
+                if (formaDePago?.trim() === '"Efectivo"') {
+                  if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
+                    totalEfectivoUsd += num;
+                  } else {
+                    totalEfectivo += num;
+                  }
+                }
+                if (formaDePago?.trim() === '"Transferencia"') {                  
+                  if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
+                    totalTransferenciaUsd += num;
+                  } else {
+                    totalTransferencia += num;
+                  }
+                }
+                if (formaDePago?.trim() === '"Tarjeta de débito"') {
+                  if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
+                    totalTarjetaDebitoUsd += num;
+                  } else {
+                    totalTarjetaDebito += num;
+                  }
+                }
+                if (formaDePago?.trim() === '"Tarjeta de crédito"') {
+                  if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
+                    totalTarjetaCreditoUsd += num;
+                  } else {
+                    totalTarjetaCredito += num;
+                  }
                 }
               }
             }
@@ -46,9 +88,9 @@ export default () => {
               const normalized = cleaned.replace(/\./g, "").replace(",", ".");
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
-                if(codigoTipoMoneda?.toUpperCase() === '"USD"'){
-                  totalGananciaDolares += num; 
-                }else{
+                if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
+                  totalGananciaDolares += num;
+                } else {
                   totalGanancia += num;
                 }
               }
@@ -133,12 +175,34 @@ export default () => {
           }
 
           // línea TOTAL antes de terminar la response
-          const totalLine = `TOTAL (ARS): ,${total}\n`;
+          const totalLine = `\nTOTAL (ARS): ,${total}\n`;
           const totalLineGanancia = `TOTAL GANANCIA (ARS): , ${totalGanancia}\n`;
           const totalLineDolares = `TOTAL (USD): ,${totalDolares}\n`;
-          const totalLineGananciaDolares = `TOTAL GANANCIA (USD): , ${totalGananciaDolares}\n`;
+          const totalLineGananciaDolares = `TOTAL GANANCIA (USD): , ${totalGananciaDolares}\n\n`;
 
-          const endTotalLine = totalLine + totalLineGanancia + totalLineDolares + totalLineGananciaDolares;
+          const totalLineEfectivo = `TOTAL EFECTIVO (ARS): , ${totalEfectivo}\n`;
+          const totalLineTransferencia = `TOTAL TRANSFERENCIA (ARS): , ${totalTransferencia}\n`;
+          const totalLineTarjetaDeCredito = `TOTAL TARJETA DE CRÉDITO (ARS): , ${totalTarjetaCredito}\n`;
+          const totalLineTarjetaDeDebito = `TOTAL TARJETA DE DÉBITO (ARS): , ${totalTarjetaDebito}\n\n`;
+
+          const totalLineEfectivoUsd = `TOTAL EFECTIVO (USD): , ${totalEfectivoUsd}\n`;
+          const totalLineTransferenciaUsd = `TOTAL TRANSFERENCIA (USD): , ${totalTransferenciaUsd}\n`;
+          const totalLineTarjetaDeCreditoUsd = `TOTAL TARJETA DE CRÉDITO (USD): , ${totalTarjetaCreditoUsd}\n`;
+          const totalLineTarjetaDeDebitoUsd = `TOTAL TARJETA DE DÉBITO (USD): , ${totalTarjetaDebitoUsd}\n`;
+
+          const endTotalLine =
+            totalLine +
+            totalLineGanancia +
+            totalLineDolares +
+            totalLineGananciaDolares +
+            totalLineEfectivo +
+            totalLineTransferencia +
+            totalLineTarjetaDeCredito +
+            totalLineTarjetaDeDebito +
+            totalLineEfectivoUsd + 
+            totalLineTransferenciaUsd +
+            totalLineTarjetaDeCreditoUsd + 
+            totalLineTarjetaDeDebitoUsd;
 
           oldWrite.call(this, endTotalLine);
         } catch (e) {

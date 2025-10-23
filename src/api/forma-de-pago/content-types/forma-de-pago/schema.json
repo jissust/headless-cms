@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "forma_de_pagos",
+  "info": {
+    "singularName": "forma-de-pago",
+    "pluralName": "forma-de-pagos",
+    "displayName": "Forma de pago"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}

@@ -407,6 +407,34 @@ export interface ApiEstadoDeServiceEstadoDeService
   };
 }
 
+export interface ApiFormaDePagoFormaDePago extends Struct.CollectionTypeSchema {
+  collectionName: 'forma_de_pagos';
+  info: {
+    displayName: 'Forma de pago';
+    pluralName: 'forma-de-pagos';
+    singularName: 'forma-de-pago';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::forma-de-pago.forma-de-pago'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGastoGasto extends Struct.CollectionTypeSchema {
   collectionName: 'gastos';
   info: {
@@ -761,6 +789,10 @@ export interface ApiVentaVenta extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     dni: Schema.Attribute.BigInteger;
     email: Schema.Attribute.Email;
+    forma_de_pago: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::forma-de-pago.forma-de-pago'
+    >;
     local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::venta.venta'> &
@@ -1359,6 +1391,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::estado-de-service.estado-de-service': ApiEstadoDeServiceEstadoDeService;
+      'api::forma-de-pago.forma-de-pago': ApiFormaDePagoFormaDePago;
       'api::gasto.gasto': ApiGastoGasto;
       'api::local.local': ApiLocalLocal;
       'api::producto.producto': ApiProductoProducto;
