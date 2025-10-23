@@ -6,11 +6,13 @@ export default {
   async beforeCreate(event) {
     const ctx = strapi.requestContext.get();
     const ctxBody = ctx.request.body;
-    
-    if(!ctxBody.tipo_de_moneda || ctxBody.tipo_de_moneda.length === 0 || ctxBody.tipo_de_moneda.connect.length === 0){
-      throw new errors.ApplicationError(
-        `Debe seleccionar un "Tipo de moneda"`
-      );
+
+    if (
+      !ctxBody.tipo_de_moneda ||
+      ctxBody.tipo_de_moneda.length === 0 ||
+      ctxBody.tipo_de_moneda.connect.length === 0
+    ) {
+      throw new errors.ApplicationError(`Debe seleccionar un "Tipo de moneda"`);
     }
 
     const tipoDeMonedaId = ctxBody.tipo_de_moneda.connect[0].id;
@@ -38,6 +40,14 @@ export default {
     event.params.data.tipo_de_venta = {
       connect: [{ id: tipoDeVentaId }],
     };
+    console.log(ctxBody)
+    if (
+      !ctxBody.forma_de_pago ||
+      ctxBody.forma_de_pago.length === 0 ||
+      ctxBody.forma_de_pago.connect.length === 0
+    ) {
+      throw new errors.ApplicationError(`Debe seleccionar un "Forma de pago"`);
+    }
 
     for (const producto of ctxBody.Productos) {
       const cantidad = producto.cantidad;
@@ -50,7 +60,7 @@ export default {
           populate: true,
         });
 
-      if(productoDb.tipo_de_moneda.id !== tipoDeMonedaId){
+      if (productoDb.tipo_de_moneda.id !== tipoDeMonedaId) {
         throw new ApplicationError(
           `La moneda del producto ${productoDb.nombre} no coincide con la moneda seleccionada para la venta.`
         );
