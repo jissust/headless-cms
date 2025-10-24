@@ -17,8 +17,7 @@ export default () => {
     let totalTarjetaCreditoUsd = 0;
     let totalTarjetaDebitoUsd = 0;
 
-    let leftover = ""; // resto parcial entre chunks
-    // helper: separa por comas respetando comillas
+    let leftover = "";
     const splitCsvLine = (line: string) =>
       line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
     const normalizeText = (text: string) => {
@@ -30,7 +29,6 @@ export default () => {
               .toLowerCase()
     }
     const processText = (text: string, apiCollectionType?: string) => {
-      //console.log(text)
       const data = leftover + text;
       const lines = data.split("\n");
       leftover = lines.pop() || ""; // el último puede estar incompleto
@@ -40,12 +38,8 @@ export default () => {
         try {
           const cols = splitCsvLine(line);
           const codigoTipoMoneda = cols[9];
-          const formaDePago = cols[10];
+          const formaDePago = normalizeText(cols[10]);
           const formaDePagoService = normalizeText(cols[18]);
-          console.log(
-            "Service: ",
-            formaDePagoService
-          );
 
           if (apiCollectionType === "venta") {
             // --- Columna 7 => total ---
@@ -60,28 +54,28 @@ export default () => {
                 } else {
                   total += num;
                 }
-                if (formaDePago?.trim() === '"Efectivo"') {
+                if (formaDePago === 'efectivo') {
                   if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
                     totalEfectivoUsd += num;
                   } else {
                     totalEfectivo += num;
                   }
                 }
-                if (formaDePago?.trim() === '"Transferencia"') {
+                if (formaDePago === 'transferencia') {
                   if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
                     totalTransferenciaUsd += num;
                   } else {
                     totalTransferencia += num;
                   }
                 }
-                if (formaDePago?.trim() === '"Tarjeta de débito"') {
+                if (formaDePago === 'tarjetadedebito') {
                   if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
                     totalTarjetaDebitoUsd += num;
                   } else {
                     totalTarjetaDebito += num;
                   }
                 }
-                if (formaDePago?.trim() === '"Tarjeta de crédito"') {
+                if (formaDePago === 'tarjetadecredito') {
                   if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
                     totalTarjetaCreditoUsd += num;
                   } else {
@@ -108,8 +102,6 @@ export default () => {
           }
 
           if (apiCollectionType === "service") {
-            //console.log(`processText: ${apiCollectionType}`);
-
             // --- Columna 7 => total ---
             const rawTotal = cols[4];
             if (rawTotal !== undefined) {
