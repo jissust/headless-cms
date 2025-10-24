@@ -11,7 +11,7 @@ export default () => {
     let totalTransferencia = 0;
     let totalTarjetaCredito = 0;
     let totalTarjetaDebito = 0;
-    //formas de pago usd 
+    //formas de pago usd
     let totalEfectivoUsd = 0;
     let totalTransferenciaUsd = 0;
     let totalTarjetaCreditoUsd = 0;
@@ -21,7 +21,14 @@ export default () => {
     // helper: separa por comas respetando comillas
     const splitCsvLine = (line: string) =>
       line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-
+    const normalizeText = (text: string) => {
+      return text?.replace(/^["']|["']$/g, "")
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .trim()
+              .replace(/\s+/g, "")
+              .toLowerCase()
+    }
     const processText = (text: string, apiCollectionType?: string) => {
       //console.log(text)
       const data = leftover + text;
@@ -34,8 +41,11 @@ export default () => {
           const cols = splitCsvLine(line);
           const codigoTipoMoneda = cols[9];
           const formaDePago = cols[10];
-
-          console.log(cols);
+          const formaDePagoService = normalizeText(cols[18]);
+          console.log(
+            "Service: ",
+            formaDePagoService
+          );
 
           if (apiCollectionType === "venta") {
             // --- Columna 7 => total ---
@@ -57,7 +67,7 @@ export default () => {
                     totalEfectivo += num;
                   }
                 }
-                if (formaDePago?.trim() === '"Transferencia"') {                  
+                if (formaDePago?.trim() === '"Transferencia"') {
                   if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
                     totalTransferenciaUsd += num;
                   } else {
@@ -98,7 +108,7 @@ export default () => {
           }
 
           if (apiCollectionType === "service") {
-            console.log(`processText: ${apiCollectionType}`);
+            //console.log(`processText: ${apiCollectionType}`);
 
             // --- Columna 7 => total ---
             const rawTotal = cols[4];
@@ -108,6 +118,19 @@ export default () => {
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
                 total += num;
+              }
+
+              if (formaDePagoService === 'efectivo') {
+                totalEfectivo += num;
+              }
+              if (formaDePagoService === 'transferencia') {
+                totalTransferencia += num;
+              }
+              if (formaDePagoService === 'tarjetadedebito') {
+                totalTarjetaDebito += num;
+              }
+              if (formaDePagoService === 'tarjetadecredito') {
+                totalTarjetaCredito += num;
               }
             }
 
@@ -199,9 +222,9 @@ export default () => {
             totalLineTransferencia +
             totalLineTarjetaDeCredito +
             totalLineTarjetaDeDebito +
-            totalLineEfectivoUsd + 
+            totalLineEfectivoUsd +
             totalLineTransferenciaUsd +
-            totalLineTarjetaDeCreditoUsd + 
+            totalLineTarjetaDeCreditoUsd +
             totalLineTarjetaDeDebitoUsd;
 
           oldWrite.call(this, endTotalLine);
@@ -251,10 +274,23 @@ export default () => {
           }
 
           // línea TOTAL antes de terminar la response
-          const totalLine = `TOTAL: ,${total}\n`;
+          const totalLine = `\nTOTAL: ,${total}\n`;
           const totalLineGanancia = `TOTAL GANANCIA: , ${totalGanancia}\n`;
-          const totalLineGasto = `TOTAL GASTO: , ${totalGasto}\n`;
-          const endTotalLine = totalLine + totalLineGanancia + totalLineGasto;
+          const totalLineGasto = `TOTAL GASTO: , ${totalGasto}\n\n`;
+
+          const totalLineEfectivo = `TOTAL EFECTIVO: , ${totalEfectivo}\n`;
+          const totalLineTransferencia = `TOTAL TRANSFERENCIA: , ${totalTransferencia}\n`;
+          const totalLineTarjetaDeCredito = `TOTAL TARJETA DE CRÉDITO: , ${totalTarjetaCredito}\n`;
+          const totalLineTarjetaDeDebito = `TOTAL TARJETA DE DÉBITO: , ${totalTarjetaDebito}\n\n`;
+
+          const endTotalLine =
+            totalLine +
+            totalLineGanancia +
+            totalLineGasto +
+            totalLineEfectivo +
+            totalLineTransferencia +
+            totalLineTarjetaDeCredito +
+            totalLineTarjetaDeDebito;
           oldWrite.call(this, endTotalLine);
         } catch (e) {
           console.error("csv-total end error:", e);

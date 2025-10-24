@@ -605,7 +605,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     descripcion_estado_del_equipo: Schema.Attribute.Text;
-    descripcion_gasto: Schema.Attribute.Text & Schema.Attribute.Required;
+    descripcion_gasto: Schema.Attribute.Text;
     email: Schema.Attribute.Email;
     enciende: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     estado_de_service: Schema.Attribute.Relation<
@@ -613,6 +613,10 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
       'api::estado-de-service.estado-de-service'
     >;
     fecha_de_ingreso: Schema.Attribute.Date;
+    forma_de_pago: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::forma-de-pago.forma-de-pago'
+    >;
     ganancia: Schema.Attribute.Decimal &
       Schema.Attribute.CustomField<'plugin::my-custom-fields.input-service-total-ganancia'> &
       Schema.Attribute.DefaultTo<0>;

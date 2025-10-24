@@ -27,13 +27,13 @@
       "relation": "oneToOne",
       "target": "api::estado-de-service.estado-de-service",
       "config": {
-        "mainField":"nombre"
+        "mainField": "nombre"
       }
     },
     "total": {
       "type": "decimal",
-      "default": 0,
       "customField": "plugin::my-custom-fields.input-total-generico",
+      "default": 0,
       "options": {
         "label": "Total",
         "disabled": false
@@ -41,13 +41,13 @@
     },
     "descripcion_gasto": {
       "type": "text",
-      "required": true
+      "required": false
     },
     "total_gasto": {
       "type": "decimal",
+      "customField": "plugin::my-custom-fields.input-total-generico",
       "required": true,
       "default": 0,
-      "customField": "plugin::my-custom-fields.input-total-generico",
       "options": {
         "label": "Total Gasto",
         "disabled": false
@@ -173,6 +173,11 @@
         "label": "Estados del equipo al ingreso",
         "placeholder": "Ingrese el título de la sección"
       }
+    },
+    "forma_de_pago": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::forma-de-pago.forma-de-pago"
     }
   }
 }
