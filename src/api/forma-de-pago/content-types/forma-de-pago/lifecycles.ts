@@ -4,16 +4,16 @@ import { errors } from "@strapi/utils";
 
 export default {
   async beforeCreate(event) {
-    const tiposDeVentas = await strapi.entityService.findMany(
-      "api::tipo-de-venta.tipo-de-venta"
+    const formasDePago = await strapi.entityService.findMany(
+      "api::forma-de-pago.forma-de-pago"
     );
-    if (tiposDeVentas.length >= 2) {
+    if (formasDePago.length >= 4) {
       throw new errors.ApplicationError(
-        `No se pueden crear más tipos de ventas.`
+        `No se pueden crear más formas de pago`
       );
     }
   },
   async beforeUpdate(event) {
-    throw new errors.ApplicationError(`No se pueden editar los tipos de ventas.`);
+    throw new errors.ApplicationError(`No se pueden editar las formas de pago`);
   },
 };
