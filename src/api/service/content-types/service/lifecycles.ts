@@ -3,7 +3,7 @@ import { errors } from "@strapi/utils";
 export default {
   async beforeCreate(event) {
     const { data } = event.params;
-    console.log(data);
+    
     if (
       !data.local ||
       data.local.length === 0 ||
@@ -32,13 +32,19 @@ export default {
   },
   async afterCreate(event) {
     const { result } = event;
-    console.log("Service creado:", result.id);
+    const { data } = event.params;
+    
     if (!result.numero_de_orden) {
       await strapi.db.query("api::service.service").update({
         where: { id: result.id },
-        data: { numero_de_orden: result.id },
+        data: { 
+          numero_de_orden: result.id,
+          local:{ connect: [], disconnect: [] },
+          forma_de_pago:{ connect: [], disconnect: [] },
+          estado_de_service:{ connect: [], disconnect: [] }
+        },
       });
-      console.log(`✅ numero_de_orden asignado al crear: ${result.id}`);
+
     }
     (strapi as any).io.emit("respuesta", "actualizado");
   },
