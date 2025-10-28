@@ -1,6 +1,4 @@
 import { errors } from "@strapi/utils";
-//const { ApplicationError } = errors;
-//import { factories } from "@strapi/strapi";
 
 export default {
   async beforeCreate(event) {
@@ -14,6 +12,11 @@ export default {
     }
   },
   async beforeUpdate(event) {
-    throw new errors.ApplicationError(`No se pueden editar los tipos de ventas.`);
+    throw new errors.ApplicationError(
+      `No se pueden editar los tipos de ventas.`
+    );
+  },
+  async beforeDelete(event) {
+    throw new errors.ApplicationError(`No se puede eliminar el elemento seleccionado.`);
   },
 };

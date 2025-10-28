@@ -16,4 +16,9 @@ export default {
   async beforeUpdate(event) {
     throw new errors.ApplicationError(`No se pueden editar las formas de pago`);
   },
+  async beforeDelete(event) {
+    throw new errors.ApplicationError(
+      `No se puede eliminar el elemento seleccionado.`
+    );
+  },
 };

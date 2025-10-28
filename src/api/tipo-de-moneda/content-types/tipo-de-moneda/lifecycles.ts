@@ -16,4 +16,7 @@ export default {
   async beforeUpdate(event) {
     throw new errors.ApplicationError(`No se pueden editar los tipos de moneda.`);
   },
+  async beforeDelete(event) {
+    throw new errors.ApplicationError(`No se puede eliminar el elemento seleccionado.`);
+  },
 };
