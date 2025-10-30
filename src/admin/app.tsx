@@ -396,18 +396,18 @@ export default {
   bootstrap(app: StrapiApp) {
     observarPaginaVentas();
     observarPaginaGastos();
-    bloquearBotones();
+    //bloquearBotones();
     const style = document.createElement("style");
     style.innerHTML = `
       /*nav ol li ol li:nth-child(2),*/
-      nav ol li ol li:nth-child(5),
-      /*nav ol li ol li:nth-child(9),
-      nav ol li ol li:nth-child(10),*/
-      nav ol li ol li:nth-child(11),
+      nav ol li ol li:nth-child(6),
+      /*nav ol li ol li:nth-child(10),
+      nav ol li ol li:nth-child(11),*/
+      nav ol li ol li:nth-child(12),
       nav ul li:nth-child(n+3),
       nav:not([aria-label="Pagination"]) ol li span {
           display: none !important;
-      }
+      }*/
       #main-content div:first-child div:first-child img ~ div{
         display: none !important;
       }

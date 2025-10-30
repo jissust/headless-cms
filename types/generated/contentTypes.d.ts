@@ -435,6 +435,45 @@ export interface ApiFormaDePagoFormaDePago extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGastoDiarioGastoDiario extends Struct.CollectionTypeSchema {
+  collectionName: 'gasto_diarios';
+  info: {
+    displayName: 'gasto diario';
+    pluralName: 'gasto-diarios';
+    singularName: 'gasto-diario';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descripcion: Schema.Attribute.Text & Schema.Attribute.Required;
+    forma_de_pago: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::forma-de-pago.forma-de-pago'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::gasto-diario.gasto-diario'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    tipo_de_moneda: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::tipo-de-moneda.tipo-de-moneda'
+    >;
+    total: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGastoGasto extends Struct.CollectionTypeSchema {
   collectionName: 'gastos';
   info: {
@@ -1396,6 +1435,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::estado-de-service.estado-de-service': ApiEstadoDeServiceEstadoDeService;
       'api::forma-de-pago.forma-de-pago': ApiFormaDePagoFormaDePago;
+      'api::gasto-diario.gasto-diario': ApiGastoDiarioGastoDiario;
       'api::gasto.gasto': ApiGastoGasto;
       'api::local.local': ApiLocalLocal;
       'api::producto.producto': ApiProductoProducto;

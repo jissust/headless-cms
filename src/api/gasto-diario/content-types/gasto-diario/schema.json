@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gasto_diarios",
+  "info": {
+    "singularName": "gasto-diario",
+    "pluralName": "gasto-diarios",
+    "displayName": "gasto diario"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "descripcion": {
+      "type": "text",
+      "required": true
+    },
+    "total": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "tipo_de_moneda": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tipo-de-moneda.tipo-de-moneda"
+    },
+    "forma_de_pago": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::forma-de-pago.forma-de-pago"
+    }
+  }
+}
