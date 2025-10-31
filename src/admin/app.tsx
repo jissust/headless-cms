@@ -352,6 +352,7 @@ export default {
         local: "Local",
         gasto: "Gastos",
         "estado de service": "Estado de service",
+        "gasto diario": "Gastos diarios",
         venta: "Ventas",
 
         "app.utils.drag": "Drag",
