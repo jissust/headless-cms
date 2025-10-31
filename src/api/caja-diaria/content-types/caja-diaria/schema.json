@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "caja_diarias",
+  "info": {
+    "singularName": "caja-diaria",
+    "pluralName": "caja-diarias",
+    "displayName": "Caja Diaria"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "saldo_inicial_pesos": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "saldo_inicial_dolar": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    }
+  }
+}

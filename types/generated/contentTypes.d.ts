@@ -373,6 +373,39 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCajaDiariaCajaDiaria extends Struct.CollectionTypeSchema {
+  collectionName: 'caja_diarias';
+  info: {
+    displayName: 'Caja Diaria';
+    pluralName: 'caja-diarias';
+    singularName: 'caja-diaria';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::caja-diaria.caja-diaria'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    saldo_inicial_dolar: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
+    saldo_inicial_pesos: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEstadoDeServiceEstadoDeService
   extends Struct.CollectionTypeSchema {
   collectionName: 'estado_de_services';
@@ -1433,6 +1466,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::caja-diaria.caja-diaria': ApiCajaDiariaCajaDiaria;
       'api::estado-de-service.estado-de-service': ApiEstadoDeServiceEstadoDeService;
       'api::forma-de-pago.forma-de-pago': ApiFormaDePagoFormaDePago;
       'api::gasto-diario.gasto-diario': ApiGastoDiarioGastoDiario;

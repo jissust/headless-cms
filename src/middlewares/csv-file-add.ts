@@ -324,8 +324,6 @@ export default () => {
     };
 
     const calcularTotales = (merged) => {
-      // Unificamos ambos arrays
-      //const merged = [...ventasHoy, ...serviceHoy];
 
       // Objeto base de totales
       const totales = {
@@ -343,14 +341,9 @@ export default () => {
 
       for (const item of merged) {
         const total = item.total || 0;
-
-        // Moneda: si no existe (como en Service), es ARS
         const moneda = item.tipo_de_moneda?.codigo || "ARS";
-
-        // Forma de pago normalizada
         const forma = normalizeText(item.forma_de_pago?.nombre || "efectivo");
 
-        // Sumar según moneda
         if (moneda === "ARS") {
           totales.totalEnPesos += total;
 
@@ -395,11 +388,39 @@ export default () => {
       ctx.request.method === "GET" &&
       ctx.url.startsWith("/export-csv/export/caja-diaria")
     ) {
-      const today = new Date();
-      const startOfDay = new Date(today.setHours(0, 0, 0, 0));
-      const endOfDay = new Date(today.setHours(23, 59, 59, 999));
-
+      const parts = ctx.url.split("/");
+      const documentId = parts[parts.length - 1];
+      
+      /** Caja hoy */
       let csv = `CAJA - ${new Date().toLocaleDateString()}\n\n`; //Variable en donde se van a grabar todas las lineas
+      const cajaDiaria = await strapi.db
+        .query("api::caja-diaria.caja-diaria")
+        .findOne({
+          where: {
+            documentId: documentId,
+          },
+        });
+      
+      if(!cajaDiaria) {
+        ctx.set("Content-Type", "text/csv; charset=utf-8");
+        ctx.set("Content-Disposition", "attachment; filename=error.csv");
+        ctx.body = `ERROR,No existe el documentId de la caja diaria (${documentId})`;
+        ctx.status = 200;
+        return;
+      }
+      
+      /*const today = new Date();
+      const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+      const endOfDay = new Date(today.setHours(23, 59, 59, 999));*/
+      
+      // Usamos la fecha de creación de la caja diaria como base
+      const cajaDate = new Date(cajaDiaria.createdAt);  
+      
+      const startOfDay = new Date(cajaDate);
+      startOfDay.setHours(0, 0, 0, 0);
+      
+      const endOfDay = new Date(cajaDate);
+      endOfDay.setHours(23, 59, 59, 999);
 
       /** BLOQUE DE ENTRADA */
       /** VENTAS */
@@ -412,7 +433,7 @@ export default () => {
         },
         populate: ["forma_de_pago", "tipo_de_moneda"],
       });
-      
+
       const serviceHoy = await strapi.db
         .query("api::service.service")
         .findMany({
@@ -424,13 +445,12 @@ export default () => {
           },
           populate: ["forma_de_pago"],
         });
-      
+
       const entradasMerged = [...ventasHoy, ...serviceHoy];
-      const entradasTotales = calcularTotales(entradasMerged);  
-      //console.log("entradasTotales: ", entradasTotales);
+      const entradasTotales = calcularTotales(entradasMerged);
 
       let csvEntradaVentas = "";
-      csvEntradaVentas += "Concepto,Cliente,Total,Moneda,Forma de pago\n";
+      csvEntradaVentas += "ENTRADAS\nCONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";
 
       for (const venta of ventasHoy) {
         const concepto = "Venta";
@@ -458,7 +478,7 @@ export default () => {
       csv += csvEntradasService;
 
       /** BLOQUE DE SALIDA */
-      let csvSalidaHeader = "\n\nConcepto,Cliente,Total,Moneda,Forma de pago\n";
+      let csvSalidaHeader = "\n\nSALIDAS\nCONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";
       /** GASTO */
       const gastoHoy = await strapi.db.query("api::gasto.gasto").findMany({
         where: {
@@ -508,18 +528,46 @@ export default () => {
       }
       const salidaMerged = [...gastoHoy, ...gastoDiarioHoy];
       const salidaTotales = calcularTotales(salidaMerged);
-      //console.log("SALIDA", salidaTotales);
 
       csv += csvSalidaGastoDiario;
       //TABLA TOTALES POR MEDIOS DE PAGO
-      const tituloTotalesPorMedioDePago = "\n\nTOTALES POR MEDIO DE PAGO\n"
-      const headerTotalesPorMedioDePago = "MEDIO DE PAGO, ENTRADA EN PESOS, SALIDA EN PESOS, ENTRADA EN DOLARES, SALIDA EN DOLARES\n"
-      const efectivoTotalesPorMedioDePago = `EFECTIVO, ${entradasTotales["totalEnPesosEfectivo"]}, ${salidaTotales["totalEnPesosEfectivo"]}, ${entradasTotales["totalEnDolaresEfectivo"]}, ${salidaTotales["totalEnDolaresEfectivo"]}\n`
-      const transferenciaTotalesPorMedioDePago = `TRANSFERENCIA, ${entradasTotales["totalEnPesosTransferencia"]}, ${salidaTotales["totalEnPesosTransferencia"]}, ${entradasTotales["totalEnDolaresTransferencia"]}, ${salidaTotales["totalEnDolaresTransferencia"]}\n`
-      const tarjetaDeDebitoTotalesPorMedioDePago = `TARJETA DE DÉBITO, ${entradasTotales["totalEnPesosTarjetaDeDebito"]}, ${salidaTotales["totalEnPesosTarjetaDeDebito"]}, ${entradasTotales["totalEnDolaresTarjetaDeDebito"]}, ${salidaTotales["totalEnDolaresTarjetaDeDebito"]}\n`
-      const tarjetaDeCreditoTotalesPorMedioDePago = `TARJETA DE CRÉDITO, ${entradasTotales["totalEnPesosTarjetaDeCredito"]}, ${salidaTotales["totalEnPesosTarjetaDeCredito"]}, ${entradasTotales["totalEnDolaresTarjetaDeCredito"]}, ${salidaTotales["totalEnDolaresTarjetaDeCredito"]}\n`
+      const tituloTotalesPorMedioDePago = "\n\nTOTALES POR MEDIO DE PAGO\n";
+      const headerTotalesPorMedioDePago =
+        "MEDIO DE PAGO, ENTRADA EN PESOS, SALIDA EN PESOS, ENTRADA EN DOLARES, SALIDA EN DOLARES\n";
+      const efectivoTotalesPorMedioDePago = `EFECTIVO, ${entradasTotales.totalEnPesosEfectivo}, ${salidaTotales.totalEnPesosEfectivo}, ${entradasTotales.totalEnDolaresEfectivo}, ${salidaTotales.totalEnDolaresEfectivo}\n`;
+      const transferenciaTotalesPorMedioDePago = `TRANSFERENCIA, ${entradasTotales.totalEnPesosTransferencia}, ${salidaTotales.totalEnPesosTransferencia}, ${entradasTotales.totalEnDolaresTransferencia}, ${salidaTotales.totalEnDolaresTransferencia}\n`;
+      const tarjetaDeDebitoTotalesPorMedioDePago = `TARJETA DE DÉBITO, ${entradasTotales.totalEnPesosTarjetaDeDebito}, ${salidaTotales.totalEnPesosTarjetaDeDebito}, ${entradasTotales.totalEnDolaresTarjetaDeDebito}, ${salidaTotales.totalEnDolaresTarjetaDeDebito}\n`;
+      const tarjetaDeCreditoTotalesPorMedioDePago = `TARJETA DE CRÉDITO, ${entradasTotales.totalEnPesosTarjetaDeCredito}, ${salidaTotales.totalEnPesosTarjetaDeCredito}, ${entradasTotales.totalEnDolaresTarjetaDeCredito}, ${salidaTotales.totalEnDolaresTarjetaDeCredito}\n`;
 
-      csv += tituloTotalesPorMedioDePago + headerTotalesPorMedioDePago + efectivoTotalesPorMedioDePago + transferenciaTotalesPorMedioDePago + tarjetaDeDebitoTotalesPorMedioDePago + tarjetaDeCreditoTotalesPorMedioDePago;
+      csv +=
+        tituloTotalesPorMedioDePago +
+        headerTotalesPorMedioDePago +
+        efectivoTotalesPorMedioDePago +
+        transferenciaTotalesPorMedioDePago +
+        tarjetaDeDebitoTotalesPorMedioDePago +
+        tarjetaDeCreditoTotalesPorMedioDePago;
+
+      /** RESUMEN CAJA FINAL */
+      const saldoFinalPesos =
+        entradasTotales.totalEnPesos -
+        salidaTotales.totalEnPesos +
+        cajaDiaria.saldo_inicial_pesos;
+      const saldoFinalDolar =
+        entradasTotales.totalEnDolares -
+        salidaTotales.totalEnDolares +
+        cajaDiaria.saldo_inicial_dolar;
+
+      const titleResumenFinalCaja = "\n\nRESUMEN CAJA FINAL\n";
+      const headerResumenFinalCaja =
+        "MONEDA, INICIAL, ENTRADAS, SALIDAS, SALDO FINAL\n";
+      const pesosResumenFinalCaja = `PESOS, ${cajaDiaria.saldo_inicial_pesos},${entradasTotales.totalEnPesos}, ${salidaTotales.totalEnPesos}, ${saldoFinalPesos}\n`;
+      const dolarResumenFinalCaja = `DOLARES, ${cajaDiaria.saldo_inicial_dolar},${entradasTotales.totalEnDolares}, ${salidaTotales.totalEnDolares}, ${saldoFinalDolar}\n`;
+
+      csv +=
+        titleResumenFinalCaja +
+        headerResumenFinalCaja +
+        pesosResumenFinalCaja +
+        dolarResumenFinalCaja;
 
       ctx.set("Content-Type", "text/csv");
       ctx.set(

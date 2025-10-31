@@ -162,12 +162,12 @@ function bloquearBotones() {
       'button[aria-haspopup="dialog"]'
     );
     buttonsHasDialog.forEach((btn, index) => {
-      if(index == 1){
+      if (index == 1) {
         btn.disabled = true;
         btn.style.pointerEvents = "none";
         btn.style.display = "none";
       }
-    })
+    });
   });
 
   observer.observe(document.body, {
@@ -396,18 +396,15 @@ export default {
   bootstrap(app: StrapiApp) {
     observarPaginaVentas();
     observarPaginaGastos();
-    //bloquearBotones();
+    bloquearBotones();
     const style = document.createElement("style");
     style.innerHTML = `
-      /*nav ol li ol li:nth-child(2),*/
-      nav ol li ol li:nth-child(6),
-      /*nav ol li ol li:nth-child(10),
-      nav ol li ol li:nth-child(11),*/
-      nav ol li ol li:nth-child(12),
+      nav ol li ol li:nth-child(7),
+      nav ol li ol li:nth-child(13),
       nav ul li:nth-child(n+3),
       nav:not([aria-label="Pagination"]) ol li span {
           display: none !important;
-      }*/
+      }
       #main-content div:first-child div:first-child img ~ div{
         display: none !important;
       }
@@ -547,6 +544,32 @@ export default {
               target="_blank"
             >
               Remito
+            </a>
+          );
+        },
+      });
+
+    /** agrego boton para realizar descarga de remito en ventas */
+    app
+      .getPlugin("content-manager")
+      .injectComponent("editView", "right-links", {
+        name: "venta-pdf-reporte",
+        Component: (props: any) => {
+          const { slug } = props;
+
+          if (slug !== "api::caja-diaria.caja-diaria") return null;
+
+          const segments = window.location.pathname.split("/");
+          const documentId = segments[segments.length - 1];
+          
+          if (documentId === "create") return null;
+          
+          return (
+            <a
+              className="boton-local w-100"
+              href={`/export-csv/export/caja-diaria/${documentId}`}
+            >
+              Reporte
             </a>
           );
         },
