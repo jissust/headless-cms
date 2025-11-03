@@ -6,14 +6,14 @@ const InputPrecioPorUnidadGastosItem = (props, ref) => {
   const nameSplit = name.split(".");
   const index = parseInt(nameSplit[1]);
   const handleChange = (e) => {
-    const precioPorUnidad = parseInt(e.target.value, 10) || 0;
+    const precioPorUnidad = parseFloat(e.target.value);
     onChange({
       target: { name, type: attribute.type, value: precioPorUnidad }
     });
     const cantidadGastos = document.querySelector(
       `input[name="Gastos.${index}.cantidad"]`
     );
-    const cantidadGastosValue = cantidadGastos ? parseInt(cantidadGastos?.value) : 0;
+    const cantidadGastosValue = cantidadGastos ? parseFloat(cantidadGastos?.value) : 0;
     const total = precioPorUnidad * cantidadGastosValue;
     onChange({
       target: {

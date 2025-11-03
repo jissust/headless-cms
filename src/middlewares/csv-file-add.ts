@@ -45,9 +45,11 @@ export default () => {
           if (apiCollectionType === "venta") {
             // --- Columna 7 => total ---
             const rawTotal = cols[7];
+
             if (rawTotal !== undefined) {
               const cleaned = rawTotal.replace(/^"|"$/g, "").trim();
-              const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              //const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              const normalized = cleaned.replace(",", ".");
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
                 if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
@@ -90,7 +92,8 @@ export default () => {
             const rawGanancia = cols[8];
             if (rawGanancia !== undefined) {
               const cleaned = rawGanancia.replace(/^"|"$/g, "").trim();
-              const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              //const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              const normalized = cleaned.replace(",", ".");
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
                 if (codigoTipoMoneda?.toUpperCase() === '"USD"') {
@@ -105,10 +108,14 @@ export default () => {
           if (apiCollectionType === "service") {
             // --- Columna 7 => total ---
             const rawTotal = cols[4];
+            //console.log(rawTotal);
             if (rawTotal !== undefined) {
               const cleaned = rawTotal.replace(/^"|"$/g, "").trim();
-              const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              //const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              const normalized = cleaned.replace(",", ".");
+              //console.log("normalized: ", normalized);
               const num = parseFloat(normalized);
+              //console.log("num: ", num);
               if (!Number.isNaN(num)) {
                 total += num;
               }
@@ -131,7 +138,8 @@ export default () => {
             const rawGanancia = cols[17];
             if (rawGanancia !== undefined) {
               const cleaned = rawGanancia.replace(/^"|"$/g, "").trim();
-              const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              //const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              const normalized = cleaned.replace(",", ".");
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
                 totalGanancia += num;
@@ -142,7 +150,8 @@ export default () => {
             const rawTotalGasto = cols[6];
             if (rawTotalGasto !== undefined) {
               const cleaned = rawTotalGasto.replace(/^"|"$/g, "").trim();
-              const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              //const normalized = cleaned.replace(/\./g, "").replace(",", ".");
+              const normalized = cleaned.replace(",", ".");
               const num = parseFloat(normalized);
               if (!Number.isNaN(num)) {
                 totalGasto += num;
@@ -324,7 +333,6 @@ export default () => {
     };
 
     const calcularTotales = (merged) => {
-
       // Objeto base de totales
       const totales = {
         totalEnPesos: 0,
@@ -340,7 +348,12 @@ export default () => {
       };
 
       for (const item of merged) {
-        const total = item.total || 0;
+        console.log(parseFloat(item.total))
+        //const cleaned = item.total.replace(/^"|"$/g, "").trim();
+        //const normalized = cleaned.replace(",", ".");
+        //const totalTmp = parseFloat(normalized);
+        //const total = isNaN(totalTmp) ? 0 : parseFloat(totalTmp.toFixed(2));//item.total || 0;
+        const total = isNaN(item.total) ? 0 : parseFloat(item.total);
         const moneda = item.tipo_de_moneda?.codigo || "ARS";
         const forma = normalizeText(item.forma_de_pago?.nombre || "efectivo");
 
@@ -390,7 +403,7 @@ export default () => {
     ) {
       const parts = ctx.url.split("/");
       const documentId = parts[parts.length - 1];
-      
+
       /** Caja hoy */
       let csv = `CAJA - ${new Date().toLocaleDateString()}\n\n`; //Variable en donde se van a grabar todas las lineas
       const cajaDiaria = await strapi.db
@@ -400,25 +413,25 @@ export default () => {
             documentId: documentId,
           },
         });
-      
-      if(!cajaDiaria) {
+
+      if (!cajaDiaria) {
         ctx.set("Content-Type", "text/csv; charset=utf-8");
         ctx.set("Content-Disposition", "attachment; filename=error.csv");
         ctx.body = `ERROR,No existe el documentId de la caja diaria (${documentId})`;
         ctx.status = 200;
         return;
       }
-      
+
       /*const today = new Date();
       const startOfDay = new Date(today.setHours(0, 0, 0, 0));
       const endOfDay = new Date(today.setHours(23, 59, 59, 999));*/
-      
+
       // Usamos la fecha de creación de la caja diaria como base
-      const cajaDate = new Date(cajaDiaria.createdAt);  
-      
+      const cajaDate = new Date(cajaDiaria.createdAt);
+
       const startOfDay = new Date(cajaDate);
       startOfDay.setHours(0, 0, 0, 0);
-      
+
       const endOfDay = new Date(cajaDate);
       endOfDay.setHours(23, 59, 59, 999);
 
@@ -450,7 +463,8 @@ export default () => {
       const entradasTotales = calcularTotales(entradasMerged);
 
       let csvEntradaVentas = "";
-      csvEntradaVentas += "ENTRADAS\nCONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";
+      csvEntradaVentas +=
+        "ENTRADAS\nCONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";
 
       for (const venta of ventasHoy) {
         const concepto = "Venta";
@@ -478,7 +492,8 @@ export default () => {
       csv += csvEntradasService;
 
       /** BLOQUE DE SALIDA */
-      let csvSalidaHeader = "\n\nSALIDAS\nCONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";
+      let csvSalidaHeader =
+        "\n\nSALIDAS\nCONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";
       /** GASTO */
       const gastoHoy = await strapi.db.query("api::gasto.gasto").findMany({
         where: {

@@ -5,7 +5,7 @@ const InputPrecioPorUnidadGastosItem = (props: any, ref: any) => {
   const index = parseInt(nameSplit[1]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const precioPorUnidad = parseInt(e.target.value, 10) || 0;
+    const precioPorUnidad = parseFloat(e.target.value);//parseInt(e.target.value, 10) || 0;
     onChange({
       target: { name, type: attribute.type, value: precioPorUnidad },
     });
@@ -14,7 +14,7 @@ const InputPrecioPorUnidadGastosItem = (props: any, ref: any) => {
       `input[name="Gastos.${index}.cantidad"]`
     );
 
-    const cantidadGastosValue = cantidadGastos ? parseInt(cantidadGastos?.value) : 0;
+    const cantidadGastosValue = cantidadGastos ? parseFloat(cantidadGastos?.value) :0; //cantidadGastos ? parseInt(cantidadGastos?.value) : 0;
     const total = precioPorUnidad * cantidadGastosValue;
 
     onChange({

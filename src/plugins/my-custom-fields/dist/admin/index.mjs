@@ -190,7 +190,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => import("../_chunks/index-DWC8FF-k.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-3WmPx7JN.mjs").then((module) => ({
           default: module.InputPrecioPorUnidadGastosItem
         }))
       },
