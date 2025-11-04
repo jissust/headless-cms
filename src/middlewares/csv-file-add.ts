@@ -447,9 +447,10 @@ export default () => {
 
         csv += `${conceptoEntrada},${clienteEntrada},${totalEntrada},${monedaEntrada},${formaEntrada},${conceptoSalida},${clienteSalida},${totalSalida},${monedaSalida},${formaSalida}\n`;
       }
-      console.log(csv);
+      
       return csv;
     };
+
     if (
       ctx.request.method === "GET" &&
       ctx.url.startsWith("/export-csv/export/caja-diaria")
@@ -489,7 +490,6 @@ export default () => {
       endOfDay.setHours(23, 59, 59, 999);
 
       /** BLOQUE DE ENTRADA */
-      /** VENTAS */
       const ventasHoy = await strapi.db.query("api::venta.venta").findMany({
         where: {
           createdAt: {
@@ -515,39 +515,7 @@ export default () => {
       const entradasMerged = [...ventasHoy, ...serviceHoy];
       const entradasTotales = calcularTotales(entradasMerged);
 
-      /*let csvEntradaVentas = "";
-      csvEntradaVentas +=
-        "ENTRADAS\nCONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";
-
-      for (const venta of ventasHoy) {
-        const concepto = "Venta";
-        const cliente = `${venta.nombre} ${venta.apellido}` || "";
-        const total = venta.total || 0;
-        const moneda = venta.tipo_de_moneda?.codigo || "-";
-        const forma = venta.forma_de_pago?.nombre || "-";
-
-        csvEntradaVentas += `${concepto},${cliente},${total},${moneda},${forma}\n`;
-      }*/
-
-      /** SERVICE */
-      /*let csvEntradasService = "";
-      for (const service of serviceHoy) {
-        const concepto = `Service`;
-        const cliente = `${service.cliente}` || "";
-        const total = service.total || 0;
-        const moneda = "ARS";
-        const forma = service.forma_de_pago?.nombre || "-";
-
-        csvEntradasService += `${concepto},${cliente},${total},${moneda},${forma}\n`;
-      }*/
-
-      //csv += csvEntradaVentas;
-      //csv += csvEntradasService;
-
       /** BLOQUE DE SALIDA */
-      /*let csvSalidaHeader =
-        "\n\nSALIDAS\nCONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";*/
-      /** GASTO */
       const gastoHoy = await strapi.db.query("api::gasto.gasto").findMany({
         where: {
           createdAt: {
@@ -558,20 +526,6 @@ export default () => {
         populate: ["tipo_de_moneda"],
       });
 
-      /*let csvSalidaGasto = "";
-      for (const gasto of gastoHoy) {
-        const concepto = `Gasto`;
-        const cliente = `${gasto.proveedor}` || "-";
-        const total = gasto.total || 0;
-        const moneda = gasto?.tipo_de_moneda?.codigo || "ARS";
-        const forma = "Efectivo";
-
-        csvSalidaGasto += `${concepto},${cliente},${total},${moneda},${forma}\n`;
-      }*/
-
-      //csv += csvSalidaHeader + csvSalidaGasto;
-
-      /** GASTO DIARIO */
       const gastoDiarioHoy = await strapi.db
         .query("api::gasto-diario.gasto-diario")
         .findMany({
@@ -584,21 +538,8 @@ export default () => {
           populate: true,
         });
 
-      /*let csvSalidaGastoDiario = "";
-      for (const gastoDiario of gastoDiarioHoy) {
-        const concepto = `Gasto Diario`;
-        const cliente = `${gastoDiario.descripcion}` || "-";
-        const total = gastoDiario.total || 0;
-        const moneda = gastoDiario?.tipo_de_moneda?.codigo || "ARS";
-        const forma = gastoDiario?.forma_de_pago?.nombre || "Efectivo";
-
-        csvSalidaGastoDiario += `${concepto},${cliente},${total},${moneda},${forma}\n`;
-      }*/
-
       const salidaMerged = [...gastoHoy, ...gastoDiarioHoy];
       const salidaTotales = calcularTotales(salidaMerged);
-      
-      //csv += csvSalidaGastoDiario;
       
       csv += crearTablaEntradasSalidas(entradasMerged, salidaMerged);
       
