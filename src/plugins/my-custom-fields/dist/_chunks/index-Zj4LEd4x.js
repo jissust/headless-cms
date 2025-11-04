@@ -1,4 +1,6 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const jsxRuntime = require("react/jsx-runtime");
 const InputPrecioPorUnidadGastosItem = (props, ref) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   const nameSplit = name.split(".");
@@ -21,11 +23,11 @@ const InputPrecioPorUnidadGastosItem = (props, ref) => {
       }
     });
   };
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx("label", { className: "label-customize", children: "Precio por unidad" }),
-    /* @__PURE__ */ jsxs("div", { className: "container-number-currency", children: [
-      /* @__PURE__ */ jsx("span", { children: "$" }),
-      /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize", children: "Precio por unidad" }),
+    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "container-number-currency", children: [
+      /* @__PURE__ */ jsxRuntime.jsx("span", { children: "$" }),
+      /* @__PURE__ */ jsxRuntime.jsx(
         "input",
         {
           name,
@@ -38,9 +40,8 @@ const InputPrecioPorUnidadGastosItem = (props, ref) => {
           onChange: handleChange
         }
       )
-    ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntime.jsx("span", { className: "input-description", children: "Solo comas para decimales, sin puntos. Ej: 1234,56" })
   ] });
 };
-export {
-  InputPrecioPorUnidadGastosItem
-};
+exports.InputPrecioPorUnidadGastosItem = InputPrecioPorUnidadGastosItem;

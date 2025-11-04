@@ -42,6 +42,7 @@ const InputPrecioPorUnidadGastosItem = (props: any, ref: any) => {
           onChange={handleChange}
         />
       </div>
+      <span className="input-description">Solo comas para decimales, sin puntos. Ej: 1234,56</span>
     </>
   );
 };

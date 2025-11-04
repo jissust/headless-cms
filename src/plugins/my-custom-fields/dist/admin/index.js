@@ -191,7 +191,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-DZdWLjIH.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-Zj4LEd4x.js")).then((module2) => ({
           default: module2.InputPrecioPorUnidadGastosItem
         }))
       },
@@ -324,7 +324,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-BlK59dHC.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-MwkviL5C.js")).then((module2) => ({
           default: module2.InputTotalGenerico
         }))
       },

@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const jsxRuntime = require("react/jsx-runtime");
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 const InputTotalGenerico = (props, ref) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   const handleChange = (e) => {
@@ -9,11 +7,11 @@ const InputTotalGenerico = (props, ref) => {
       target: { name, type: attribute.type, value: val }
     });
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize", children: attribute?.options?.label }),
-    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "container-number-currency", children: [
-      /* @__PURE__ */ jsxRuntime.jsx("span", { children: "$" }),
-      /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx("label", { className: "label-customize", children: attribute?.options?.label }),
+    /* @__PURE__ */ jsxs("div", { className: "container-number-currency", children: [
+      /* @__PURE__ */ jsx("span", { children: "$" }),
+      /* @__PURE__ */ jsx(
         "input",
         {
           name,
@@ -26,7 +24,10 @@ const InputTotalGenerico = (props, ref) => {
           onChange: handleChange
         }
       )
-    ] })
+    ] }),
+    /* @__PURE__ */ jsx("span", { className: "input-description", children: "Solo comas para decimales, sin puntos. Ej: 1234,56" })
   ] });
 };
-exports.InputTotalGenerico = InputTotalGenerico;
+export {
+  InputTotalGenerico
+};

@@ -451,6 +451,13 @@ export default {
         transition-property: border-color, box-shadow, fill;
         transition-duration: 0.2s;
         font-size:1.4rem;
+        width: 100%;
+      }
+      .input-description {
+        font-size: 1.2rem;
+        line-height: 1.33;
+        color: #666687;
+        margin-top: 5px;
       }
       .label-customize {
         font-size: 1.2rem;
@@ -562,9 +569,9 @@ export default {
 
           const segments = window.location.pathname.split("/");
           const documentId = segments[segments.length - 1];
-          
+
           if (documentId === "create") return null;
-          
+
           return (
             <a
               className="boton-local w-100"
