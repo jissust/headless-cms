@@ -397,29 +397,37 @@ export default () => {
       return totales;
     };
 
+    const sanitizeCSV = (text = "") => {
+      if (typeof text !== "string") return "";
+      const safe = text.replace(/"/g, '""');
+      return `"${safe}"`;
+    };
     const crearTablaEntradasSalidas = (entradas: any, salidas: any) => {
       let csv = "";
-      const titleEntradasSalidas = ",,ENTRADAS,,,,,SALIDAS,,,\n";
+      const titleEntradasSalidas = "ENTRADAS,,,,SALIDAS,,,,\n";
       const headerEntradasSalidas =
-        "CONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO,CONCEPTO,CLIENTE,TOTAL,MONEDA,FORMA DE PAGO\n";
+        "CONCEPTO,TOTAL,MONEDA,FORMA DE PAGO,CONCEPTO,TOTAL,MONEDA,FORMA DE PAGO\n";
       csv += titleEntradasSalidas + headerEntradasSalidas;
 
       const maxLength = Math.max(entradas.length, salidas.length);
       for (let i = 0; i < maxLength; i++) {
         const entrada = entradas[i];
         const salida = salidas[i];
+        //Datos de entrada
+        const idEntrada = entrada ? entrada.id || "" : "";
+        const tipoEntrada = entrada
+          ? entrada.numero_de_orden
+            ? "Service"
+            : "Venta"
+          : "";
+        const conceptoTextoEntrada = entrada
+          ? entrada.numero_de_orden
+            ? `${entrada.descripcion_estado_del_equipo || ""}`
+            : ``
+          : "";
 
-        // Datos de entrada
-        const conceptoEntrada = entrada
-          ? entrada.nombre || entrada.apellido
-            ? "Venta"
-            : "Service"
-          : "";
-        const clienteEntrada = entrada
-          ? entrada.nombre
-            ? `${entrada.nombre || ""} ${entrada.apellido || ""}`
-            : `${entrada.cliente || ""}`
-          : "";
+        const conceptoEntrada = idEntrada ? `(#${idEntrada}) ${tipoEntrada} ${ conceptoTextoEntrada !== "" ? ": " + conceptoTextoEntrada  : ""}` : ``;  
+
         const totalEntrada = entrada ? entrada.total || 0 : "";
         const monedaEntrada = entrada
           ? entrada.tipo_de_moneda?.codigo || "ARS"
@@ -429,14 +437,18 @@ export default () => {
           : "";
 
         // Datos de salida
-        const conceptoSalida = salida
+        const idSalida = salida ? salida.id || "" : "";
+        const tipoSalida = salida
           ? salida.proveedor
             ? "Gasto"
             : "Gasto Diario"
           : "";
-        const clienteSalida = salida
-          ? salida.proveedor || salida.descripcion || ""
+        const conceptoTextoSalida = salida
+          ? salida.descripcion || ""
           : "";
+
+        const conceptoSalida = idSalida ? `(#${idSalida}) ${tipoSalida} ${ conceptoTextoSalida !== "" ? ": " + conceptoTextoSalida : "" }`: ``;
+        
         const totalSalida = salida ? salida.total || 0 : "";
         const monedaSalida = salida
           ? salida.tipo_de_moneda?.codigo || "ARS"
@@ -445,7 +457,7 @@ export default () => {
           ? salida.forma_de_pago?.nombre || "Efectivo"
           : "";
 
-        csv += `${conceptoEntrada},${clienteEntrada},${totalEntrada},${monedaEntrada},${formaEntrada},${conceptoSalida},${clienteSalida},${totalSalida},${monedaSalida},${formaSalida}\n`;
+        csv += `${sanitizeCSV(conceptoEntrada)},${totalEntrada},${monedaEntrada},${formaEntrada},${sanitizeCSV(conceptoSalida)},${totalSalida},${monedaSalida},${formaSalida}\n`;
       }
       
       return csv;
