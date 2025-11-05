@@ -108,14 +108,11 @@ export default () => {
           if (apiCollectionType === "service") {
             // --- Columna 7 => total ---
             const rawTotal = cols[4];
-            //console.log(rawTotal);
             if (rawTotal !== undefined) {
               const cleaned = rawTotal.replace(/^"|"$/g, "").trim();
               //const normalized = cleaned.replace(/\./g, "").replace(",", ".");
               const normalized = cleaned.replace(",", ".");
-              //console.log("normalized: ", normalized);
               const num = parseFloat(normalized);
-              //console.log("num: ", num);
               if (!Number.isNaN(num)) {
                 total += num;
               }
@@ -348,7 +345,6 @@ export default () => {
       };
 
       for (const item of merged) {
-        //console.log(parseFloat(item.total))
         //const cleaned = item.total.replace(/^"|"$/g, "").trim();
         //const normalized = cleaned.replace(",", ".");
         //const totalTmp = parseFloat(normalized);
@@ -438,7 +434,6 @@ export default () => {
         let salidaProductos = "";
         if (salida && salida.Gastos) {
           for (const producto of salida.Gastos) {
-            console.log(producto);
             let nombreProducto = producto.nombre_producto_nuevo;
             if(!nombreProducto) {
               const productoDb = await getProductoById(producto.producto);
@@ -450,7 +445,6 @@ export default () => {
             }
             salidaProductos += `\n- ${nombreProducto} (x${producto.cantidad || 1})`;
           }
-          console.log(salidaProductos);
         }
         //Datos de entrada
         const idEntrada = entrada ? entrada.id || "" : "";
@@ -512,7 +506,7 @@ export default () => {
       const documentId = parts[parts.length - 1];
 
       /** Caja hoy */
-      let csv = `CAJA - ${new Date().toLocaleDateString()}\n\n`; //Variable en donde se van a grabar todas las lineas
+      //let csv = `CAJA - ${new Date().toLocaleDateString()}\n\n`; //Variable en donde se van a grabar todas las lineas
       const cajaDiaria = await strapi.db
         .query("api::caja-diaria.caja-diaria")
         .findOne({
@@ -520,7 +514,10 @@ export default () => {
             documentId: documentId,
           },
         });
-
+        
+      const fechaCaja = new Date(cajaDiaria.createdAt).toLocaleDateString();
+      let csv = `CAJA - ${fechaCaja}\n\n`;
+      console.log("cajaDiaria: ", cajaDiaria);
       if (!cajaDiaria) {
         ctx.set("Content-Type", "text/csv; charset=utf-8");
         ctx.set("Content-Disposition", "attachment; filename=error.csv");
@@ -638,7 +635,7 @@ export default () => {
       ctx.set("Content-Type", "text/csv");
       ctx.set(
         "Content-Disposition",
-        `attachment; filename="caja_diaria_${new Date().toISOString().split("T")[0]}.csv"`
+        `attachment; filename="caja_diaria_${new Date(cajaDiaria.createdAt).toISOString().split("T")[0]}.csv"`
       );
       ctx.body = csv;
 
