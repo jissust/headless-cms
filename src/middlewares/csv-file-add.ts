@@ -399,16 +399,14 @@ export default () => {
       return `"${safe}"`;
     };
     const getProductoById = async (id: number) => {
-      return strapi.db
-        .query("api::producto.producto")
-        .findOne({
-          where: {
-            id: id,
-          },
-        });
-    }
+      return strapi.db.query("api::producto.producto").findOne({
+        where: {
+          id: id,
+        },
+      });
+    };
 
-    const crearTablaEntradasSalidas = async(entradas: any, salidas: any) => {
+    const crearTablaEntradasSalidas = async (entradas: any, salidas: any) => {
       let csv = "";
       const titleEntradasSalidas = "ENTRADAS,,,,SALIDAS,,,,\n";
       const headerEntradasSalidas =
@@ -417,14 +415,13 @@ export default () => {
 
       const maxLength = Math.max(entradas.length, salidas.length);
       for (let i = 0; i < maxLength; i++) {
-
         const entrada = entradas[i];
         let entradaProductos = "";
         if (entrada && entrada.Productos) {
           for (const producto of entrada.Productos) {
             const id = producto.productoItem;
             const productoDb = await getProductoById(id);
-            if(productoDb) {
+            if (productoDb) {
               entradaProductos += `\n- ${productoDb.nombre} (x${producto.cantidad || 1})`;
             }
           }
@@ -435,9 +432,9 @@ export default () => {
         if (salida && salida.Gastos) {
           for (const producto of salida.Gastos) {
             let nombreProducto = producto.nombre_producto_nuevo;
-            if(!nombreProducto) {
+            if (!nombreProducto) {
               const productoDb = await getProductoById(producto.producto);
-              if(productoDb) {
+              if (productoDb) {
                 nombreProducto = productoDb.nombre;
               } else {
                 nombreProducto = "Producto desconocido";
@@ -478,7 +475,9 @@ export default () => {
             ? "Gasto"
             : "Gasto Diario"
           : "";
-        const conceptoTextoSalida = salida ? salida.descripcion || salidaProductos : "";
+        const conceptoTextoSalida = salida
+          ? salida.descripcion || salidaProductos
+          : "";
 
         const conceptoSalida = idSalida
           ? `(#${idSalida}) ${tipoSalida} ${conceptoTextoSalida !== "" ? ": " + conceptoTextoSalida : ""}`
@@ -514,10 +513,9 @@ export default () => {
             documentId: documentId,
           },
         });
-        
+
       const fechaCaja = new Date(cajaDiaria.createdAt).toLocaleDateString();
       let csv = `CAJA - ${fechaCaja}\n\n`;
-      console.log("cajaDiaria: ", cajaDiaria);
       if (!cajaDiaria) {
         ctx.set("Content-Type", "text/csv; charset=utf-8");
         ctx.set("Content-Disposition", "attachment; filename=error.csv");
@@ -526,13 +524,7 @@ export default () => {
         return;
       }
 
-      /*const today = new Date();
-      const startOfDay = new Date(today.setHours(0, 0, 0, 0));
-      const endOfDay = new Date(today.setHours(23, 59, 59, 999));*/
-
-      // Usamos la fecha de creación de la caja diaria como base
       const cajaDate = new Date(cajaDiaria.createdAt);
-
       const startOfDay = new Date(cajaDate);
       startOfDay.setHours(0, 0, 0, 0);
 
