@@ -397,13 +397,13 @@ export default {
   bootstrap(app: StrapiApp) {
     observarPaginaVentas();
     observarPaginaGastos();
-    //bloquearBotones();
+    bloquearBotones();
     const style = document.createElement("style");
     style.innerHTML = `
       nav ol li ol li:nth-child(7),
-      nav ol li ol li:nth-child(13)/*,
+      nav ol li ol li:nth-child(13),
       nav ul li:nth-child(n+3),
-      nav:not([aria-label="Pagination"]) ol li span*/ {
+      nav:not([aria-label="Pagination"]) ol li span {
           display: none !important;
       }
       #main-content div:first-child div:first-child img ~ div{
