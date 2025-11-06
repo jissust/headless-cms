@@ -1,37 +1,55 @@
-# 🚀 Getting started with Strapi
+# 📦 Bien copiado — Instrucciones de instalación y desarrollo
+Este proyecto está desarrollado con **Strapi**, e incluye un conjunto de **plugins personalizados** ubicados en la carpeta `src/plugins`.
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
-
-### `develop`
-
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
-
+## 🚀 Instalación del proyecto
+ 1️⃣ Clonar el repositorio
 ```
-npm run develop
-# or
-yarn develop
+git clone https://github.com/jissust/headless-cms.git
+cd headless-cms
 ```
 
-### `start`
-
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
-
+2️⃣ Instalar dependencias
+Instala todas las dependencias necesarias y genera la carpeta node_modules:
 ```
-npm run start
-# or
-yarn start
+yarn install
 ```
 
-### `build`
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
+3️⃣ Generar archivo de entorno
+Crea el archivo .env a partir del archivo de ejemplo:
 ```
-npm run build
-# or
+cp .env.example .env
+```
+
+4️⃣ Compilar el proyecto
+Genera la carpeta /dist con los archivos de compilación de Strapi [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build):
+```
 yarn build
 ```
 
+5️⃣ Iniciar el entorno de desarrollo
+Ejecuta el proyecto en modo desarrollo.
+Esto creará automáticamente el archivo /tmp/.data.db (base de datos local) y levantará el servidor. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+```
+yarn dev
+```
+
+El proyecto estará disponible, por defecto, en:
+👉 http://localhost:1337/admin
+
+## 🧩 Plugins personalizados
+Este proyecto incluye plugins desarrollados específicamente para funcionalidades personalizadas de Strapi.
+
+📁 Ubicación
+```
+src/plugins/my-custom-fields/
+```
+
+⚙️ Compilar un plugin personalizado
+Cada vez que realices cambios en un plugin, debés compilarlo antes de ejecutarlo:
+```
+cd src/plugins/my-custom-fields
+yarn build
+```
 ## ⚙️ Deployment
 
 Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
@@ -39,6 +57,16 @@ Strapi gives you many possible deployment options for your project including [St
 ```
 yarn strapi deploy
 ```
+
+## 📤 Subir plugins al repositorio
+Por defecto, la carpeta /dist generada dentro de un plugin no se incluye en Git.
+Para versionar los cambios y subirlos al repositorio, debés forzar la inclusión de la carpeta dist:
+```
+git add -f src/plugins/my-custom-fields/dist
+git commit -m "Actualización del plugin my-custom-fields"
+git push
+```
+Luego podés continuar con el flujo normal de versionado (git commit, git push, etc.).
 
 ## 📚 Learn more
 
