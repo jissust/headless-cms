@@ -30,8 +30,9 @@ const SelectCustomize = (props, ref) => {
     getTipoDeVenta(tipoDeVentaId);
   }, []);
   const filtrarLocalesPorLocal = (localId2) => {
-    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId2}`).then((res) => res.json()).then((data) => {
+    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId2}&sort=nombre:desc&pagination[pageSize]=1000`).then((res) => res.json()).then((data) => {
       if (!data?.data) return;
+      console.log(data.data);
       setProductos(data.data);
     }).catch((err) => {
       console.error("Error al cargar productos", err);

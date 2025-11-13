@@ -29,7 +29,7 @@ const SelectCustomizeGasto = (props: any, ref: any) => {
   }, []);
 
   const filtrarLocalesPorLocal = (localId: any) => {
-    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId}`)
+    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId}&sort=nombre:desc&pagination[pageSize]=1000`)
       .then((res) => res.json())
       .then((data) => {
         if (!data?.data) return;
@@ -64,7 +64,7 @@ const SelectCustomizeGasto = (props: any, ref: any) => {
         <option value="">Seleccione un producto</option>
         {productos.map((producto: any) => (
           <option key={producto.id} value={producto.id}>
-            {producto?.nombre || `Producto ${producto.id}`}
+            {`${producto?.nombre} (${producto?.tipo_de_moneda?.codigo})` || `Producto ${producto.id}`}
           </option>
         ))}
       </select>

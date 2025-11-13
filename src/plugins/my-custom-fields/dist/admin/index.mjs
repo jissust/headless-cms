@@ -38,7 +38,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => import("../_chunks/index-BKB_4l7X.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-DlVPfcN9.mjs").then((module) => ({
           default: module.SelectCustomize
         }))
       },
@@ -228,7 +228,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => import("../_chunks/index-CGK04Tyb.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-BrgACd3_.mjs").then((module) => ({
           default: module.SelectCustomizeGasto
         }))
       },

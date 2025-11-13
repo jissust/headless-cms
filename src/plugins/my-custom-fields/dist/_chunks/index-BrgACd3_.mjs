@@ -23,7 +23,7 @@ const SelectCustomizeGasto = (props, ref) => {
     }
   }, []);
   const filtrarLocalesPorLocal = (localId2) => {
-    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId2}`).then((res) => res.json()).then((data) => {
+    fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId2}&sort=nombre:desc&pagination[pageSize]=1000`).then((res) => res.json()).then((data) => {
       if (!data?.data) return;
       setProductos(data.data);
     }).catch((err) => {
@@ -50,7 +50,7 @@ const SelectCustomizeGasto = (props, ref) => {
         className: "input-customize",
         children: [
           /* @__PURE__ */ jsx("option", { value: "", children: "Seleccione un producto" }),
-          productos.map((producto) => /* @__PURE__ */ jsx("option", { value: producto.id, children: producto?.nombre || `Producto ${producto.id}` }, producto.id))
+          productos.map((producto) => /* @__PURE__ */ jsx("option", { value: producto.id, children: `${producto?.nombre} (${producto?.tipo_de_moneda?.codigo})` || `Producto ${producto.id}` }, producto.id))
         ]
       }
     )
