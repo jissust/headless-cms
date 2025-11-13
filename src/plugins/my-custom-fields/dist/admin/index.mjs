@@ -38,7 +38,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => import("../_chunks/index-DlVPfcN9.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-DTsfCCCy.mjs").then((module) => ({
           default: module.SelectCustomize
         }))
       },

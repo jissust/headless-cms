@@ -102,7 +102,7 @@ const SelectCustomize = (props, ref) => {
       }
     ),
     selectedProducto && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize p-1", children: tipoDeVenta?.nombre?.toLowerCase().includes("mayorista") ? `Precio mayorista: ${selectedProducto.tipo_de_moneda.simbolo} ${precio} (por unidad)` : `Precio minorista: ${selectedProducto.tipo_de_moneda.simbolo} ${precio} (por unidad)` }),
+      /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize p-1", children: tipoDeVenta?.nombre?.toLowerCase().includes("mayorista") ? `Precio mayorista: ${selectedProducto.tipo_de_moneda?.simbolo} ${precio} (por unidad)` : `Precio minorista: ${selectedProducto.tipo_de_moneda?.simbolo} ${precio} (por unidad)` }),
       /* @__PURE__ */ jsxRuntime.jsx(
         "input",
         {
@@ -114,7 +114,7 @@ const SelectCustomize = (props, ref) => {
           disabled: true
         }
       ),
-      /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize p-1", children: `Precio de compra: ${selectedProducto.tipo_de_moneda.simbolo} ${precioCompra} (por unidad)` }),
+      /* @__PURE__ */ jsxRuntime.jsx("label", { className: "label-customize p-1", children: `Precio de compra: ${selectedProducto.tipo_de_moneda?.simbolo} ${precioCompra} (por unidad)` }),
       /* @__PURE__ */ jsxRuntime.jsx(
         "input",
         {

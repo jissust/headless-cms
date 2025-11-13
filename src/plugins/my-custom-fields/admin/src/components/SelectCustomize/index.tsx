@@ -147,8 +147,8 @@ const SelectCustomize = (props: any, ref: any) => {
         <>
           <label className="label-customize p-1">
             {tipoDeVenta?.nombre?.toLowerCase().includes("mayorista")
-              ? `Precio mayorista: ${selectedProducto.tipo_de_moneda.simbolo} ${precio} (por unidad)`
-              : `Precio minorista: ${selectedProducto.tipo_de_moneda.simbolo} ${precio} (por unidad)`}
+              ? `Precio mayorista: ${selectedProducto.tipo_de_moneda?.simbolo} ${precio} (por unidad)`
+              : `Precio minorista: ${selectedProducto.tipo_de_moneda?.simbolo} ${precio} (por unidad)`}
           </label>
           <input
             className="d-none"
@@ -159,7 +159,7 @@ const SelectCustomize = (props: any, ref: any) => {
             disabled
           />
 
-          <label className="label-customize p-1">{`Precio de compra: ${selectedProducto.tipo_de_moneda.simbolo} ${precioCompra} (por unidad)`}</label>
+          <label className="label-customize p-1">{`Precio de compra: ${selectedProducto.tipo_de_moneda?.simbolo} ${precioCompra} (por unidad)`}</label>
 
           <input
             className="d-none"
