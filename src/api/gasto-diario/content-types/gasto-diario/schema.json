@@ -29,6 +29,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::forma-de-pago.forma-de-pago"
+    },
+    "local": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::local.local"
     }
   }
 }

@@ -512,10 +512,12 @@ export default () => {
           where: {
             documentId: documentId,
           },
+          populate: true,
         });
-
+      const localId = cajaDiaria.local?.id;
+      const nameLocal = cajaDiaria.local?.nombre;  
       const fechaCaja = new Date(cajaDiaria.createdAt).toLocaleDateString();
-      let csv = `CAJA - ${fechaCaja}\n\n`;
+      let csv = `CAJA - ${nameLocal} - ${fechaCaja}\n\n`;
       if (!cajaDiaria) {
         ctx.set("Content-Type", "text/csv; charset=utf-8");
         ctx.set("Content-Disposition", "attachment; filename=error.csv");
@@ -523,7 +525,7 @@ export default () => {
         ctx.status = 200;
         return;
       }
-
+      
       const cajaDate = new Date(cajaDiaria.createdAt);
       const startOfDay = new Date(cajaDate);
       startOfDay.setHours(0, 0, 0, 0);
@@ -531,6 +533,7 @@ export default () => {
       const endOfDay = new Date(cajaDate);
       endOfDay.setHours(23, 59, 59, 999);
 
+      //console.log(`Local: ${localId}`)
       /** BLOQUE DE ENTRADA */
       const ventasHoy = await strapi.db.query("api::venta.venta").findMany({
         where: {
@@ -538,10 +541,13 @@ export default () => {
             $gte: startOfDay,
             $lte: endOfDay,
           },
+          local: {
+            id: localId,  // <--- acá filtrás por ID
+          }
         },
         populate: true,
       });
-
+      
       const serviceHoy = await strapi.db
         .query("api::service.service")
         .findMany({
@@ -550,6 +556,9 @@ export default () => {
               $gte: startOfDay,
               $lte: endOfDay,
             },
+            local: {
+              id: localId,  // <--- acá filtrás por ID
+            }
           },
           populate: true,
         });
@@ -564,6 +573,9 @@ export default () => {
             $gte: startOfDay,
             $lte: endOfDay,
           },
+          local: {
+            id: localId,  // <--- acá filtrás por ID
+          }
         },
         populate: true,
       });
@@ -576,6 +588,9 @@ export default () => {
               $gte: startOfDay,
               $lte: endOfDay,
             },
+            local: {
+              id: localId,  // <--- acá filtrás por ID
+            }
           },
           populate: true,
         });
@@ -623,11 +638,11 @@ export default () => {
         headerResumenFinalCaja +
         pesosResumenFinalCaja +
         dolarResumenFinalCaja;
-
+        
       ctx.set("Content-Type", "text/csv");
       ctx.set(
         "Content-Disposition",
-        `attachment; filename="caja_diaria_${new Date(cajaDiaria.createdAt).toISOString().split("T")[0]}.csv"`
+        `attachment; filename="caja_diaria_${nameLocal?.trim().toLowerCase().replace(" ", "_")}_${new Date(cajaDiaria.createdAt).toISOString().split("T")[0]}.csv"`
       );
       ctx.body = csv;
 

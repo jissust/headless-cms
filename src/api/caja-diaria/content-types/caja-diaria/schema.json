@@ -20,6 +20,11 @@
       "type": "decimal",
       "required": true,
       "default": 0
+    },
+    "local": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::local.local"
     }
   }
 }
