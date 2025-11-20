@@ -330,6 +330,25 @@ const index = {
       },
       options: {}
     });
+    app.customFields.register({
+      name: "ver-caja-diaria",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "ver-caja-diaria-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "ver-caja-diaria-description",
+        defaultMessage: "Select any color"
+      },
+      components: {
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-DSkSiIOv.js")).then((module2) => ({
+          default: module2.VerCajaDiaria
+        }))
+      },
+      options: {}
+    });
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,

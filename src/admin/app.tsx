@@ -487,6 +487,20 @@ export default {
         font-size: 15px;
         font-weight: bold;
       }
+      .table {
+        border-top: 1px solid #dcdce4;
+        border-right: 1px solid #dcdce4;
+      }
+      .table thead {
+        background-color: #eaeaef;
+      }  
+      .table thead tr th, .table tbody tr td{
+        padding:10px 0;
+        font-size:14px;
+        border-bottom: 1px solid #dcdce4;
+        text-align:center;
+        border-left:1px solid #dcdce4;
+      }  
       @media (max-width: 992px) { 
         #main-content {
           margin: 0 20px !important;

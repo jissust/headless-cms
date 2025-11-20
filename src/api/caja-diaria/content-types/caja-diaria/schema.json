@@ -25,6 +25,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::local.local"
+    },
+    "ver-caja-diaria": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.ver-caja-diaria"
     }
   }
 }
