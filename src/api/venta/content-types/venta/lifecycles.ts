@@ -74,6 +74,7 @@ export default {
         );
       }
     }
+    (strapi as any).io.emit("refresh", "actualizado");
   },
   async afterCreate(event) {
     const ctx = strapi.requestContext.get();

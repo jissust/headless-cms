@@ -109,6 +109,7 @@ export default {
           });
       }
     }
+    (strapi as any).io.emit("refresh", "actualizado");
   },
   async beforeUpdate(event) {
     throw new errors.ApplicationError(

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 
 const VerCajaDiaria = (props: any, ref: any) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
@@ -14,7 +15,26 @@ const VerCajaDiaria = (props: any, ref: any) => {
 
   let urlSplit = window.location.href.split('/');
   let documentId = urlSplit[urlSplit.length - 1];
+
   if (!documentId || documentId === 'create') return;
+  
+  useEffect(() => {
+    // Conectar al WebSocket del backend
+    const socket = io("/", {
+      transports: ["websocket"], // recomendado
+    });
+
+    // escuchar evento emitido desde el lifecycle
+    socket.on("refresh", (msg:any) => {
+      console.log("🔄 Evento refresh recibido:", msg);
+      window.location.reload();
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     //if (!documentId || documentId === 'create') return;
     setLoading(true);

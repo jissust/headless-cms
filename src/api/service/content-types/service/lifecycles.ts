@@ -47,6 +47,7 @@ export default {
 
     }
     (strapi as any).io.emit("respuesta", "actualizado");
+    (strapi as any).io.emit("refresh", "actualizado");
   },
   async beforeUpdate(event) {
     const { data, where } = event.params;
@@ -83,5 +84,7 @@ export default {
   },
   async afterUpdate(event) {
     (strapi as any).io.emit("respuesta", "actualizado");
+    (strapi as any).io.emit("refresh", "actualizado");
+
   },
 };
