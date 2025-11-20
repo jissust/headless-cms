@@ -387,7 +387,6 @@ export interface ApiCajaDiariaCajaDiaria extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -488,7 +487,6 @@ export interface ApiGastoDiarioGastoDiario extends Struct.CollectionTypeSchema {
       'oneToOne',
       'api::forma-de-pago.forma-de-pago'
     >;
-    local: Schema.Attribute.Relation<'oneToOne', 'api::local.local'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
