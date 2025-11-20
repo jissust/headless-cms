@@ -35,7 +35,7 @@ export default {
     }
   },
   async beforeUpdate(event) {
-    const { data } = event.params;
+    /*const { data } = event.params;
 
     const caja = await strapi.db.query("api::caja-diaria.caja-diaria").findOne({
       where: {
@@ -71,6 +71,6 @@ export default {
       if(!fueCreadaHoy){
             throw new errors.ApplicationError(`No es posible editar una caja correspondiente a una fecha anterior.`);
       }
-    }
+    }*/
   },
 };
