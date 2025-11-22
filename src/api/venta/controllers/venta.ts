@@ -29,10 +29,14 @@ export default factories.createCoreController(
           .findOne({
             where: { id: componenteProducto.productoItem },
           });
+        let nameProduct = productoDb.nombre;
+        if (productoDb.descripcion) {
+          nameProduct += ` ( ${productoDb.descripcion} )`;
+        }
 
         let producto = {
           id: productoDb.id,
-          nombre: productoDb.nombre,
+          nombre: nameProduct,
           cantidad: componenteProducto.cantidad,
           total: componenteProducto.total,
         };
@@ -83,7 +87,7 @@ export default factories.createCoreController(
 
       doc.fontSize(12).text(`Fecha: ${fechaFormateada}`);
       doc.moveDown();
-      
+
       // --------- DATOS DEL VENDEDOR ---------
       doc.fontSize(14).text("Datos del vendedor", { underline: true });
       doc.moveDown(0.5);
@@ -104,7 +108,7 @@ export default factories.createCoreController(
         .moveDown();
 
       // --------- TABLA DE PRODUCTOS ---------
-      doc.fontSize(14).text("Productos", { underline: true });
+      doc.fontSize(12).text("Productos", { underline: true });
       doc.moveDown(0.5);
 
       const tableTop = doc.y;
@@ -118,18 +122,52 @@ export default factories.createCoreController(
       doc.text("Total", 430, tableTop);
       doc.moveDown();
       doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
-      doc.moveDown(0.5);
+      doc.moveDown(0.8);
 
       doc.font("Helvetica");
 
       // Filas de productos
       for (const producto of productos) {
-        const y = doc.y;
-        doc.text(producto.id.toString(), 50, y);
-        doc.text(producto.nombre, 100, y, { width: 240 });
-        doc.text(producto.cantidad.toString(), 350, y);
-        doc.text(`$${producto.total.toFixed(2)}`, 430, y);
-        doc.moveDown();
+        const xId = 50;
+        const xNombre = 100;
+        const xCantidad = 350;
+        const xTotal = 430;
+
+        const maxWidthNombre = 240;
+
+        // ALTURA REAL DEL TEXTO DE NOMBRE (incluye descripción si la agregás)
+        const heightNombre = doc.heightOfString(producto.nombre, {
+          width: maxWidthNombre,
+        });
+
+        // El renglón debe tener al menos la altura del texto más alto
+        const rowHeight = Math.max(heightNombre, 14);
+
+        const startY = doc.y; // punto inicial del renglón
+
+        // DIBUJAR COLUMNA ID
+        doc.text(producto.id.toString(), xId, startY);
+
+        // DIBUJAR COLUMNA NOMBRE (ocupa varias líneas si hace falta)
+        doc.text(producto.nombre, xNombre, startY, { width: maxWidthNombre });
+
+        // DIBUJAR COLUMNA CANTIDAD
+        doc.text(producto.cantidad.toString(), xCantidad, startY);
+
+        // DIBUJAR COLUMNA TOTAL
+        doc.text(`$${producto.total.toFixed(2)}`, xTotal, startY);
+
+        // Después del texto: bajar a la siguiente línea de la tabla
+        const endY = startY + rowHeight + 5; // pequeño padding inferior
+        doc.y = endY;
+
+        // DIBUJAR LÍNEA ROJA BAJO LA FILA
+        doc.moveTo(50, doc.y).lineTo(550, doc.y).strokeColor("#dcdce4").stroke();
+
+        // Volver a negro para el texto siguiente
+        //doc.strokeColor("black");
+
+        doc.moveDown(0.5);
 
         // Salto de página automático
         if (doc.y > 700) {
@@ -141,7 +179,7 @@ export default factories.createCoreController(
       doc.fontSize(14).text(`Total de la venta: $${venta.total.toFixed(2)}`, {
         align: "right",
       });
-      
+
       doc.end();
     },
   })

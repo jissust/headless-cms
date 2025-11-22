@@ -28,11 +28,14 @@ export default (config: any, { strapi }: { strapi: typeof global.strapi }) => {
         docData.tmpLocalDireccion = docData.local.direccion;
         docData.tmpLocalTel = docData.local.telefono;
       }
+      if(docData.fecha){
+        const [anio, mes, dia] = docData.fecha.split("-");
+        docData.fecha = `${dia}/${mes}/${anio}`;
+      }
       docData = await strapi
         .plugin("strapi-plugin-pdf-creator")
         .service("images")
         .BufferIamgesOnData(docData, false);
-      console.log(docData);
 
       const conf = strapi.config.get(`plugin::strapi-plugin-pdf-creator`);
 
