@@ -12,12 +12,15 @@
   "pluginOptions": {},
   "attributes": {
     "nombre_venta": {
-      "type": "customField",
+      "type": "string",
       "customField": "plugin::my-custom-fields.input-nombre-venta"
     },
     "nombre_local": {
-      "type": "customField",
+      "type": "string",
       "customField": "plugin::my-custom-fields.input-nombre-local"
+    },
+    "descripcion": {
+      "type": "text"
     },
     "tipo_de_venta": {
       "type": "relation",

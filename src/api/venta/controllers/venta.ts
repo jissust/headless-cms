@@ -16,6 +16,8 @@ export default factories.createCoreController(
         where: { documentId: documentId },
         populate: true,
       });
+
+      console.log(venta)
       
       if (!venta) {
         return ctx.notFound("Venta no encontrada");
@@ -178,6 +180,11 @@ export default factories.createCoreController(
         if (doc.y > 700) {
           doc.addPage();
         }
+      }
+      
+      if(venta.descripcion){
+        doc.moveDown(1);
+        doc.fontSize(12).text(`Aclaración: ${venta.descripcion}`, 50, doc.y);
       }
 
       doc.moveDown(2);
