@@ -62,7 +62,8 @@
       "required": true
     },
     "fecha_de_ingreso": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "numero_de_orden": {
       "type": "string"

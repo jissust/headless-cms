@@ -71,6 +71,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::forma-de-pago.forma-de-pago"
+    },
+    "fecha_de_ingreso": {
+      "type": "date",
+      "required": true
     }
   }
 }

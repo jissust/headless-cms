@@ -63,12 +63,12 @@ const VerCajaDiaria = (props: any, ref: any) => {
     const localId = caja?.local?.id;
 
     const base = `&filters[local][id][$eq]=${localId}&filters[createdAt][$gte]=${startOfDay.toISOString()}&filters[createdAt][$lte]=${endOfDay.toISOString()}`;
-    const baseService = `&filters[local][id][$eq]=${localId}&filters[fecha_de_ingreso][$gte]=${startOfDay.toISOString()}&filters[fecha_de_ingreso][$lte]=${endOfDay.toISOString()}`;
+    const baseFechaIngreso = `&filters[local][id][$eq]=${localId}&filters[fecha_de_ingreso][$gte]=${startOfDay.toISOString()}&filters[fecha_de_ingreso][$lte]=${endOfDay.toISOString()}`;
     setLoading(true);
 
     Promise.all([
-      fetch(`/api/ventas?populate=*&${base}`).then(r => r.json()),
-      fetch(`/api/services?populate=*&${baseService}`).then(r => r.json()),
+      fetch(`/api/ventas?populate=*&${baseFechaIngreso}`).then(r => r.json()),
+      fetch(`/api/services?populate=*&${baseFechaIngreso}`).then(r => r.json()),
       fetch(`/api/gastos?populate=*&${base}`).then(r => r.json()),
       fetch(`/api/gasto-diarios?populate=*&${base}`).then(r => r.json()),
     ])

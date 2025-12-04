@@ -537,7 +537,7 @@ export default () => {
       /** BLOQUE DE ENTRADA */
       const ventasHoy = await strapi.db.query("api::venta.venta").findMany({
         where: {
-          createdAt: {
+          fecha_de_ingreso: {
             $gte: startOfDay,
             $lte: endOfDay,
           },
