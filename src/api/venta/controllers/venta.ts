@@ -16,10 +16,15 @@ export default factories.createCoreController(
         where: { documentId: documentId },
         populate: true,
       });
-
+      
       if (!venta) {
         return ctx.notFound("Venta no encontrada");
       }
+
+      if( !venta.tipo_de_moneda && !venta.tipo_de_moneda.simbolo) {
+        return ctx.notFound("Tipo de moneda no encontrada");
+      }
+      let simboloMoneda = venta?.tipo_de_moneda?.simbolo;
 
       const componentsProductos = venta.Productos;
       let productos = [];
@@ -155,7 +160,7 @@ export default factories.createCoreController(
         doc.text(producto.cantidad.toString(), xCantidad, startY);
 
         // DIBUJAR COLUMNA TOTAL
-        doc.text(`$${producto.total.toFixed(2)}`, xTotal, startY);
+        doc.text(`${simboloMoneda} ${producto.total.toFixed(2)}`, xTotal, startY);
 
         // Después del texto: bajar a la siguiente línea de la tabla
         const endY = startY + rowHeight + 5; // pequeño padding inferior
@@ -176,7 +181,7 @@ export default factories.createCoreController(
       }
 
       doc.moveDown(2);
-      doc.fontSize(14).text(`Total de la venta: $${venta.total.toFixed(2)}`, {
+      doc.fontSize(14).text(`Total de la venta: ${simboloMoneda} ${venta.total.toFixed(2)}`, {
         align: "right",
       });
 
