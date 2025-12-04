@@ -552,7 +552,7 @@ export default () => {
         .query("api::service.service")
         .findMany({
           where: {
-            createdAt: {
+            fecha_de_ingreso: {
               $gte: startOfDay,
               $lte: endOfDay,
             },
