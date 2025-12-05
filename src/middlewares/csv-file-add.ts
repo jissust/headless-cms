@@ -619,19 +619,20 @@ export default () => {
 
       /** RESUMEN CAJA FINAL */
       const saldoFinalPesos =
-        entradasTotales.totalEnPesos -
-        salidaTotales.totalEnPesos +
+        entradasTotales.totalEnPesosEfectivo -
+        salidaTotales.totalEnPesosEfectivo +
         cajaDiaria.saldo_inicial_pesos;
       const saldoFinalDolar =
-        entradasTotales.totalEnDolares -
-        salidaTotales.totalEnDolares +
+        entradasTotales.totalEnDolaresEfectivo -
+        salidaTotales.totalEnDolaresEfectivo +
         cajaDiaria.saldo_inicial_dolar;
-
-      const titleResumenFinalCaja = "\n\nRESUMEN CAJA FINAL\n";
+        console.log("ENTRADAS TOTALES", entradasTotales)
+        console.log("SALIDAS TOTALES", salidaTotales)
+      const titleResumenFinalCaja = "\n\nRESUMEN CAJA FINAL (SOLO SE TIENE EN CUENTA EL EFECTIVO)\n";
       const headerResumenFinalCaja =
         "MONEDA, INICIAL, ENTRADAS, SALIDAS, SALDO FINAL\n";
-      const pesosResumenFinalCaja = `PESOS, ${cajaDiaria.saldo_inicial_pesos},${entradasTotales.totalEnPesos}, ${salidaTotales.totalEnPesos}, ${saldoFinalPesos}\n`;
-      const dolarResumenFinalCaja = `DOLARES, ${cajaDiaria.saldo_inicial_dolar},${entradasTotales.totalEnDolares}, ${salidaTotales.totalEnDolares}, ${saldoFinalDolar}\n`;
+      const pesosResumenFinalCaja = `PESOS, ${cajaDiaria.saldo_inicial_pesos},${entradasTotales.totalEnPesosEfectivo}, ${salidaTotales.totalEnPesosEfectivo}, ${saldoFinalPesos}\n`;
+      const dolarResumenFinalCaja = `DOLARES, ${cajaDiaria.saldo_inicial_dolar},${entradasTotales.totalEnDolaresEfectivo}, ${salidaTotales.totalEnDolaresEfectivo}, ${saldoFinalDolar}\n`;
 
       csv +=
         titleResumenFinalCaja +
