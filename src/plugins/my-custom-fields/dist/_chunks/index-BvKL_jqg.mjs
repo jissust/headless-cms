@@ -1,9 +1,10 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-const InputNumberVentaGananciaItem = (props, ref) => {
+const InputNumberTotalItemCustomize = (props, ref) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
   useEffect(() => {
-    const totals = document.querySelectorAll(".input_ganancia_item_product");
+    console.log("InputNumberTotalItemCustomize value changed:", value);
+    const totals = document.querySelectorAll(".input_total_item_product");
     let total = 0;
     for (const input of totals) {
       const val = parseFloat(input.value);
@@ -13,14 +14,14 @@ const InputNumberVentaGananciaItem = (props, ref) => {
     }
     onChange({
       target: {
-        name: "total_ganancia",
+        name: "total",
         type: "number",
         value: total
       }
     });
   }, [value]);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx("label", { className: "label-customize", children: "Ganancia" }),
+    /* @__PURE__ */ jsx("label", { className: "label-customize", children: "Total" }),
     /* @__PURE__ */ jsxs("div", { className: "container-number-currency", children: [
       /* @__PURE__ */ jsx("span", { children: "$" }),
       /* @__PURE__ */ jsx(
@@ -32,12 +33,12 @@ const InputNumberVentaGananciaItem = (props, ref) => {
           value,
           min: "0",
           type: "number",
-          className: "input-customize input_ganancia_item_product"
+          className: "input-customize input_total_item_product"
         }
       )
     ] })
   ] });
 };
 export {
-  InputNumberVentaGananciaItem
+  InputNumberTotalItemCustomize
 };

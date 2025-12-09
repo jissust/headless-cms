@@ -4,6 +4,7 @@ const InputNumberTotalItemCustomize = (props: any, ref: any) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
 
   useEffect(() => {
+    console.log("InputNumberTotalItemCustomize value changed:", value);
     const totals = document.querySelectorAll('.input_total_item_product');
     let total = 0;
 

@@ -77,7 +77,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-BmbC3AWp.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-CArECXHu.js")).then((module2) => ({
           default: module2.InputNumberTotalItemCustomize
         }))
       },
@@ -286,7 +286,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-CUXZNluD.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-UvdGOwVv.js")).then((module2) => ({
           default: module2.InputNumberVentaGananciaItem
         }))
       },
@@ -362,7 +362,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-Cnb1dNBg.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-C-H06IEE.js")).then((module2) => ({
           default: module2.SalesDetectChangesInItems
         }))
       },

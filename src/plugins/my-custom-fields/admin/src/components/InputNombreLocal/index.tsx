@@ -39,38 +39,6 @@ const InputNombreLocal = (props: any, ref: any) => {
       });
   }
 
-  /*useEffect(() => {
-    const observer = new MutationObserver(() => {
-      getTotals('.input_total_item_product', 'total');
-      getTotals('.input_ganancia_item_product', 'total_ganancia');
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const getTotals = (totalsInput: string, totalsName: string) => {
-    const totals = document.querySelectorAll(totalsInput);
-    let total = 0;
-
-    if(totals.length > 0) {
-      for (const input of totals) {
-        const val = parseFloat((input as HTMLInputElement).value);
-        if (!isNaN(val)) {
-          total += val;
-        }
-      }
-      
-      onChange({
-          target: {
-            name: totalsName,
-            type: 'number',
-            value: total,
-          },
-        });
-    }  
-  };*/
-
   return (
     <>
       <input

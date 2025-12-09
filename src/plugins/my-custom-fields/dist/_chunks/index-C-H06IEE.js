@@ -1,10 +1,12 @@
-import { jsx, Fragment } from "react/jsx-runtime";
-import { useEffect } from "react";
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const jsxRuntime = require("react/jsx-runtime");
+const react = require("react");
 const SalesDetectChangesInItems = (props, ref) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
-  useEffect(() => {
-    console.log("Detecting changes in items...");
+  react.useEffect(() => {
     const observer = new MutationObserver(() => {
+      console.log("Detecting changes in items...");
       getTotals(".input_total_item_product", "total");
       getTotals(".input_ganancia_item_product", "total_ganancia");
     });
@@ -30,8 +32,6 @@ const SalesDetectChangesInItems = (props, ref) => {
       });
     }
   };
-  return /* @__PURE__ */ jsx(Fragment, {});
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
 };
-export {
-  SalesDetectChangesInItems
-};
+exports.SalesDetectChangesInItems = SalesDetectChangesInItems;

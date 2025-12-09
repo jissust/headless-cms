@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 const SalesDetectChangesInItems = (props: any, ref: any) => {
   const { attribute, disabled, intlLabel, name, onChange, required, value } = props;
 
-  useEffect(() => {
-    console.log('Detecting changes in items...');
+  useEffect(() => {    
     const observer = new MutationObserver(() => {
+      console.log('Detecting changes in items...');
       getTotals('.input_total_item_product', 'total');
       getTotals('.input_ganancia_item_product', 'total_ganancia');
     });
