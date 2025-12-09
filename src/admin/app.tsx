@@ -218,11 +218,14 @@ export default {
         "content-manager.content-types.api::venta.venta.local": "Local",
         "content-manager.content-types.api::venta.venta.tipo_de_venta":
           "Tipo de venta",
+        "content-manager.content-types.api::venta.venta.forma_de_pago": "Forma de pago",
+        "content-manager.content-types.api::venta.venta.tipo_de_moneda":"Tipo de moneda",
         "content-manager.content-types.api::venta.venta.total_ganancia":
           "Total ganancia",
         "content-manager.content-types.api::venta.venta.apellido": "Apellido",
         "content-manager.content-types.api::venta.venta.nombre": "Nombre",
         "content-manager.content-types.api::venta.venta.id": "Id",
+        "content-manager.content-types.api::venta.venta.saldo_inicial_pesos": "Saldo inicial pesos",
 
         "content-manager.content-types.api::tipo-de-venta.tipo-de-venta.updatedAt":
           "Editado",
@@ -232,6 +235,8 @@ export default {
           "Nombre",
         "content-manager.content-types.api::tipo-de-venta.tipo-de-venta.id":
           "Id",
+        "content-manager.content-types.api::tipo-de-venta.tipo-de-venta.forma_de_pago":"Forma de pago",
+
 
         "content-manager.content-types.api::service.service.estado_de_service":
           "Estado de service",
@@ -291,6 +296,10 @@ export default {
         "content-manager.content-types.api::service.service.local": "Local",
         "content-manager.content-types.api::service.service.telefono":
           "Teléfono",
+        "content-manager.content-types.api::service.service.forma_de_pago": "Forma de pago",
+        "content-manager.content-types.api::service.service.simbolo": "Símbolo",
+        "content-manager.content-types.api::service.service.codigo": "Código",
+        "content-manager.content-types.api::service.service.nombre": "Nombre",
 
         "content-manager.content-types.api::remito.remito.fecha": "Fecha",
         "content-manager.content-types.api::remito.remito.telefono": "Teléfono",
@@ -318,6 +327,24 @@ export default {
         "content-manager.content-types.api::producto.producto.precio_mayorista":
           "Precio Mayorista",
 
+        "content-manager.components.productos.productos.ganancia_por_item":"Ganancia por ítem",
+        "content-manager.components.productos.productos.total":"Total",
+        "content-manager.components.productos.productos.cantidad":"Cantidad",
+        "content-manager.components.productos.productos.productoItem":"Producto",
+        "content-manager.components.DynamicZone.add-item-below":"Agregar ítem",
+        "content-manager.components.DynamicZone.add-item-above":"Agregar ítem",
+        "content-manager.components.DynamicZone.more-actions":"Más acciones",
+
+        "content-manager.content-types.api::venta.venta.sales_detect_changes_in_items":"Se detectaron cambios en los ítems de la venta",
+        "content-manager.content-types.api::venta.venta.fecha_de_ingreso":"Fecha de ingreso",
+        "content-manager.content-types.api::venta.venta.Productos":"Productos",
+        "content-manager.content-types.api::venta.venta.descripcion": "Descripción",
+        "content-manager.content-types.api::venta.venta.email": "Email",
+        "content-manager.content-types.api::venta.venta.dni": "DNI",
+        "content-manager.content-types.api::venta.venta.telefono": "Teléfono",
+        "content-manager.content-types.api::venta.venta.nombre_venta": "Nombre",
+        "content-manager.content-types.api::venta.venta.nombre_local": "Nombre local",
+
         "content-manager.content-types.api::local.local.telefono": "Teléfono",
         "content-manager.content-types.api::local.local.direccion": "Dirección",
         "content-manager.content-types.api::local.local.nombre": "Nombre",
@@ -341,6 +368,18 @@ export default {
           "Id",
         "content-manager.content-types.api::estado-de-service.estado-de-service.color":
           "Color",
+
+        "content-manager.content-types.api::caja-diaria.caja-diaria.saldo_inicial_pesos": "Saldo inicial pesos",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.ver-caja-diaria":"Ver caja diaria",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.local":"Local",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.saldo_inicial_dolar": "Saldo inicial dólar",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.createdAt":"Creado",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.id":"Id",
+
+        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.simbolo":"Símbolo",
+        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.id":"Id",
+        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.nombre":"Nombre",
+        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.codigo":"Código",
 
         "content-manager.plugin.name": "Gestor de contenidos",
         User: "Usuario",
@@ -376,6 +415,9 @@ export default {
         "app.utils.toggle": "Toggle",
         "Settings.application.header": "Encabezado",
         "review-workflows.plugin.name": "Nombre",
+        "Tipo de moneda": "Tipo de moneda",
+        "Forma de pago": "Forma de pago",
+        "Caja Diaria": "Caja Diaria",
       },
     },
     theme: {
