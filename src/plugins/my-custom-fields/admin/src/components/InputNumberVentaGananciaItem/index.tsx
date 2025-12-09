@@ -13,7 +13,7 @@ const InputNumberVentaGananciaItem = (props: any, ref: any) => {
         total += val;
       }
     }
-    console.log('total ganancia', total);
+    
     onChange({
       target: {
         name: 'total_ganancia',

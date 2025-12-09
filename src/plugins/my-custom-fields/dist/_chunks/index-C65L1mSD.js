@@ -32,7 +32,6 @@ const SelectCustomize = (props, ref) => {
   const filtrarLocalesPorLocal = (localId2) => {
     fetch(`/api/productos?populate=*&filters[locales][id][$eq]=${localId2}&sort=nombre:desc&pagination[pageSize]=1000`).then((res) => res.json()).then((data) => {
       if (!data?.data) return;
-      console.log(data.data);
       setProductos(data.data);
     }).catch((err) => {
       console.error("Error al cargar productos", err);
@@ -48,7 +47,6 @@ const SelectCustomize = (props, ref) => {
   };
   const handleChange = (selectedId) => {
     const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
-    console.log(selectedProductoChange);
     setSelectedProducto(selectedProductoChange);
     const cantidadHTML = document.querySelector(
       `input[name="Productos.${index}.cantidad"]`
@@ -60,14 +58,14 @@ const SelectCustomize = (props, ref) => {
     if (selectedProductoChange) {
       let precioSelected = tipoDeVenta?.nombre?.toLowerCase().includes("mayorista") ? selectedProductoChange.precio_mayorista : selectedProductoChange.precio;
       setPrecio(precioSelected);
-      const stock = selectedProductoChange.stock;
+      selectedProductoChange.stock;
       setPrecioCompra(selectedProductoChange.precio_compra);
       const totalGanancia = precioSelected * parseInt(cantidad || "0") - selectedProductoChange.precio_compra * parseInt(cantidad || "0");
       onChange({
         target: {
           name: `Productos.${index}.total`,
           type: "number",
-          value: stock > 0 ? precioSelected * parseInt(cantidad || "0") : 0
+          value: parseInt(cantidad || "0") > 0 ? precioSelected * parseInt(cantidad || "0") : 0
         }
       });
       onChange({

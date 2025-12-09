@@ -40,7 +40,6 @@ const SelectCustomize = (props: any, ref: any) => {
       .then((res) => res.json())
       .then((data) => {
         if (!data?.data) return;
-        console.log(data.data);
         setProductos(data.data);
       })
       .catch((err) => {
@@ -59,10 +58,8 @@ const SelectCustomize = (props: any, ref: any) => {
         console.error('Error al cargar tipo de venta', err);
       });
   }
-
   const handleChange = (selectedId: string) => {
     const selectedProductoChange = productos.find((p) => p.id === parseInt(selectedId));
-    console.log(selectedProductoChange);
     setSelectedProducto(selectedProductoChange);
 
     const cantidadHTML: HTMLInputElement | null = document.querySelector(
@@ -75,10 +72,6 @@ const SelectCustomize = (props: any, ref: any) => {
     });
 
     if (selectedProductoChange) {
-      /*let precioSelected =
-        Number(tipoDeVentaId) == 1
-          ? selectedProductoChange.precio
-          : selectedProductoChange.precio_mayorista;*/
       let precioSelected = tipoDeVenta?.nombre?.toLowerCase().includes("mayorista")
         ? selectedProductoChange.precio_mayorista
         : selectedProductoChange.precio;
@@ -90,19 +83,11 @@ const SelectCustomize = (props: any, ref: any) => {
 
       const totalGanancia = (precioSelected * parseInt(cantidad || '0')) - (selectedProductoChange.precio_compra * parseInt(cantidad || '0'));
 
-      /*onChange({
-        target: {
-          name: `Productos.${index}.cantidad`,
-          type: 'number',
-          value: stock > 0 ? 1 : 0,
-        },
-      });*/
-
       onChange({
         target: {
           name: `Productos.${index}.total`,
           type: 'number',
-          value: stock > 0 ? precioSelected * parseInt(cantidad || '0') : 0,
+          value: parseInt(cantidad || '0') > 0 ? precioSelected * parseInt(cantidad || '0') : 0,
         },
       });
 

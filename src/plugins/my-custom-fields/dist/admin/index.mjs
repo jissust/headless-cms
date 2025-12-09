@@ -38,7 +38,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => import("../_chunks/index-DTsfCCCy.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-CfeLpP7N.mjs").then((module) => ({
           default: module.SelectCustomize
         }))
       },
@@ -285,7 +285,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => import("../_chunks/index-e_ifErM5.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-DkoQaWbd.mjs").then((module) => ({
           default: module.InputNumberVentaGananciaItem
         }))
       },
@@ -344,6 +344,25 @@ const index = {
       components: {
         Input: async () => import("../_chunks/index-BceVjvn5.mjs").then((module) => ({
           default: module.VerCajaDiaria
+        }))
+      },
+      options: {}
+    });
+    app.customFields.register({
+      name: "sales-detect-changes-in-items",
+      pluginId: PLUGIN_ID,
+      type: "string",
+      intlLabel: {
+        id: "sales-detect-changes-in-items-label",
+        defaultMessage: "label"
+      },
+      intlDescription: {
+        id: "sales-detect-changes-in-items-description",
+        defaultMessage: "Select any color"
+      },
+      components: {
+        Input: async () => import("../_chunks/index-BAEyDF3_.mjs").then((module) => ({
+          default: module.SalesDetectChangesInItems
         }))
       },
       options: {}

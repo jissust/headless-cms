@@ -362,6 +362,27 @@ export default {
       options: {},
     });
 
+    app.customFields.register({
+      name: 'sales-detect-changes-in-items',
+      pluginId: PLUGIN_ID,
+      type: 'string',
+      intlLabel: {
+        id: 'sales-detect-changes-in-items-label',
+        defaultMessage: 'label',
+      },
+      intlDescription: {
+        id: 'sales-detect-changes-in-items-description',
+        defaultMessage: 'Select any color',
+      },
+      components: {
+        Input: async () =>
+          import('./components/SalesDetectChangesInItems').then((module) => ({
+            default: module.SalesDetectChangesInItems,
+          })),
+      },
+      options: {},
+    });
+
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,

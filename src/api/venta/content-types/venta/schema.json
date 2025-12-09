@@ -78,6 +78,10 @@
     "fecha_de_ingreso": {
       "type": "date",
       "required": true
+    },
+    "sales_detect_changes_in_items": {  
+      "type": "string",
+      "customField": "plugin::my-custom-fields.sales-detect-changes-in-items"
     }
   }
 }
