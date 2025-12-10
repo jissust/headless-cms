@@ -95,7 +95,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => import("../_chunks/index-7DNjnmAF.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-dtX21yVF.mjs").then((module) => ({
           default: module.InputTotalVentaCustomize
         }))
       },
@@ -304,7 +304,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => import("../_chunks/index-YlGs4tPR.mjs").then((module) => ({
+        Input: async () => import("../_chunks/index-htN9s67q.mjs").then((module) => ({
           default: module.InputTotalVentaGanancia
         }))
       },

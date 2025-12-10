@@ -96,7 +96,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-EJ6c7NXq.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-FB39NT1u.js")).then((module2) => ({
           default: module2.InputTotalVentaCustomize
         }))
       },
@@ -305,7 +305,7 @@ const index = {
         defaultMessage: "Select any color"
       },
       components: {
-        Input: async () => Promise.resolve().then(() => require("../_chunks/index-B_dfG6Qj.js")).then((module2) => ({
+        Input: async () => Promise.resolve().then(() => require("../_chunks/index-CAg8vELF.js")).then((module2) => ({
           default: module2.InputTotalVentaGanancia
         }))
       },

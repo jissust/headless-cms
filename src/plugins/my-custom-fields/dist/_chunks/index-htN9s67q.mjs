@@ -11,7 +11,7 @@ const InputTotalVentaGanancia = (props, ref) => {
           name,
           disabled: true,
           required,
-          value,
+          value: props.initialValue > 0 ? props.initialValue : value,
           min: "0",
           type: "number",
           className: "input-customize"
