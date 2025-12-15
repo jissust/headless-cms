@@ -317,13 +317,13 @@ export default {
         "content-manager.content-types.api::producto.producto.stock": "Stock",
         "content-manager.content-types.api::producto.producto.locales":
           "Locales",
-        "content-manager.content-types.api::producto.producto.precio": "Precio",
+        "content-manager.content-types.api::producto.producto.precio": "Precio público",
         "content-manager.content-types.api::producto.producto.descripcion":
           "Descripción",
         "content-manager.content-types.api::producto.producto.nombre": "Nombre",
         "content-manager.content-types.api::producto.producto.id": "Id",
         "content-manager.content-types.api::producto.producto.precio_compra":
-          "Precio compra",
+          "Precio costo",
         "content-manager.content-types.api::producto.producto.precio_mayorista":
           "Precio Mayorista",
 
