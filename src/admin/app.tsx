@@ -218,14 +218,17 @@ export default {
         "content-manager.content-types.api::venta.venta.local": "Local",
         "content-manager.content-types.api::venta.venta.tipo_de_venta":
           "Tipo de venta",
-        "content-manager.content-types.api::venta.venta.forma_de_pago": "Forma de pago",
-        "content-manager.content-types.api::venta.venta.tipo_de_moneda":"Tipo de moneda",
+        "content-manager.content-types.api::venta.venta.forma_de_pago":
+          "Forma de pago",
+        "content-manager.content-types.api::venta.venta.tipo_de_moneda":
+          "Tipo de moneda",
         "content-manager.content-types.api::venta.venta.total_ganancia":
           "Total ganancia",
         "content-manager.content-types.api::venta.venta.apellido": "Apellido",
         "content-manager.content-types.api::venta.venta.nombre": "Nombre",
         "content-manager.content-types.api::venta.venta.id": "Id",
-        "content-manager.content-types.api::venta.venta.saldo_inicial_pesos": "Saldo inicial pesos",
+        "content-manager.content-types.api::venta.venta.saldo_inicial_pesos":
+          "Saldo inicial pesos",
 
         "content-manager.content-types.api::tipo-de-venta.tipo-de-venta.updatedAt":
           "Editado",
@@ -235,8 +238,8 @@ export default {
           "Nombre",
         "content-manager.content-types.api::tipo-de-venta.tipo-de-venta.id":
           "Id",
-        "content-manager.content-types.api::tipo-de-venta.tipo-de-venta.forma_de_pago":"Forma de pago",
-
+        "content-manager.content-types.api::tipo-de-venta.tipo-de-venta.forma_de_pago":
+          "Forma de pago",
 
         "content-manager.content-types.api::service.service.estado_de_service":
           "Estado de service",
@@ -296,7 +299,8 @@ export default {
         "content-manager.content-types.api::service.service.local": "Local",
         "content-manager.content-types.api::service.service.telefono":
           "Teléfono",
-        "content-manager.content-types.api::service.service.forma_de_pago": "Forma de pago",
+        "content-manager.content-types.api::service.service.forma_de_pago":
+          "Forma de pago",
         "content-manager.content-types.api::service.service.simbolo": "Símbolo",
         "content-manager.content-types.api::service.service.codigo": "Código",
         "content-manager.content-types.api::service.service.nombre": "Nombre",
@@ -317,7 +321,8 @@ export default {
         "content-manager.content-types.api::producto.producto.stock": "Stock",
         "content-manager.content-types.api::producto.producto.locales":
           "Locales",
-        "content-manager.content-types.api::producto.producto.precio": "Precio público",
+        "content-manager.content-types.api::producto.producto.precio":
+          "Precio público",
         "content-manager.content-types.api::producto.producto.descripcion":
           "Descripción",
         "content-manager.content-types.api::producto.producto.nombre": "Nombre",
@@ -327,23 +332,29 @@ export default {
         "content-manager.content-types.api::producto.producto.precio_mayorista":
           "Precio Mayorista",
 
-        "content-manager.components.productos.productos.ganancia_por_item":"Ganancia por ítem",
-        "content-manager.components.productos.productos.total":"Total",
-        "content-manager.components.productos.productos.cantidad":"Cantidad",
-        "content-manager.components.productos.productos.productoItem":"Producto",
-        "content-manager.components.DynamicZone.add-item-below":"Agregar ítem",
-        "content-manager.components.DynamicZone.add-item-above":"Agregar ítem",
-        "content-manager.components.DynamicZone.more-actions":"Más acciones",
+        "content-manager.components.productos.productos.ganancia_por_item":
+          "Ganancia por ítem",
+        "content-manager.components.productos.productos.total": "Total",
+        "content-manager.components.productos.productos.cantidad": "Cantidad",
+        "content-manager.components.productos.productos.productoItem":
+          "Producto",
+        "content-manager.components.DynamicZone.add-item-below": "Agregar ítem",
+        "content-manager.components.DynamicZone.add-item-above": "Agregar ítem",
+        "content-manager.components.DynamicZone.more-actions": "Más acciones",
 
-        "content-manager.content-types.api::venta.venta.sales_detect_changes_in_items":"Se detectaron cambios en los ítems de la venta",
-        "content-manager.content-types.api::venta.venta.fecha_de_ingreso":"Fecha de ingreso",
-        "content-manager.content-types.api::venta.venta.Productos":"Productos",
-        "content-manager.content-types.api::venta.venta.descripcion": "Descripción",
+        "content-manager.content-types.api::venta.venta.sales_detect_changes_in_items":
+          "Se detectaron cambios en los ítems de la venta",
+        "content-manager.content-types.api::venta.venta.fecha_de_ingreso":
+          "Fecha de ingreso",
+        "content-manager.content-types.api::venta.venta.Productos": "Productos",
+        "content-manager.content-types.api::venta.venta.descripcion":
+          "Descripción",
         "content-manager.content-types.api::venta.venta.email": "Email",
         "content-manager.content-types.api::venta.venta.dni": "DNI",
         "content-manager.content-types.api::venta.venta.telefono": "Teléfono",
         "content-manager.content-types.api::venta.venta.nombre_venta": "Nombre",
-        "content-manager.content-types.api::venta.venta.nombre_local": "Nombre local",
+        "content-manager.content-types.api::venta.venta.nombre_local":
+          "Nombre local",
 
         "content-manager.content-types.api::local.local.telefono": "Teléfono",
         "content-manager.content-types.api::local.local.direccion": "Dirección",
@@ -369,17 +380,26 @@ export default {
         "content-manager.content-types.api::estado-de-service.estado-de-service.color":
           "Color",
 
-        "content-manager.content-types.api::caja-diaria.caja-diaria.saldo_inicial_pesos": "Saldo inicial pesos",
-        "content-manager.content-types.api::caja-diaria.caja-diaria.ver-caja-diaria":"Ver caja diaria",
-        "content-manager.content-types.api::caja-diaria.caja-diaria.local":"Local",
-        "content-manager.content-types.api::caja-diaria.caja-diaria.saldo_inicial_dolar": "Saldo inicial dólar",
-        "content-manager.content-types.api::caja-diaria.caja-diaria.createdAt":"Creado",
-        "content-manager.content-types.api::caja-diaria.caja-diaria.id":"Id",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.saldo_inicial_pesos":
+          "Saldo inicial pesos",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.ver-caja-diaria":
+          "Ver caja diaria",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.local":
+          "Local",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.saldo_inicial_dolar":
+          "Saldo inicial dólar",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.createdAt":
+          "Creado",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.id": "Id",
 
-        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.simbolo":"Símbolo",
-        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.id":"Id",
-        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.nombre":"Nombre",
-        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.codigo":"Código",
+        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.simbolo":
+          "Símbolo",
+        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.id":
+          "Id",
+        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.nombre":
+          "Nombre",
+        "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.codigo":
+          "Código",
 
         "content-manager.plugin.name": "Gestor de contenidos",
         User: "Usuario",
@@ -459,6 +479,12 @@ export default {
         display: flex;
         gap: 5px
       }
+      .container-btn {
+        width: 100%;
+        display: flex;
+        border: 1px solid #eaeaef;
+        padding: 15px;
+      }
       .boton-local {
         background-color:#E53935;
         color:#FFFFFF;
@@ -468,6 +494,12 @@ export default {
         font-size:1.2rem;
         font-weight:600;
         text-align:center;
+      }
+      .boton-local--download {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
       }
       .w-100 {
         width: 100% !important;
@@ -602,18 +634,29 @@ export default {
           if (documentId === "create") return null;
 
           return (
-            <a
-              className="boton-local w-100"
-              href={`/api/venta/${documentId}/export-pdf`}
-              target="_blank"
-            >
-              Remito
-            </a>
+            <div className="container-btn">
+              <a
+                className="boton-local boton-local--download"
+                href={`/api/venta/${documentId}/export-pdf`}
+                target="_blank"
+              >
+                Remito
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                >
+                  <path d="M28.5 19v7a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 26v-7a1.5 1.5 0 0 1 3 0v6.5h19V19a1.5 1.5 0 1 1 3 0m-13.561 1.061a1.5 1.5 0 0 0 2.125 0l5-5a1.502 1.502 0 1 0-2.125-2.125L17.5 15.375V5a1.5 1.5 0 1 0-3 0v10.375l-2.439-2.436a1.502 1.502 0 1 0-2.125 2.125z"></path>
+                </svg>
+              </a>
+            </div>
           );
         },
       });
 
-    /** agrego boton para realizar descarga de remito en ventas */
+    /** agrego boton para generar reporte en caja diaria */
     app
       .getPlugin("content-manager")
       .injectComponent("editView", "right-links", {
@@ -629,12 +672,61 @@ export default {
           if (documentId === "create") return null;
 
           return (
-            <a
-              className="boton-local w-100"
-              href={`/export-csv/export/caja-diaria/${documentId}`}
-            >
-              Reporte
-            </a>
+            <div className="container-btn">
+              <a
+                className="boton-local boton-local--download"
+                href={`/export-csv/export/caja-diaria/${documentId}`}
+              >
+                Reporte
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                >
+                  <path d="M28.5 19v7a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 26v-7a1.5 1.5 0 0 1 3 0v6.5h19V19a1.5 1.5 0 1 1 3 0m-13.561 1.061a1.5 1.5 0 0 0 2.125 0l5-5a1.502 1.502 0 1 0-2.125-2.125L17.5 15.375V5a1.5 1.5 0 1 0-3 0v10.375l-2.439-2.436a1.502 1.502 0 1 0-2.125 2.125z"></path>
+                </svg>
+              </a>
+            </div>
+          );
+        },
+      });
+
+    /** agrego boton para realizar descarga de remito en ventas */
+    app
+      .getPlugin("content-manager")
+      .injectComponent("editView", "right-links", {
+        name: "service-pdf-remito",
+        Component: (props: any) => {
+          const { slug } = props;
+
+          if (slug !== "api::service.service") return null;
+
+          const segments = window.location.pathname.split("/");
+          const documentId = segments[segments.length - 1];
+
+          if (documentId === "create") return null;
+
+          return (
+            <div className="container-btn">
+              <a
+                className="boton-local boton-local--download"
+                href={`/api/service/${documentId}/export-pdf`}
+                target="_blank"
+              >
+                Remito
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                >
+                  <path d="M28.5 19v7a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 26v-7a1.5 1.5 0 0 1 3 0v6.5h19V19a1.5 1.5 0 1 1 3 0m-13.561 1.061a1.5 1.5 0 0 0 2.125 0l5-5a1.502 1.502 0 1 0-2.125-2.125L17.5 15.375V5a1.5 1.5 0 1 0-3 0v10.375l-2.439-2.436a1.502 1.502 0 1 0-2.125 2.125z"></path>
+                </svg>
+              </a>
+            </div>
           );
         },
       });
