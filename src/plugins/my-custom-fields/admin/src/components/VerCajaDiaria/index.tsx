@@ -69,8 +69,8 @@ const VerCajaDiaria = (props: any, ref: any) => {
     Promise.all([
       fetch(`/api/ventas?populate=*&${baseFechaIngreso}`).then(r => r.json()),
       fetch(`/api/services?populate=*&${baseFechaIngreso}`).then(r => r.json()),
-      fetch(`/api/gastos?populate=*&${base}`).then(r => r.json()),
-      fetch(`/api/gasto-diarios?populate=*&${base}`).then(r => r.json()),
+      fetch(`/api/gastos?populate=*&${baseFechaIngreso}`).then(r => r.json()),
+      fetch(`/api/gasto-diarios?populate=*&${baseFechaIngreso}`).then(r => r.json()),
     ])
       .then(async([ventasRes, servicesRes, gastosRes, gastosDiariosRes]) => {
         const ventas = ventasRes?.data || [];

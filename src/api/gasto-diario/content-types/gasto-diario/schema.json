@@ -34,6 +34,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::local.local"
+    },
+    "fecha_de_ingreso": {
+      "type": "date",
+      "required": true
     }
   }
 }

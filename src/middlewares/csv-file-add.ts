@@ -569,7 +569,7 @@ export default () => {
       /** BLOQUE DE SALIDA */
       const gastoHoy = await strapi.db.query("api::gasto.gasto").findMany({
         where: {
-          createdAt: {
+          fecha_de_ingreso: {
             $gte: startOfDay,
             $lte: endOfDay,
           },
@@ -584,7 +584,7 @@ export default () => {
         .query("api::gasto-diario.gasto-diario")
         .findMany({
           where: {
-            createdAt: {
+            fecha_de_ingreso: {
               $gte: startOfDay,
               $lte: endOfDay,
             },
