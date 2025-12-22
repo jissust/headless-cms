@@ -2,9 +2,13 @@ import { errors } from "@strapi/utils";
 
 export default {
   async beforeCreate(event) {
-    const today = new Date();
-    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+    if(! event.params.data.fecha_de_ingreso){
+      throw new errors.ApplicationError(
+        `Debe seleccionar una fecha de ingreso.`
+      );
+    }
+    
+    const dateOfEntry = new Date(event.params.data.fecha_de_ingreso).toISOString().split("T")[0]; // "2025-12-21";
     
     if(!event.params.data.local || event.params.data.local.connect.length === 0) {
       throw new errors.ApplicationError(
@@ -12,15 +16,12 @@ export default {
       );      
     }
     const localId = event.params.data.local.connect[0].id;
-    //console.log("localId", localId)
+    
     const cajaExistente = await strapi.db
       .query("api::caja-diaria.caja-diaria")
       .findOne({
         where: {
-          createdAt: {
-            $gte: startOfDay,
-            $lte: endOfDay,
-          },
+          fecha_de_ingreso: dateOfEntry,
           local: {
             id: localId,  // <--- acá filtrás por ID
           }
@@ -50,7 +51,7 @@ export default {
       );      
     }
     
-    if(data.local?.connect.length > 0 && data.local?.connect[0].id != caja.local.id) {
+    /*if(data.local?.connect.length > 0 && data.local?.connect[0].id != caja.local.id) {
       throw new errors.ApplicationError(
         `No puede editar el local.`
       );      
@@ -69,8 +70,8 @@ export default {
       const fueCreadaHoy = createdAt >= startOfToday && createdAt <= endOfToday;
 
       if(!fueCreadaHoy){
-            throw new errors.ApplicationError(`No es posible editar una caja correspondiente a una fecha anterior.`);
+        throw new errors.ApplicationError(`No es posible editar una caja correspondiente a una fecha anterior.`);
       }
-    }
+    }*/
   },
 };

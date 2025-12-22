@@ -27,8 +27,12 @@
       "target": "api::local.local"
     },
     "ver-caja-diaria": {
-      "type": "string",
+      "type": "decimal",
       "customField": "plugin::my-custom-fields.ver-caja-diaria"
+    },
+    "fecha_de_ingreso": {
+      "type": "date",
+      "required": true
     }
   }
 }
