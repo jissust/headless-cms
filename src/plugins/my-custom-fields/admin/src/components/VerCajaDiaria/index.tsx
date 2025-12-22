@@ -55,15 +55,31 @@ const VerCajaDiaria = (props: any, ref: any) => {
   useEffect(() => {
     if (!caja || caja.length === 0) return;
     console.log(`CAJA`,caja)
-    const created = new Date(caja.createdAt);
+    //console.log("Created: ", created)
+    //console.log("Fecha de ingreso: ", new Date(caja.fecha_de_ingreso))
+    const [year, month, day] = caja.fecha_de_ingreso.split("-");
+
+    const created = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day)
+    );
+    //console.log("fechaLocal: ", fechaLocal);
+    //const created = new Date(caja.createdAt);
+    
+    console.log(created)
     const startOfDay = new Date(created);
     startOfDay.setHours(0, 0, 0, 0);
+    console.log("startOfDay: ", startOfDay)
     const endOfDay = new Date(created);
     endOfDay.setHours(23, 59, 59, 999);
+    console.log("endOfDay: ", endOfDay)
+
     const localId = caja?.local?.id;
 
     const base = `&filters[local][id][$eq]=${localId}&filters[createdAt][$gte]=${startOfDay.toISOString()}&filters[createdAt][$lte]=${endOfDay.toISOString()}`;
     const baseFechaIngreso = `&filters[local][id][$eq]=${localId}&filters[fecha_de_ingreso][$gte]=${startOfDay.toISOString()}&filters[fecha_de_ingreso][$lte]=${endOfDay.toISOString()}`;
+    
     setLoading(true);
 
     Promise.all([
