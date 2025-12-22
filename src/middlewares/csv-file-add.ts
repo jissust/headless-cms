@@ -505,7 +505,6 @@ export default () => {
       const documentId = parts[parts.length - 1];
 
       /** Caja hoy */
-      //let csv = `CAJA - ${new Date().toLocaleDateString()}\n\n`; //Variable en donde se van a grabar todas las lineas
       const cajaDiaria = await strapi.db
         .query("api::caja-diaria.caja-diaria")
         .findOne({
@@ -514,9 +513,17 @@ export default () => {
           },
           populate: true,
         });
+      
+      const [year, month, day] = cajaDiaria.fecha_de_ingreso.split("-");
+      const created = new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day)
+      );
+      
       const localId = cajaDiaria.local?.id;
       const nameLocal = cajaDiaria.local?.nombre;  
-      const fechaCaja = new Date(cajaDiaria.createdAt).toLocaleDateString();
+      const fechaCaja = new Date(created).toLocaleDateString();
       let csv = `CAJA - ${nameLocal} - ${fechaCaja}\n\n`;
       if (!cajaDiaria) {
         ctx.set("Content-Type", "text/csv; charset=utf-8");
@@ -525,15 +532,12 @@ export default () => {
         ctx.status = 200;
         return;
       }
-      
-      const cajaDate = new Date(cajaDiaria.createdAt);
-      const startOfDay = new Date(cajaDate);
+      const startOfDay = new Date(created);
       startOfDay.setHours(0, 0, 0, 0);
 
-      const endOfDay = new Date(cajaDate);
+      const endOfDay = new Date(created);
       endOfDay.setHours(23, 59, 59, 999);
 
-      //console.log(`Local: ${localId}`)
       /** BLOQUE DE ENTRADA */
       const ventasHoy = await strapi.db.query("api::venta.venta").findMany({
         where: {
@@ -626,8 +630,8 @@ export default () => {
         entradasTotales.totalEnDolaresEfectivo -
         salidaTotales.totalEnDolaresEfectivo +
         cajaDiaria.saldo_inicial_dolar;
-        console.log("ENTRADAS TOTALES", entradasTotales)
-        console.log("SALIDAS TOTALES", salidaTotales)
+        //console.log("ENTRADAS TOTALES", entradasTotales)
+        //console.log("SALIDAS TOTALES", salidaTotales)
       const titleResumenFinalCaja = "\n\nRESUMEN CAJA FINAL (SOLO SE TIENE EN CUENTA EL EFECTIVO)\n";
       const headerResumenFinalCaja =
         "MONEDA, INICIAL, ENTRADAS, SALIDAS, SALDO FINAL\n";
@@ -643,7 +647,7 @@ export default () => {
       ctx.set("Content-Type", "text/csv");
       ctx.set(
         "Content-Disposition",
-        `attachment; filename="caja_diaria_${nameLocal?.trim().toLowerCase().replace(" ", "_")}_${new Date(cajaDiaria.createdAt).toISOString().split("T")[0]}.csv"`
+        `attachment; filename="caja_diaria_${nameLocal?.trim().toLowerCase().replace(" ", "_")}_${new Date(created).toISOString().split("T")[0]}.csv"`
       );
       ctx.body = csv;
 
