@@ -331,6 +331,7 @@ export default {
           "Precio costo",
         "content-manager.content-types.api::producto.producto.precio_mayorista":
           "Precio Mayorista",
+        "content-manager.content-types.api::producto.producto.tipo_de_moneda": "Tipo de moneda",
 
         "content-manager.components.productos.productos.ganancia_por_item":
           "Ganancia por ítem",
