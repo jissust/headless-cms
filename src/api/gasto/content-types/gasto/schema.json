@@ -11,10 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "total": {
-      "type": "decimal",
-      "customField": "plugin::my-custom-fields.input-total-gastos"
-    },
     "proveedor": {
       "type": "string",
       "required": true
@@ -24,12 +20,6 @@
     },
     "telefono": {
       "type": "biginteger"
-    },
-    "Gastos": {
-      "type": "dynamiczone",
-      "components": [
-        "gastos.gastos-items"
-      ]
     },
     "local": {
       "type": "relation",
@@ -44,6 +34,16 @@
     "fecha_de_ingreso": {
       "type": "date",
       "required": true
+    },
+    "Gastos": {
+      "type": "dynamiczone",
+      "components": [
+        "gastos.gastos-items"
+      ]
+    },
+    "total": {
+      "type": "decimal",
+      "customField": "plugin::my-custom-fields.input-total-gastos"
     }
   }
 }

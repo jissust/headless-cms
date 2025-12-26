@@ -19,14 +19,6 @@
       "type": "string",
       "customField": "plugin::my-custom-fields.input-nombre-local"
     },
-    "descripcion": {
-      "type": "text"
-    },
-    "tipo_de_venta": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::tipo-de-venta.tipo-de-venta"
-    },
     "nombre": {
       "type": "string",
       "required": true
@@ -49,6 +41,28 @@
       "relation": "oneToOne",
       "target": "api::local.local"
     },
+    "descripcion": {
+      "type": "text"
+    },
+    "tipo_de_venta": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tipo-de-venta.tipo-de-venta"
+    },
+    "tipo_de_moneda": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tipo-de-moneda.tipo-de-moneda"
+    },
+    "forma_de_pago": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::forma-de-pago.forma-de-pago"
+    },
+    "fecha_de_ingreso": {
+      "type": "date",
+      "required": true
+    },
     "Productos": {
       "type": "dynamiczone",
       "components": [
@@ -64,20 +78,6 @@
       "type": "decimal",
       "customField": "plugin::my-custom-fields.input-total-venta-ganancia",
       "default": 0
-    },
-    "tipo_de_moneda": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::tipo-de-moneda.tipo-de-moneda"
-    },
-    "forma_de_pago": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::forma-de-pago.forma-de-pago"
-    },
-    "fecha_de_ingreso": {
-      "type": "date",
-      "required": true
     },
     "sales_detect_changes_in_items": {  
       "type": "string",

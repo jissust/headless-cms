@@ -19,6 +19,19 @@
     "descripcion": {
       "type": "text"
     },
+    "locales": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::local.local"
+    },
+    "tipo_de_moneda": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tipo-de-moneda.tipo-de-moneda"
+    },
+    "precio_compra": {
+      "type": "decimal"
+    },
     "precio": {
       "type": "decimal"
     },
@@ -28,19 +41,6 @@
     "stock": {
       "type": "integer",
       "default": 0
-    },
-    "locales": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::local.local"
-    },
-    "precio_compra": {
-      "type": "decimal"
-    },
-    "tipo_de_moneda": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::tipo-de-moneda.tipo-de-moneda"
     }
   }
 }

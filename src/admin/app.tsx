@@ -343,6 +343,18 @@ export default {
         "content-manager.components.DynamicZone.add-item-above": "Agregar ítem",
         "content-manager.components.DynamicZone.more-actions": "Más acciones",
 
+        "content-manager.components.gastos.gastos-items.total_por_item": "Total",
+        "content-manager.components.gastos.gastos-items.precio_por_unidad":"Precio",
+        "content-manager.components.gastos.gastos-items.cantidad":"Cantidad",
+        "content-manager.components.gastos.gastos-items.nombre_producto_nuevo": "Nombre producto nuevo",
+
+        "content-manager.content-types.api::gasto-diario.gasto-diario.fecha_de_ingreso": "Fecha de ingreso",
+        "content-manager.content-types.api::gasto-diario.gasto-diario.local": "Local",
+        "content-manager.content-types.api::gasto-diario.gasto-diario.forma_de_pago":"Forma de pago",
+        "content-manager.content-types.api::gasto-diario.gasto-diario.tipo_de_moneda": "Tipo de moneda",
+        "content-manager.content-types.api::gasto-diario.gasto-diario.total":"Total",
+        "content-manager.content-types.api::gasto-diario.gasto-diario.descripcion": "Descripción",
+
         "content-manager.content-types.api::venta.venta.sales_detect_changes_in_items":
           "Se detectaron cambios en los ítems de la venta",
         "content-manager.content-types.api::venta.venta.fecha_de_ingreso":
@@ -369,6 +381,9 @@ export default {
         "content-manager.content-types.api::gasto.gasto.id": "Id",
         "content-manager.content-types.api::gasto.gasto.Gastos": "Gastos",
         "content-manager.content-types.api::gasto.gasto.total": "Total",
+        "content-manager.content-types.api::gasto.gasto.fecha_de_ingreso": "Fecha de ingreso",
+        "content-manager.content-types.api::gasto.gasto.tipo_de_moneda":"Tipo de moneda",
+        "content-manager.content-types.api::gasto.gasto.local": "Local",
 
         "content-manager.content-types.api::estado-de-service.estado-de-service.descripcion":
           "Descripción",
@@ -392,6 +407,7 @@ export default {
         "content-manager.content-types.api::caja-diaria.caja-diaria.createdAt":
           "Creado",
         "content-manager.content-types.api::caja-diaria.caja-diaria.id": "Id",
+        "content-manager.content-types.api::caja-diaria.caja-diaria.fecha_de_ingreso": "Fecha de ingreso",
 
         "content-manager.content-types.api::tipo-de-moneda.tipo-de-moneda.simbolo":
           "Símbolo",
@@ -575,6 +591,13 @@ export default {
         border-bottom: 1px solid #dcdce4;
         text-align:center;
         border-left:1px solid #dcdce4;
+      }  
+      input[name=numero_de_orden],
+      input[name=comercio] {
+        pointer-events: none;   /* no se puede clickear ni escribir */
+        background-color: #f5f5f5;
+        color: #333;
+        border-color: #ddd;
       }  
       @media (max-width: 992px) { 
         #main-content {

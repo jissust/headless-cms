@@ -21,6 +21,10 @@
       "required": true,
       "default": 0
     },
+    "fecha_de_ingreso": {
+      "type": "date",
+      "required": true
+    },
     "local": {
       "type": "relation",
       "relation": "oneToOne",
@@ -29,10 +33,6 @@
     "ver-caja-diaria": {
       "type": "decimal",
       "customField": "plugin::my-custom-fields.ver-caja-diaria"
-    },
-    "fecha_de_ingreso": {
-      "type": "date",
-      "required": true
     }
   }
 }

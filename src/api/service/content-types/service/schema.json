@@ -11,6 +11,17 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "comercio": {
+      "type": "string",
+      "default": "Bien copiado"
+    },
+    "numero_de_orden": {
+      "type": "string"
+    },
+    "cliente": {
+      "type": "string",
+      "required": true
+    },
     "email": {
       "type": "email"
     },
@@ -30,6 +41,11 @@
         "mainField": "nombre"
       }
     },
+    "forma_de_pago": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::forma-de-pago.forma-de-pago"
+    },
     "total": {
       "type": "decimal",
       "customField": "plugin::my-custom-fields.input-total-generico",
@@ -39,37 +55,17 @@
         "disabled": false
       }
     },
-    "descripcion_gasto": {
-      "type": "text",
-      "required": false
-    },
-    "total_gasto": {
-      "type": "decimal",
-      "customField": "plugin::my-custom-fields.input-total-generico",
-      "required": true,
-      "default": 0,
-      "options": {
-        "label": "Total Gasto",
-        "disabled": false
-      }
-    },
-    "comercio": {
-      "type": "string",
-      "default": "Bien copiado"
-    },
-    "cliente": {
-      "type": "string",
-      "required": true
-    },
     "fecha_de_ingreso": {
       "type": "date",
       "required": true
     },
-    "numero_de_orden": {
-      "type": "string"
-    },
-    "descripcion_estado_del_equipo": {
-      "type": "text"
+    "title_section": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Datos del equipo",
+        "placeholder": "Ingrese el título de la sección"
+      }
     },
     "marca": {
       "type": "string"
@@ -79,16 +75,6 @@
     },
     "imei": {
       "type": "string"
-    },
-    "trabajo_solicitado_por_el_cliente": {
-      "type": "text"
-    },
-    "observaciones_del_tecnico": {
-      "type": "text"
-    },
-    "condiciones_del_servicio": {
-      "type": "text",
-      "default": "1. El comercio *no se responsabiliza por fallas adicionales* que puedan aparecer durante o después de la reparación debido al estado previo del equipo. 2. El cliente declara haber entregado el equipo con el *estado detallado arriba*. 3. Las reparaciones tienen una *garantía limitada de X días* (solo sobre la pieza o trabajo realizado, no sobre otros componentes). 4. Equipos mojados o con golpes previos *no tienen garantía*. 5. El cliente debe retirar el equipo en un plazo máximo de *30 días*, pasado ese tiempo el comercio no se responsabiliza por pérdida o daño."
     },
     "enciende": {
       "type": "boolean",
@@ -114,58 +100,13 @@
       "type": "boolean",
       "default": false
     },
-    "otros": {
-      "type": "boolean",
-      "default": false
-    },
     "rayaduras": {
       "type": "boolean",
       "default": false
     },
-    "ganancia": {
-      "type": "decimal",
-      "customField": "plugin::my-custom-fields.input-service-total-ganancia",
-      "default": 0
-    },
-    "title_section": {
-      "type": "string",
-      "customField": "plugin::my-custom-fields.title-section",
-      "options": {
-        "label": "Datos del equipo",
-        "placeholder": "Ingrese el título de la sección"
-      }
-    },
-    "title_section_trabajo_solicitado_por_cliente": {
-      "type": "string",
-      "customField": "plugin::my-custom-fields.title-section",
-      "options": {
-        "label": "Trabajo solicitado por el cliente",
-        "placeholder": "Ingrese el título de la sección"
-      }
-    },
-    "title_section_observaciones_del_tecnico": {
-      "type": "string",
-      "customField": "plugin::my-custom-fields.title-section",
-      "options": {
-        "label": "Observaciones del técnico",
-        "placeholder": "Ingrese el título de la sección"
-      }
-    },
-    "title_section_condiciones_de_servicio": {
-      "type": "string",
-      "customField": "plugin::my-custom-fields.title-section",
-      "options": {
-        "label": "Condiciones de Servicio",
-        "placeholder": "Ingrese el título de la sección"
-      }
-    },
-    "title_section_gastos": {
-      "type": "string",
-      "customField": "plugin::my-custom-fields.title-section",
-      "options": {
-        "label": "Gastos",
-        "placeholder": "Ingrese el título de la sección"
-      }
+    "otros": {
+      "type": "boolean",
+      "default": false
     },
     "title_section_estados_del_equipo": {
       "type": "string",
@@ -175,10 +116,69 @@
         "placeholder": "Ingrese el título de la sección"
       }
     },
-    "forma_de_pago": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::forma-de-pago.forma-de-pago"
+    "descripcion_estado_del_equipo": {
+      "type": "text"
+    },
+    "title_section_trabajo_solicitado_por_cliente": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Trabajo solicitado por el cliente",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "trabajo_solicitado_por_el_cliente": {
+      "type": "text"
+    },
+    "title_section_observaciones_del_tecnico": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Observaciones del técnico",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "observaciones_del_tecnico": {
+      "type": "text"
+    },
+    "title_section_condiciones_de_servicio": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Condiciones de Servicio",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "condiciones_del_servicio": {
+      "type": "text",
+      "default": "1. El comercio *no se responsabiliza por fallas adicionales* que puedan aparecer durante o después de la reparación debido al estado previo del equipo. 2. El cliente declara haber entregado el equipo con el *estado detallado arriba*. 3. Las reparaciones tienen una *garantía limitada de X días* (solo sobre la pieza o trabajo realizado, no sobre otros componentes). 4. Equipos mojados o con golpes previos *no tienen garantía*. 5. El cliente debe retirar el equipo en un plazo máximo de *30 días*, pasado ese tiempo el comercio no se responsabiliza por pérdida o daño."
+    },
+    "title_section_gastos": {
+      "type": "string",
+      "customField": "plugin::my-custom-fields.title-section",
+      "options": {
+        "label": "Gastos",
+        "placeholder": "Ingrese el título de la sección"
+      }
+    },
+    "descripcion_gasto": {
+      "type": "text",
+      "required": false
+    },
+    "total_gasto": {
+      "type": "decimal",
+      "customField": "plugin::my-custom-fields.input-total-generico",
+      "required": true,
+      "default": 0,
+      "options": {
+        "label": "Total Gasto",
+        "disabled": false
+      }
+    },
+    "ganancia": {
+      "type": "decimal",
+      "customField": "plugin::my-custom-fields.input-service-total-ganancia",
+      "default": 0
     }
   }
 }
