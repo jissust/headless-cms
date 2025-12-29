@@ -6,15 +6,16 @@ export default async function seedPdfTemplates(strapi) {
     'plugin::strapi-plugin-pdf-creator.template'
   );
 
-  /*const count = await templateQuery.count();
+  const count = await templateQuery.count();
   if (count > 0) {
     strapi.log.info('⏭ PDF templates ya existen');
     return;
-  }*/
+  }
 
   const uploadService = strapi.plugin('upload').service('upload');
 
-  const uploadPdf = async (fileName: string) => {    
+  const uploadPdf = async (fileName: string) => {
+    
     const filePath = path.resolve(
       process.cwd(),
       'seeds/pdf/',
