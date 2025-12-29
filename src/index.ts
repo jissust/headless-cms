@@ -1,5 +1,7 @@
-// import type { Core } from '@strapi/strapi';
 //import fs from "fs";
+//import path from "path";
+import seedPdfTemplates from '../seeds/seed-pdf';
+
 import { Server } from "socket.io";
 
 export default {
@@ -69,7 +71,7 @@ export default {
       const estadosCount = await strapi.db
         .query("api::estado-de-service.estado-de-service")
         .count();
-      strapi.log.info(`Estado de service - cantidad: ${estadosCount}`);
+      //strapi.log.info(`Estado de service - cantidad: ${estadosCount}`);
       if (estadosCount === 0) {
         await strapi.db
           .query("api::estado-de-service.estado-de-service")
@@ -91,7 +93,7 @@ export default {
       const pagosCount = await strapi.db
         .query("api::forma-de-pago.forma-de-pago")
         .count();
-      strapi.log.info(`Formas de pago - cantidad: ${pagosCount}`);
+      //strapi.log.info(`Formas de pago - cantidad: ${pagosCount}`);
 
       if (pagosCount === 0) {
         await strapi.db.query("api::forma-de-pago.forma-de-pago").createMany({
@@ -110,7 +112,7 @@ export default {
        * 3️⃣ LOCALS
        */
       const localsCount = await strapi.db.query("api::local.local").count();
-      strapi.log.info(`Locales - cantidad: ${localsCount}`);
+      //strapi.log.info(`Locales - cantidad: ${localsCount}`);
 
       if (localsCount === 0) {
         await strapi.db.query("api::local.local").createMany({
@@ -129,7 +131,7 @@ export default {
       const monedasCount = await strapi.db
         .query("api::tipo-de-moneda.tipo-de-moneda")
         .count();
-      strapi.log.info(`Tipo de moneda - cantidad: ${monedasCount}`);
+      //strapi.log.info(`Tipo de moneda - cantidad: ${monedasCount}`);
 
       if (monedasCount === 0) {
         await strapi.db.query("api::tipo-de-moneda.tipo-de-moneda").createMany({
@@ -148,7 +150,7 @@ export default {
       const ventasCount = await strapi.db
         .query("api::tipo-de-venta.tipo-de-venta")
         .count();
-      strapi.log.info(`Tipos de venta - cantidad: ${ventasCount}`);
+      //strapi.log.info(`Tipos de venta - cantidad: ${ventasCount}`);
 
       if (ventasCount === 0) {
         await strapi.db.query("api::tipo-de-venta.tipo-de-venta").createMany({
@@ -160,41 +162,15 @@ export default {
 
         strapi.log.info("✔ tipos_de_ventas creados");
       }
+
+      /**
+       * 6️⃣ PDF CREATOR - TEMPLATES
+       */
+
+      await seedPdfTemplates(strapi)
+      
     } catch (error) {
       strapi.log.error("❌ Error ejecutando seeds iniciales", error);
-    }
-
-    /**
-     * 6️⃣ PDF CREATOR - TEMPLATES
-     */
-    const pdfTemplatesCount = await strapi.db
-      .query("plugin::strapi-plugin-pdf-creator.template")
-      .count();
-      strapi.log.info(`Pdf template - cantidad: ${pdfTemplatesCount}`);
-
-    if (pdfTemplatesCount === 0) {
-      await strapi.db
-        .query("plugin::strapi-plugin-pdf-creator.template")
-        .createMany({
-          data: [
-            {
-              id: 1,
-              name: "Remito",
-              collectionName: "api::remito.remito",
-              enabled: true,
-              flatten_document: true,
-            },
-            {
-              id: 2,
-              name: "Service",
-              collectionName: "api::service.service",
-              enabled: true,
-              flatten_document: true,
-            },
-          ],
-        });
-
-      strapi.log.info("✔ PDF Creator templates creados");
     }
   },
 };
