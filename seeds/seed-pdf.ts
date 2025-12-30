@@ -8,7 +8,7 @@ export default async function seedPdfTemplates(strapi) {
 
   const count = await templateQuery.count();
   if (count > 0) {
-    strapi.log.info('⏭ PDF templates ya existen');
+    strapi.log.info('6️⃣ ❌ PDF templates ya existen');
     return;
   }
 
@@ -66,5 +66,5 @@ export default async function seedPdfTemplates(strapi) {
     },
   });
   
-  strapi.log.info('✔ Seed PDF ejecutado correctamente');
+  strapi.log.info('6️⃣ ✔ Seed PDF ejecutado correctamente');
 }
