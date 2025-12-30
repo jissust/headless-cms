@@ -1,4 +1,26 @@
-# 📦 Bien copiado — Instrucciones de instalación y desarrollo
+# BIEN COPIADO — Sistema de gestión comercial y servicios técnicos
+Proyecto web a medida para un comercio de electrodomésticos y tecnología, enfocado en centralizar la operación diaria del negocio y acompañar su crecimiento.
+
+El sistema permite gestionar ventas, control de stock, servicios técnicos y caja diaria, integrando la generación de comprobantes para clientes y reportes internos. Incluye un módulo específico para servicios técnicos, donde se registran los ingresos, estados, reportes y comprobantes, además de una pantalla de seguimiento para que los clientes puedan consultar el estado de sus reparaciones en tiempo real.
+
+También se desarrolló la administración de múltiples locales, tipos de moneda (ARS / USD), formas de pago (efectivo, débito, crédito y transferencia), gastos diarios y compras de mercadería para reposición de stock. La caja diaria consolida los ingresos por moneda y medio de pago, con foco en el control del efectivo.
+
+Es un proyecto en evolución, que se desarrolla por etapas según nuevas necesidades del negocio. Cada funcionalidad se analiza, se presupuesta en tiempo y costo, y luego se implementa, manteniendo una mejora continua del sistema.
+
+Tecnologías y herramientas destacadas
+- Strapi v5 como CMS y backend
+- React para el panel administrativo
+- TypeScript
+- SQLite (better-sqlite3)
+- Plugins personalizados en Strapi
+- Generación de PDFs (comprobantes y reportes)
+- Exportación de datos en CSV
+- Socket.io para actualizaciones en tiempo real
+- Styled Components
+
+
+
+# 📦 Instrucciones de instalación y desarrollo
 Este proyecto está desarrollado con **Strapi**, e incluye un conjunto de **plugins personalizados** ubicados en la carpeta `src/plugins`.
 
 ## 🚀 Instalación del proyecto
